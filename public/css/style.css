@@ -2,3 +2,14 @@ footer {
     background-color: black;
     padding: 10em;
 }
+
+footer hr {
+    border: 0;
+    height: 1px;
+    background: #FFF;
+}
+
+footer img{
+
+    
+}
