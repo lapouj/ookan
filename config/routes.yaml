@@ -2,3 +2,6 @@ index:
     path: /base
     controller: App\Controller\DefaultController::index
 
+connect:
+    path: /connexion
+    controller: App\Controller\DefaultController::connect

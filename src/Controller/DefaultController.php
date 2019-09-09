@@ -16,4 +16,11 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    public function connect()
+    {
+        return $this->render('connexion.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }
