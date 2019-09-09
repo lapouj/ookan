@@ -9,3 +9,7 @@ connect:
 accueil:
     path: /accueil
     controller: App\Controller\AccueilController::index
+
+inscription:
+    path: /inscription
+    controller: App\Controller\DefaultController::inscription
