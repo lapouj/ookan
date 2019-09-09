@@ -5,3 +5,7 @@ index:
 connect:
     path: /connexion
     controller: App\Controller\DefaultController::connect
+
+accueil:
+    path: /accueil
+    controller: App\Controller\AccueilController::index
