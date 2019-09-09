@@ -1,4 +1,15 @@
 footer {
     background-color: black;
-    padding: 20em;
+    padding: 10em;
+}
+
+footer hr {
+    border: 0;
+    height: 1px;
+    background: #FFF;
+}
+
+footer img{
+
+    
 }
