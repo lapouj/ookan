@@ -1,6 +1,6 @@
 footer {
     background-color: black;
-    padding: 10em;
+    padding: 8em;
 }
 
 footer hr {
@@ -9,7 +9,6 @@ footer hr {
     background: #FFF;
 }
 
-footer img{
-
-    
+footer img {
+    padding: 2em;
 }
