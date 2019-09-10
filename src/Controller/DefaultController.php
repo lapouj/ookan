@@ -24,9 +24,9 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function inscription()
+    public function inscription_phase1()
     {
-        return $this->render('inscription.html.twig', [
+        return $this->render('inscription-choix.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
