@@ -22,7 +22,10 @@ class MangerController extends AbstractController
 
 
 
-
+    	if (!empty($_POST)){
+    		
+    	}
+    	
     
 
 
@@ -115,7 +118,19 @@ class MangerController extends AbstractController
 
     public function show()
     {
-
+        {
+            $errors = [];
+            
+            // Récupération de l'article
+            $em = $this->getDoctrine()->getManager();
+            // Permet de chercher les articles données via le repository
+            $restoFound = $em->getRepository(resto::class)->findAll();
+    
+            // la vue
+            return $this->render('manger/afficher.html.twig', 
+                                ['resto'=> $restoFound,
+            ]);
+        }
         
 
 
