@@ -23,8 +23,7 @@ class MangerController extends AbstractController
 
 
 
-    	echo 'remy suceur';
-
+    
 
 
 
@@ -115,7 +114,6 @@ class MangerController extends AbstractController
     }
 
     public function show()
-    fejfbeefbef
     {
 
 
