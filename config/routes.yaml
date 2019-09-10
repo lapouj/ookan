@@ -16,12 +16,11 @@ inscription_phase1:
 
 mentions:
     path: /mentions-legales
-    controller: App\Controller\DefaultController::mentions
-
+    controller: App\Controller\MentionsController::mentions
 
 contact:
     path: /contactez-nous
-    controller: App\Controller\DefaultController::contact
+    controller: App\Controller\ContactController::contact
 
 les_restos :
     path: /les-restos
