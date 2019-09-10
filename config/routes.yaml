@@ -19,7 +19,7 @@ inscription_pro:
     controller: App\Controller\InscriptionController::inscription_pro
 
 inscription_particulier:
-    path: /inscription/toulousain
+    path: /inscription/particulier
     controller: App\Controller\InscriptionController::inscription_particulier
 
 inscription_reussite:
