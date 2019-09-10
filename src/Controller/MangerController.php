@@ -22,7 +22,10 @@ class MangerController extends AbstractController
 
 
 
-
+    	if (!empty($_POST)){
+    		
+    	}
+    	
     
 
 
