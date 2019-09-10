@@ -29,10 +29,6 @@ class MangerController extends AbstractController
 
 
 
-
-
-
-
     			// Utilisation de la base de données
     			$em = $this->getDoctrine()->getManager();
 
