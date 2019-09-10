@@ -13,12 +13,14 @@
             </div>
         {% elseif mes_validation is not empty %}    
             <div class="alert alert-success">
-                {{ mes_validation|join('<br>')|raw }} 
+                {{ mes_validation|join('<br>')|raw 
+            }} 
             </div>
         {% endif %}
-
-            <div>
-
+        
+        <div class="container my-5">
+            <div class="mb-5">
+                <h2 class="text-center">Inscription Toulousain(e)</h2>
             </div>
 
             <div class="row justify-content-center">
@@ -45,6 +47,7 @@
                         <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais vos informations personnelles</small>
                     </div>
                         <button type="submit" class="btn btn-primary">M'inscrire</button>
+                       </div> 
                 </form>
             </div>
         
