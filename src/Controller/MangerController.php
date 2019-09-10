@@ -23,8 +23,7 @@ class MangerController extends AbstractController
 
 
 
-    	echo 'remy suceur';
-
+    
 
 
 
