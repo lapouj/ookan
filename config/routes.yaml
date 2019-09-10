@@ -10,9 +10,9 @@ accueil:
     path: /accueil
     controller: App\Controller\AccueilController::index
 
-inscription:
-    path: /inscription
-    controller: App\Controller\DefaultController::inscription
+inscription_phase1:
+    path: /inscription/choisissez-votre-profil
+    controller: App\Controller\DefaultController::inscription-choix-profil
 
 mentions:
     path: /mentions_legales
