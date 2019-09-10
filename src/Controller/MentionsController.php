@@ -17,4 +17,6 @@ class MentionsController extends AbstractController
             'controller_name' => 'MentionsController',
         ]);
     }
+
+    
 }
