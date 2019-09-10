@@ -1,14 +1,9 @@
-header{
-	height: 20em;
-	background-image: url("../img/header/fond.jpg");
-	background-size: cover;
-}
-li .nav-visite{
+#li-visite .nav-visite{
 	text-decoration: none;
     color: #444444;
 }
 
-li .nav-visite:after {
+#li-visite .nav-visite:after {
 	content: '';
 	display: block;
 	height: 1px;
@@ -17,7 +12,7 @@ li .nav-visite:after {
 	color: #444444;
 	transition: width .5s ease, background-color .5s ease;
 }
-li .nav-visite:hover:after {
+#li-visite .nav-visite:hover:after {
 	width: 100%;
 	background: #444;
 	color: #444444;	
