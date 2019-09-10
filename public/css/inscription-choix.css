@@ -1,3 +1,14 @@
 .possibilities-list {
     list-style-type: none;
 }
+
+.choice-div {
+    border-top: 16px solid #e3ad5a;
+    border-bottom: 16px solid #e3ad5a;
+    border-radius: 5px;
+    transition: all ease .5s;
+}
+
+.choice-div:hover {
+    transform: scale(1.10);
+}

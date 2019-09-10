@@ -16,4 +16,16 @@ class InscriptionController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+    public function inscription_pro()
+    {
+        return $this->render('inscription/inscription-pro.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    public function inscription_particulier()
+    {
+        return $this->render('inscription/inscription-particulier.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }

@@ -10,29 +10,50 @@
 
             <div class="row justify-content-center">
             
-                <div class="col-3 m-4 bg-light choice-div">
+                <div class="col-3 m-4 bg-light choice-div py-4">
                     <div>
                         <h5 class="text-center">Profil Professionnel</h5>
                     </div>
-                    <div class="text-center">
+                    <hr class="under-profile-hr">
+                    <div>
                         <ul class="possibilities-list">
                             <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i>Blabka
+                                <i class="fas fa-check"></i> Ajoutez des 
                             </li>
                             <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i>bla
+                                <i class="fas fa-check"></i> Boostez votre activitée
                             </li>
                             <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i>Boab
+                                <i class="fas fa-check"></i> Boab
                             </li>
                         </ul>
                     </div>
+                    <div class="text-center">
+                        <a href="{{ path('inscription_pro') }}" class="btn btn-success">Je suis un professionnel</a>
+                    </div>
                 </div>  
                 
-                <div class="col-3 m-4 bg-light choice-div">
-                        <div>
-                            <h5 class="text-center">Profil Toulousain</h5>
-                        </div>
+                <div class="col-3 m-4 bg-light choice-div py-4">
+                    <div>
+                        <h5 class="text-center">Profil Toulousain(e)</h5>
+                    </div>
+                    <hr class="under-profile-hr">
+                    <div>
+                        <ul class="possibilities-list">
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> Blabka
+                            </li>
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> bla
+                            </li>
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> Boab
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ path('inscription_particulier') }}" class="btn btn-success">Je suis un(e) Toulousain(e)</a>
+                    </div>
                 </div>
 
             <!-- Fin de div.row -->

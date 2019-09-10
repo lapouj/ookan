@@ -10,9 +10,17 @@ accueil:
     path: /
     controller: App\Controller\AccueilController::index
 
-inscription_phase1:
+inscription_choix:
     path: /inscription/choisissez-votre-profil
     controller: App\Controller\InscriptionController::inscription_choix_profil
+
+inscription_pro:
+    path: /inscription/inscription-professionnel
+    controller: App\Controller\InscriptionController::inscription_pro
+
+inscription_particulier:
+    path: /inscription/inscription-toulousain
+    controller: App\Controller\InscriptionController::inscription_particulier
 
 mentions:
     path: /mentions-legales
