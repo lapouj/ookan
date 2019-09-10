@@ -10,14 +10,21 @@ accueil:
     path: /
     controller: App\Controller\AccueilController::index
 
-inscription_phase1:
+inscription_choix:
     path: /inscription/choisissez-votre-profil
     controller: App\Controller\InscriptionController::inscription_choix_profil
 
+inscription_pro:
+    path: /inscription/professionnel
+    controller: App\Controller\InscriptionController::inscription_pro
+
 inscription_particulier:
-    path: /inscription/particulier
+    path: /inscription/toulousain
     controller: App\Controller\InscriptionController::inscription_particulier
 
+inscription_reussite:
+    path: /inscription/inscription-reussite
+    controller: App\Controller\InscriptionController::inscription_reussite
 
 mentions:
     path: /mentions-legales
@@ -38,3 +45,11 @@ les_sorties :
 les_activites :
     path: /les-activites
     controller: App\Controller\ActivitesController::index
+
+add_restos :
+    path : /ajouter-restaurant
+    controller: App\Controller\MangerController::add
+
+show_restos :
+    path : /consulter-restaurants
+    controller: App\Controller\MangerController::show

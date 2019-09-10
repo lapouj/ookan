@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<div class="m-5">
+		<form id="add_form" method="post" class="border">
+			<p>
+				<label for="nom">Nom d'établissement :</label>
+				<input id="nom" type="text" name="nom">
+			</p>
+			<p>
+				<label for="description">Description :</label>
+				<textarea id="description" name="description" rows="10" cols="50"></textarea>
+			</p>
+			<p>
+				<label for="adresse">Adresse :</label>
+				<input id="adresse" type="text" name="adresse">
+			</p>
+			<p class="text-center">
+				<input type="submit" name="envoyer" value="Valider">
+			</p>
+		</form>
+</div>
+
+{% endblock %}

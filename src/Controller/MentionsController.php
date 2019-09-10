@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MentionsController extends AbstractController
 {
     /**
-     * @Route("/default/controler", name="default_controler")
+     * @Route("/mentions", name="mentions")
      */
 
     public function mentions()
@@ -17,4 +17,6 @@ class MentionsController extends AbstractController
             'controller_name' => 'MentionsController',
         ]);
     }
+
+    
 }

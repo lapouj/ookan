@@ -1,4 +1,4 @@
-.container {
+#add_form, label{
+	display: inline-block;
 	width: 30%;
 }
-

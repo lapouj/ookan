@@ -8,44 +8,63 @@
     {% block body %}
         <div class="container my-5">
 
+            <h2 class="text-center">Sélectionnez un profil</h2>
+
             <div class="row justify-content-center">
             
-                <!-- Timeline -->
-                <div id="timeline-wrap">
-
-                    <div id="timeline"></div>
-                        
-                        <!-- This is the individual marker-->
-                        <div class="marker mfirst timeline-icon one">
-                            <i class="fa fa-pencil"></i>
-                        </div>
-                        <!-- / marker -->
-                    
-                        <!-- This is the individual marker-->
-                            <div class="marker m2 timeline-icon two">
-                            <i class="fa fa-usd"></i>
-                        </div>
-                        <!-- / marker -->
-                    
-                         
-                        
-                        <!-- This is the individual marker-->
-                        <div class="marker m3 timeline-icon three">
-                            <i class="fa fa-list"></i>
-                        </div>
-                        <!-- / marker -->
-                    
-                        
-                        <!-- This is the individual marker-->
-                        <div class="marker mlast timeline-icon four">
-                            <i class="fa fa-check"></i>
-                        </div>
-                        <!-- / marker --> 
-
-                <!-- Fin Timeline -->
-                </div>
-
+                <div class="col-3 m-4 bg-light choice-div py-4">
+                    <div>
+                        <h5 class="text-center">Profil Professionnel</h5>
+                    </div>
+                    <hr class="under-profile-hr">
+                    <div>
+                        <p>Pour les professionnels désireux de booster leur(s) activité(s)</p>
+                    </div>
+                    <hr class="under-profile-hr">
+                    <div>
+                        <ul class="possibilities-list">
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> Ajoutez des Fred
+                            </li>
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> Fred chauve
+                            </li>
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> Fred Imberbe
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ path('inscription_pro') }}" class="btn btn-success">Je suis un professionnel</a>
+                    </div>
+                </div>  
                 
+                <div class="col-3 m-4 bg-light choice-div py-4">
+                    <div>
+                        <h5 class="text-center">Profil Toulousain(e)</h5>
+                    </div>
+                    <hr class="under-profile-hr">
+                    <div>
+                        <p>Pour les Toulousain(e)s en quête de nouvelles idées</p>
+                    </div>
+                    <hr class="under-profile-hr">
+                    <div>
+                        <ul class="possibilities-list">
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> Fred Chauve
+                            </li>
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> Fred nul au ping-pong
+                            </li>
+                            <li class="possibilities-list-item">
+                                <i class="fas fa-check"></i> Fred nul sur Apex
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ path('inscription_particulier') }}" class="btn btn-success">Je suis un(e) Toulousain(e)</a>
+                    </div>
+                </div>
 
             <!-- Fin de div.row -->
             </div>

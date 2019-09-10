@@ -78,6 +78,18 @@ class InscriptionController extends AbstractController
         return $this->render('inscription/inscription-particulier.html.twig', [
         	'mes_erreurs'     =>  $errors,
         	'mes_validation'  =>  $success,
+        ]);
+     }	
+
+    public function inscription_pro()
+    {
+        return $this->render('inscription/inscription-pro.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    public function inscription_reussite()
+    {
+        return $this->render('inscription/inscription-reussite.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
