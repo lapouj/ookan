@@ -116,7 +116,7 @@ class MangerController extends AbstractController
     public function show()
     {
 
-        echo'Jordan suce toute sorte de bite'
+        
 
 
 
