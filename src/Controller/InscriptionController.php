@@ -23,7 +23,7 @@ class InscriptionController extends AbstractController
     public function inscription_particulier()
     {
     	$errors = [];
-    	$success = false;
+    	$success = true;
 
     	if (!empty($_POST)) {
     		// je nettoie les données reçues
