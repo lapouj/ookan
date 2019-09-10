@@ -31,10 +31,6 @@ class User
      */
     private $mail;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $photo;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -83,18 +79,6 @@ class User
     public function setMail(string $mail): self
     {
         $this->mail = $mail;
-
-        return $this;
-    }
-
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): self
-    {
-        $this->photo = $photo;
 
         return $this;
     }
