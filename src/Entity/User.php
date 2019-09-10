@@ -46,6 +46,11 @@ class User
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $resto_type;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +124,18 @@ class User
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getRestoType(): ?string
+    {
+        return $this->resto_type;
+    }
+
+    public function setRestoType(string $resto_type): self
+    {
+        $this->resto_type = $resto_type;
 
         return $this;
     }

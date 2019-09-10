@@ -74,6 +74,8 @@ class InscriptionController extends AbstractController
                 $em->flush();
 
             }
+	    } else { 
+	    	$success = 'Votre inscription est un success, bienvenue chez Ookan !';
 	    }
     
         return $this->render('inscription/inscription-particulier.html.twig', [
