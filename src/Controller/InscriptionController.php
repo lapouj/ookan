@@ -23,7 +23,8 @@ class InscriptionController extends AbstractController
     public function inscription_particulier()
     {
     	$errors = [];
-    	$success = true;
+
+    	$success = '';
 
     	if (!empty($_POST)) {
 
@@ -55,7 +56,7 @@ class InscriptionController extends AbstractController
 
             if (count($errors) == 0) {
             
-                $success = true;
+      
 
                 $errors = array_filter($errors);
 
@@ -72,12 +73,11 @@ class InscriptionController extends AbstractController
                 $em->persist($userData);
                 //éxecution
                 $em->flush();
-
+				
+				$success = 'Votre inscription est un succès, bienvenue chez Ookan !';
             }
 	    	
-	    	} else { 
-	    	$success = 'Votre inscription est un succès, bienvenue chez Ookan !';
-	    }
+	    } 
     
         return $this->render('inscription/inscription-particulier.html.twig', [
         	'mes_erreurs'     =>  $errors,

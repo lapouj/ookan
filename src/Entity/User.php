@@ -31,10 +31,6 @@ class User
      */
     private $mail;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $photo;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -45,11 +41,6 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $resto_type;
 
     public function getId(): ?int
     {
@@ -92,18 +83,6 @@ class User
         return $this;
     }
 
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -124,18 +103,6 @@ class User
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getRestoType(): ?string
-    {
-        return $this->resto_type;
-    }
-
-    public function setRestoType(string $resto_type): self
-    {
-        $this->resto_type = $resto_type;
 
         return $this;
     }
