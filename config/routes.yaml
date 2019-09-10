@@ -14,6 +14,11 @@ inscription_phase1:
     path: /inscription/choisissez-votre-profil
     controller: App\Controller\InscriptionController::inscription_choix_profil
 
+inscription_particulier:
+    path: /inscription/particulier
+    controller: App\Controller\InscriptionController::inscription_particulier
+
+
 mentions:
     path: /mentions-legales
     controller: App\Controller\MentionsController::mentions
