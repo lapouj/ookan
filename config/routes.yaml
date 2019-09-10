@@ -22,6 +22,10 @@ inscription_particulier:
     path: /inscription/inscription-toulousain
     controller: App\Controller\InscriptionController::inscription_particulier
 
+inscription_reussite:
+    path: /inscription/inscription-reussite
+    controller: App\Controller\InscriptionController::inscription_reussite
+
 mentions:
     path: /mentions-legales
     controller: App\Controller\MentionsController::mentions
