@@ -37,4 +37,11 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    public function contact()
+    {
+        return $this->render('contact.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }

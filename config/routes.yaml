@@ -17,3 +17,7 @@ inscription:
 mentions:
     path: /mentions_legales
     controller: App\Controller\DefaultController::mentions
+
+contact:
+    path: /contactez_nous
+    controller: App\Controller\DefaultController::contact
