@@ -16,4 +16,21 @@ class MangerController extends AbstractController
             'controller_name' => 'MangerController',
         ]);
     }
+
+    public function add()
+    {
+
+
+        return $this->render('manger/ajouter.html.twig', [
+            'controller_name' => 'MangerController',
+        ]);
+    }
+
+    public function show()
+    {
+
+        return $this->render('manger/afficher.html.twig', [
+            'controller_name' => 'MangerController',
+        ]);
+    }
 }
