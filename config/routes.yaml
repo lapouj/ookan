@@ -12,7 +12,7 @@ accueil:
 
 inscription_phase1:
     path: /inscription/choisissez-votre-profil
-    controller: App\Controller\DefaultController::inscription-choix-profil
+    controller: App\Controller\DefaultController::inscription_choix_profil
 
 mentions:
     path: /mentions_legales
