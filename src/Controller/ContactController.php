@@ -7,8 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
-    /**
-     * @Route("/default/controler", name="default_controler")
+     /**
+     * @Route("/contact", name="contact")
      */
 
     public function contact()
