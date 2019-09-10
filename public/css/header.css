@@ -3,4 +3,22 @@ header{
 	background-image: url("../img/header/fond.jpg");
 	background-size: cover;
 }
+li .nav-visite{
+	text-decoration: none;
+    color: #444444;
+}
 
+li .nav-visite:after {
+	content: '';
+	display: block;
+	height: 1px;
+	width: 0;
+	margin: auto;
+	color: #444444;
+	transition: width .5s ease, background-color .5s ease;
+}
+li .nav-visite:hover:after {
+	width: 100%;
+	background: #444;
+	color: #444444;	
+}
