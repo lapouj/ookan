@@ -35,4 +35,5 @@ class DefaultController extends AbstractController
         return $this->render('contact.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
+    }
 }
