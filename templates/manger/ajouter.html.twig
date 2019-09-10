@@ -2,6 +2,19 @@
 
 {% block title %}Hello MangerController!{% endblock %}
 
-{% block body %}
-AJOUTER
-{% endblock %}
+	{% block body %}
+
+
+		<form id="add_form" method="post">
+			<p>
+				<label for="nom">Nom d'établissement :</label>
+				<input id="nom" type="text" name="nom">
+			</p>
+			<p>
+				<label for="description">Description :</label>
+				<textarea id="description" rows="10" cols="50"></textarea>
+			</p>
+		</form>
+
+
+	{% endblock %}
