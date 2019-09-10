@@ -1,6 +1,6 @@
 #li-visite .nav-visite{
 	text-decoration: none;
-    color: #444444;
+    color: #4a5058;
 }
 
 #li-visite .nav-visite:after {
@@ -9,11 +9,11 @@
 	height: 1px;
 	width: 0;
 	margin: auto;
-	color: #444444;
+	color: #4a5058;
 	transition: width .5s ease, background-color .5s ease;
 }
 #li-visite .nav-visite:hover:after {
 	width: 100%;
 	background: #444;
-	color: #444444;	
+	color: #4a5058;	
 }
