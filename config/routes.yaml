@@ -21,3 +21,11 @@ mentions:
 manger :
     path: /manger
     controller: App\Controller\MangerController::manger
+
+sortir :
+    path: /sortir
+    controller: App\Controller\SortirController::index
+
+activites :
+    path: /activites
+    controller: App\Controller\ActivitesController::index
