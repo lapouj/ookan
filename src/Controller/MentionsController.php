@@ -11,7 +11,7 @@ class DefaultController extends AbstractController
      * @Route("/default/controler", name="default_controler")
      */
 
-    public function contact()
+    public function mentions()
     {
         return $this->render('contact.html.twig', [
             'controller_name' => 'MentionsController',
