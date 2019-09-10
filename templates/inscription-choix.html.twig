@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+    {% block nav %}
+        {% include "partials/nav-logo-middle.html.twig" %}
+    {% endblock %}
+
+
+    {% block body %}
+        <div class="container my-5">
+
+            <div class="row justify-content-center">
+            
+                <!-- Timeline -->
+                <div id="timeline-wrap">
+
+                    <div id="timeline"></div>
+                        
+                        <!-- This is the individual marker-->
+                        <div class="marker mfirst timeline-icon one">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                        <!-- / marker -->
+                    
+                        <!-- This is the individual marker-->
+                            <div class="marker m2 timeline-icon two">
+                            <i class="fa fa-usd"></i>
+                        </div>
+                        <!-- / marker -->
+                    
+                         
+                        
+                        <!-- This is the individual marker-->
+                        <div class="marker m3 timeline-icon three">
+                            <i class="fa fa-list"></i>
+                        </div>
+                        <!-- / marker -->
+                    
+                        
+                        <!-- This is the individual marker-->
+                        <div class="marker mlast timeline-icon four">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <!-- / marker --> 
+
+                <!-- Fin Timeline -->
+                </div>
+
+                
+
+            <!-- Fin de div.row -->
+            </div>
+        
+        <!-- Fin de div.container -->
+        </div>
+    {% endblock %}
