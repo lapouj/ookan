@@ -13,3 +13,11 @@ accueil:
 inscription:
     path: /inscription
     controller: App\Controller\DefaultController::inscription
+
+mentions:
+    path: /mentions_legales
+    controller: App\Controller\DefaultController::mentions
+
+manger :
+    path: /manger
+    controller: App\Controller\MangerController::manger

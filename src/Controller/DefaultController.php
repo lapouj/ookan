@@ -30,4 +30,11 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    public function mentions()
+    {
+        return $this->render('mentions.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }
