@@ -18,6 +18,20 @@ mentions:
     path: /mentions_legales
     controller: App\Controller\DefaultController::mentions
 
+
+contact:
+    path: /contactez_nous
+    controller: App\Controller\DefaultController::contact
+
 manger :
     path: /manger
     controller: App\Controller\MangerController::manger
+
+sortir :
+    path: /sortir
+    controller: App\Controller\SortirController::index
+
+activites :
+    path: /activites
+    controller: App\Controller\ActivitesController::index
+

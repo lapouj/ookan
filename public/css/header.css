@@ -3,12 +3,12 @@ header{
 	background-image: url("../img/header/fond.jpg");
 	background-size: cover;
 }
-li a{
+li .nav-visite{
 	text-decoration: none;
     color: #444444;
 }
 
-li a:after {
+li .nav-visite:after {
 	content: '';
 	display: block;
 	height: 1px;
@@ -17,7 +17,7 @@ li a:after {
 	color: #444444;
 	transition: width .5s ease, background-color .5s ease;
 }
-li a:hover:after {
+li .nav-visite:hover:after {
 	width: 100%;
 	background: #444;
 	color: #444444;	
