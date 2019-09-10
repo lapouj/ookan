@@ -119,7 +119,6 @@ class MangerController extends AbstractController
     public function show()
     {
         {
-            $errors = [];
             
             // Récupération de l'article
             $em = $this->getDoctrine()->getManager();

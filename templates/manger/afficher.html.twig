@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MangerController!{% endblock %}
+{% block title %}Consulter les restOorants{% endblock %}
 
-{% block body %}
-AFFICHER
+{% block main %}
+
+    <h2 class="text-center">Afficher les restOorants</h2>
+    {% for OneResto in resto %}
+        <tr>    
+            <td>{{ OneResto.getRestoname() }}</td>
+        </tr> 
+    {% endfor %}   
+
+
 {% endblock %}
