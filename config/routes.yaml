@@ -7,7 +7,7 @@ connect:
     controller: App\Controller\DefaultController::connect
 
 accueil:
-    path: /accueil
+    path: /
     controller: App\Controller\AccueilController::index
 
 inscription_phase1:
@@ -15,23 +15,22 @@ inscription_phase1:
     controller: App\Controller\DefaultController::inscription_choix_profil
 
 mentions:
-    path: /mentions_legales
+    path: /mentions-legales
     controller: App\Controller\DefaultController::mentions
 
 
 contact:
-    path: /contactez_nous
+    path: /contactez-nous
     controller: App\Controller\DefaultController::contact
 
-manger :
-    path: /manger
+les_restos :
+    path: /les-restos
     controller: App\Controller\MangerController::manger
 
-sortir :
-    path: /sortir
+les_sorties :
+    path: /les-sorties
     controller: App\Controller\SortirController::index
 
-activites :
-    path: /activites
+les_activites :
+    path: /les-activites
     controller: App\Controller\ActivitesController::index
-
