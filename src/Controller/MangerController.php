@@ -40,6 +40,7 @@ class MangerController extends AbstractController
     			$restoData = new Resto(); 
     			$restoData   ->setRestoName($safe['nom'])
     			->setDescription($safe['description'])
+                ->setType($safe['type'])
     			->setAddress($safe['adresse']);
     			// On prépare la requete.
     			$em->persist($restoData);

@@ -4,12 +4,28 @@
 
 {% block body %}
 
-    <h2 class="text-center">Les meilleurs restOorants</h2>
-    {% for OneResto in resto %}
-        <tr>    
-            <td>{{ OneResto.getRestoname() }}</td>
-        </tr> 
-    {% endfor %}   
+	<h2 class="text-center">Les meilleurs restOorants</h2> 
 
-{% endblock %}
+	<table>
+
+		<th>Nom</th>   
+		<th>Type</th>   
+		<th>Photo</th> 
+		<th>Description</th>   
+		<th>Adresse</th>
+		<th><a href="{{ path('add_restos')}}">Ajouter</a></th>
+
+		{% for OneResto in resto %}
+			<tr> 
+				<td>{{ OneResto.getRestoname() }}</td>
+				<td>{{ OneResto.getType() }}</td>
+				<td>{{ OneResto.getPhoto() }}</td>
+				<td>{{ OneResto.getDescription() }}</td>
+				<td>{{ OneResto.getAddress() }}</td>
+			</tr> 
+		{% endfor %}  
+
+	</table>
+
+{% endblock %} 
 
