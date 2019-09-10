@@ -7,25 +7,29 @@ connect:
     controller: App\Controller\DefaultController::connect
 
 accueil:
-    path: /accueil
+    path: /
     controller: App\Controller\AccueilController::index
 
-inscription:
-    path: /inscription
-    controller: App\Controller\DefaultController::inscription
+inscription_phase1:
+    path: /inscription/choisissez-votre-profil
+    controller: App\Controller\DefaultController::inscription_choix_profil
 
 mentions:
-    path: /mentions_legales
-    controller: App\Controller\DefaultController::mentions
+    path: /mentions-legales
+    controller: App\Controller\MentionsController::mentions
 
-manger :
-    path: /manger
+contact:
+    path: /contactez-nous
+    controller: App\Controller\ContactController::contact
+
+les_restos :
+    path: /les-restos
     controller: App\Controller\MangerController::manger
 
-sortir :
-    path: /sortir
+les_sorties :
+    path: /les-sorties
     controller: App\Controller\SortirController::index
 
-activites :
-    path: /activites
+les_activites :
+    path: /les-activites
     controller: App\Controller\ActivitesController::index

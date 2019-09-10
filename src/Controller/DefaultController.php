@@ -24,16 +24,9 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function inscription()
+    public function inscription_choix_profil()
     {
-        return $this->render('inscription.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
-
-    public function mentions()
-    {
-        return $this->render('mentions.html.twig', [
+        return $this->render('inscription-choix.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
