@@ -15,5 +15,5 @@ inscription:
     controller: App\Controller\DefaultController::inscription
 
 mentions:
-    path: /mentions_légales
+    path: /mentions_legales
     controller: App\Controller\DefaultController::mentions
