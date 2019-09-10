@@ -13,8 +13,9 @@
     </head>
     <body>
 
-
-        {% include 'partials/nav.html.twig' %}
+        {% block nav %}
+            {% include 'partials/nav.html.twig' %}
+        {% endblock %}
 
         {% include 'partials/header.html.twig' %}
 
