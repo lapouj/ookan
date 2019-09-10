@@ -28,4 +28,10 @@ class InscriptionController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+    public function inscription_reussite()
+    {
+        return $this->render('inscription/inscription-reussite.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }

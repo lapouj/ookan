@@ -15,12 +15,16 @@ inscription_choix:
     controller: App\Controller\InscriptionController::inscription_choix_profil
 
 inscription_pro:
-    path: /inscription/inscription-professionnel
+    path: /inscription/professionnel
     controller: App\Controller\InscriptionController::inscription_pro
 
 inscription_particulier:
-    path: /inscription/inscription-toulousain
+    path: /inscription/toulousain
     controller: App\Controller\InscriptionController::inscription_particulier
+
+inscription_reussite:
+    path: /inscription/inscription-reussite
+    controller: App\Controller\InscriptionController::inscription_reussite
 
 mentions:
     path: /mentions-legales
