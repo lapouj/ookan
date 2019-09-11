@@ -3,12 +3,31 @@
 	<img src="/img/header/toulouse.jpg" class="img-fluid w-100" alt="Responsive image">
 		
 
-	<div class="container-fluid text-center bg-light">
+	<div class="container-fluid text-center bg-transparent">
 		<ul class="d-flex justify-content-center">
 
-			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat"><h4><a style="text-decoration:none" class="nav-visite" href="{{ path('les_sorties')}}" ><i class="fas fa-glass-cheers"></i> Sorties</a></h4></li>
-			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat"><h4><a style="text-decoration:none" class="nav-visite" href="{{ path('show_restos')}}"><i class="fas fa-utensils"></i> Restos</a></h4></li>
-			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat"><h4><a style="text-decoration:none" class="nav-visite" href="{{ path('les_activites')}}"><i class="fas fa-running"></i>  Activités</a></h4></li>
+			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
+				<i class="fas fa-glass-cheers nav-visite"></i> 
+				<h4>
+					<a style="text-decoration:none" class="nav-visite" href="{{ path('les_sorties')}}">Sorties</a>
+				</h4>
+			</li>
+
+
+			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
+				<i class="fas fa-utensils nav-visite"></i> 
+				<h4>
+					<a style="text-decoration:none" class="nav-visite" href="{{ path('show_restos')}}">Restos</a>
+				</h4>
+			</li>
+
+
+			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
+				<i class="fas fa-running nav-visite"></i> 
+				<h4>
+					<a style="text-decoration:none" class="nav-visite" href="{{ path('les_activites')}}">Activités</a>
+				</h4>
+			</li>
 
 		</ul>
 	</div>
