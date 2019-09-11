@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 /* import des classes de PHPMailer */
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-// Load Composer's autoloader
-require '../vendor/autoload.php';
+
+
 
 class ContactController extends AbstractController
 {
