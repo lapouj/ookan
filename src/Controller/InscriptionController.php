@@ -56,6 +56,11 @@ class InscriptionController extends AbstractController
                 $errors[] = 'Votre mot de passe n\'est pas identique';
             }
 
+            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['mail' => $safe['email']]);
+            if(!empty($emailExist)){
+              $errors[] = 'L\'adresse email existe déjà';
+            }
+
             if (count($errors) == 0) {
             
       
