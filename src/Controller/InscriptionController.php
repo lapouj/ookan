@@ -33,7 +33,7 @@ class InscriptionController extends AbstractController
     		// je nettoie les données reçues
     		$safe = array_map('trim', array_map('strip_tags', $_POST));
 
-            if (strlen($safe['nom']) <= 3) {
+            if (strlen($safe['nom']) <= 4) {
                 $errors[] = 'Votre nom doit contenir au moins 4 caractères';
             }
 
