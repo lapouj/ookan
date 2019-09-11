@@ -8,15 +8,19 @@
 
     <div class="container my-5">
         <div class="row justify-content-center">
-            <form method="post" class="bg-light border p-4 col-lg-4 col-md-6 col-10">
+            <form method="post" action="mailer.php" class="bg-light border p-4 col-lg-4 col-md-6 col-10">
                 <h2 class="p-3">Contactez-nOous</h2>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Adresse mail</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="exemple@gmail.com">
+                    <label for="name">Votre nom</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="exemple@gmail.com">
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Type de demande</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <label for="email">Adresse mail</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="exemple@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="demande">Type de demande</label>
+                    <select class="form-control" id="demande" name="demande">
                         <option>Bug technique</option>
                         <option>Information erronée dans le contenu</option>
                         <option>Suggérer une amélioration</option>
@@ -26,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Dites-nous en plus</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Entrez ici votre message"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="6" placeholder="Entrez ici votre message"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
