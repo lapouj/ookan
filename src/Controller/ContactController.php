@@ -9,8 +9,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
-
 class ContactController extends AbstractController
 {
      /**
