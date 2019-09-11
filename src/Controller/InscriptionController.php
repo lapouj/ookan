@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 use App\Entity\User; // Intéraction
 
+
 class InscriptionController extends AbstractController
 {
     /**

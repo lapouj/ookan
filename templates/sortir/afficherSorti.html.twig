@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consulter les restOorants{% endblock %}
+
+{% block body %}
+
+	<h2 class="text-center">Les meilleurs endroOits</h2> 
+
+	<table>
+
+		<th>Nom</th>   
+		<th>Type</th>   
+		<th>Photo</th> 
+		<th>Description</th>   
+		<th>Adresse</th>
+		<th><a href="{{ path('add_place')}}">Ajouter</a></th>
+
+		{% for OnePlace in place %}
+			<tr> 
+				<td>{{ OneResto.getPlacename() }}</td>
+				<td>{{ OneResto.getType() }}</td>
+				<td>{{ OneResto.getPhoto() }}</td>
+				<td>{{ OneResto.getDescription() }}</td>
+				<td>{{ OneResto.getAddress() }}</td>
+			</tr> 
+		{% endfor %}  
+
+	</table>
+
+{% endblock %} 
