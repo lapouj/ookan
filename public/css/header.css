@@ -11,24 +11,10 @@
     color: #4a5058;
 }
 
-#li-visite .nav-visite:after {
-	content: '';
-	display: block;
-	height: 1px;
-	width: 0;
-	margin: auto;
-	color: #4a5058;
-	transition: width .5s ease, background-color .5s ease;
-}
-#li-visite .nav-visite:hover:after {
-	width: 100%;
-	background: #444;
-	color: #4a5058;	
+header ul {
+	margin-top: -8em;                                                                                                                                                                                                                                                                                                                                                                            
 }
 
-header ul {
-	margin-top: -2em;
-	background-color: white;
-	margin-right: 40em;                                                                                                                                                                                                                                                                                                                                                                               
-	margin-left: 40em;                                                                                                                                                                                                                                                                                                                                                                               
+header ul li {
+	padding: 1em;
 }
