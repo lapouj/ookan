@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 use App\Entity\User; // Intéraction
+use App\Entity\UserPro; // Intéraction
 
 
 class InscriptionController extends AbstractController
@@ -142,9 +143,9 @@ class InscriptionController extends AbstractController
 
                 $em = $this->getDoctrine()->getManager();
 
-                $userData = new Userpro();
+                $userData = new UserPro();
 
-                $userData->setFirstame($safe['firstname'])
+                $userData->setFirstname($safe['firstname'])
                         ->setName($safe['lastname'])
                         ->setSiret($safe['siren'])
                         ->setEmail($safe['email'])	
