@@ -6,3 +6,7 @@ footer {
 footer img {
     padding: 2em;
 }
+
+footer p a:visited { 
+    color: inherit;
+}
