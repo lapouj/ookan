@@ -41,6 +41,21 @@ class Resto
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $street_num;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $street_name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cp;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +117,42 @@ class Resto
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getStreetNum(): ?int
+    {
+        return $this->street_num;
+    }
+
+    public function setStreetNum(?int $street_num): self
+    {
+        $this->street_num = $street_num;
+
+        return $this;
+    }
+
+    public function getStreetName(): ?string
+    {
+        return $this->street_name;
+    }
+
+    public function setStreetName(string $street_name): self
+    {
+        $this->street_name = $street_name;
+
+        return $this;
+    }
+
+    public function getCp(): ?string
+    {
+        return $this->cp;
+    }
+
+    public function setCp(string $cp): self
+    {
+        $this->cp = $cp;
 
         return $this;
     }
