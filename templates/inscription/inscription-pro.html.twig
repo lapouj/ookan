@@ -17,9 +17,20 @@
             <div class="my-5">
                 <h2 class="text-center">Inscription Professionnel</h2>
             </div>
+            
+            {% if mes_erreurs is not empty %}
+                <div class="alert alert-danger text-center col-lg-4">
+                    {{ mes_erreurs|join('<br>')|raw }} 
+                </div>
+            {% elseif mes_validation is not empty %}    
+                <div class="alert alert-success text-center">
+                    {{ mes_validation|join('<br>')|raw 
+                }} 
+                </div>
+            {% endif %}
 
             <div class="row justify-content-center">
-                <form class="bg-light p-4 border">
+                <form method="POST" class="bg-light p-4 border">
                     <div class="form-group">
                         <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Prénom">
                     </div>
@@ -27,7 +38,7 @@
                         <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Nom">
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" name="lastname" id="lastname" placeholder="N° SIREN">
+                        <input type="number" class="form-control" name="siren" id="siren" placeholder="N° SIREN">
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Adresse Email">
