@@ -11,11 +11,11 @@
             <div class="alert alert-danger">
                 {{ mes_erreurs|join('<br>')|raw }} 
             </div>
-        {% elseif mes_validation is not empty %}    
+        {# {% elseif mes_validation is not empty %}    
             <div class="alert alert-success">
                 {{ mes_validation|join('<br>')|raw 
             }} 
-            </div>
+            </div> #}
         {% endif %}
         
         <div class="container my-5">

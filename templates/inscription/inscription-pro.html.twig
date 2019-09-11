@@ -24,13 +24,13 @@
                     {{ mes_erreurs|join('<br>')|raw }} 
                 </div>
             </div>
-            {% elseif mes_validation is not empty %}
+            {# {% elseif mes_validation is not empty %}
             <div class="row justify-content-center">    
                 <div class="alert alert-success text-center">
                     {{ mes_validation|join('<br>')|raw 
                 }} 
                 </div>
-            </div>
+            </div> #}
             {% endif %}
 
             <div class="row justify-content-center">

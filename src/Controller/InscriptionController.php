@@ -75,15 +75,17 @@ class InscriptionController extends AbstractController
                 $em->persist($userData);
                 //éxecution
                 $em->flush();
-				
-				$success = 'Votre inscription est un succès, bienvenue chez Ookan !';
+                
+                header('Location: http://127.0.0.1:8000/inscription/inscription-reussite');
+                exit();
+				// $success = 'Votre inscription est un succès, bienvenue chez Ookan !';
             }
 	    	
 	    } 
     
         return $this->render('inscription/inscription-particulier.html.twig', [
         	'mes_erreurs'     =>  $errors,
-        	'mes_validation'  =>  $success,
+        	// 'mes_validation'  =>  $success,
         ]);
      }	
 
@@ -155,8 +157,10 @@ class InscriptionController extends AbstractController
                 $em->persist($userData);
                 //éxecution
                 $em->flush();
-				
-				$success = 'Votre inscription est un succès, bienvenue chez Ookan !';
+                
+                header('Location: http://127.0.0.1:8000/inscription/inscription-reussite');
+                exit();
+				// $success = 'Votre inscription est un succès, bienvenue chez Ookan !';
             
             } // Fin de 'if (count($errors) == 0)'
 
@@ -164,7 +168,7 @@ class InscriptionController extends AbstractController
 
         return $this->render('inscription/inscription-pro.html.twig', [
                 'mes_erreurs'     =>  $errors,
-                'mes_validation'  =>  $success,
+                // 'mes_validation'  =>  $success ?? null,
         ]);
     }
     public function inscription_reussite()
