@@ -37,7 +37,10 @@ class MangerController extends AbstractController
     			$restoData   ->setRestoName($safe['nom'])
     			->setDescription($safe['description'])
                 ->setType($safe['type'])
-    			->setAddress($safe['adresse']);
+    			->setStreetname($safe['street_name'])
+				->setStreetnum($safe['street_num'])
+				->setCp($safe['cp'])
+				->setVille($safe['ville']);
     			// On prépare la requete.
     			$em->persist($restoData);
     			// On l'exécute
