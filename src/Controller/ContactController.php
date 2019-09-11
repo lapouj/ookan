@@ -40,8 +40,8 @@ if (!empty($_POST)) {
         $errors[] = 'Votre adresse email n\'est pas valide';
     }
 
-    if (strlen($safe['demande']) <= 5) {
-    	$errors[] = 'Votre message doit contenir au moins 4 caractères';
+    if (strlen($safe['demande']) < 5) {
+    	$errors[] = 'Votre message doit contenir au moins 5 caractères';
     }
 
     	
