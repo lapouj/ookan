@@ -6,23 +6,19 @@
 	font-family: 'Roboto';
 }
 
-
 #li-visite .nav-visite{
 	text-decoration: none;
     color: #4a5058;
 }
 
-#li-visite .nav-visite:after {
-	content: '';
-	display: block;
-	height: 1px;
-	width: 0;
-	margin: auto;
-	color: #4a5058;
-	transition: width .5s ease, background-color .5s ease;
+header ul {
+	margin-top: -8em;                                                                                                                                                                                                                                                                                                                                                                            
 }
-#li-visite .nav-visite:hover:after {
-	width: 100%;
-	background: #444;
-	color: #4a5058;	
+
+header ul li {
+	padding: 1em;
+}
+
+header ul li i {
+	font-size: 3em;
 }

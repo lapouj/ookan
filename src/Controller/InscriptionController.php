@@ -33,8 +33,8 @@ class InscriptionController extends AbstractController
     		// je nettoie les données reçues
     		$safe = array_map('trim', array_map('strip_tags', $_POST));
 
-            if (strlen($safe['nom']) <= 2) {
-                $errors[] = 'Votre nom doit contenir au moins 3 caractères';
+            if (strlen($safe['nom']) <= 3) {
+                $errors[] = 'Votre nom doit contenir au moins 4 caractères';
             }
 
             if (strlen($safe['prenom']) <= 4) {
@@ -54,6 +54,11 @@ class InscriptionController extends AbstractController
             }
             elseif($safe['password'] != $safe['comfirm_password']) {
                 $errors[] = 'Votre mot de passe n\'est pas identique';
+            }
+
+            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['mail' => $safe['email']]);
+            if(!empty($emailExist)){
+              $errors[] = 'L\'adresse email existe déjà';
             }
 
             if (count($errors) == 0) {
