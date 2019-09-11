@@ -10,9 +10,9 @@ class UserprofileController extends AbstractController
     /**
      * @Route("/userprofile", name="userprofile")
      */
-    public function index()
+    public function userprofile()
     {
-        return $this->render('userprofile/index.html.twig', [
+        return $this->render('userprofile/user-profile.html.twig', [
             'controller_name' => 'UserprofileController',
         ]);
     }

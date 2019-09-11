@@ -10,6 +10,7 @@ accueil:
     path: /
     controller: App\Controller\AccueilController::index
 
+# Les pages d'inscription
 inscription_choix:
     path: /inscription/choisissez-votre-profil
     controller: App\Controller\InscriptionController::inscription_choix_profil
@@ -53,3 +54,7 @@ add_restos :
 show_restos :
     path : /consulter-restaurants
     controller: App\Controller\MangerController::show
+
+user_profile :
+    path : /mon-compte
+    controller : App\Controller\UserprofileController::userprofile
