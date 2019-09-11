@@ -42,13 +42,13 @@
     content: none;
 }
 .progressive-bar li.active {
-    color: green;
+    color: #e3ad5a;
 }
 .progressive-bar li.active:before {
-    border-color: green;
+    border-color: #e3ad5a;
 }
 .progressive-bar li.active + li:after {
-    background-color: green;
+    background-color: #e3ad5a;
 }
 
 /* Profil Divs */
