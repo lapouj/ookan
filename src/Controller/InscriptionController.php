@@ -31,15 +31,15 @@ class InscriptionController extends AbstractController
     		// je nettoie les données reçues
     		$safe = array_map('trim', array_map('strip_tags', $_POST));
 
-            if (strlen($safe['nom']) < 2) {
+            if (strlen($safe['nom']) <= 2) {
                 $errors[] = 'Votre nom doit contenir au moins 3 caractères';
             }
 
-            if (strlen($safe['prenom']) < 4) {
+            if (strlen($safe['prenom']) <= 4) {
                 $errors[] = 'Votre prénom doit contenir au moins 5 caractères';
             }
 
-            if (strlen($safe['pseudo']) < 4) {
+            if (strlen($safe['pseudo']) <= 4) {
                 $errors[] = 'Votre pseudo doit contenir au moins 5 caractères';
             }
 
@@ -47,7 +47,7 @@ class InscriptionController extends AbstractController
                 $errors[] = 'Votre adresse email n\'est pas valide';
             }
 
-            if (strlen($safe['password']) < 4) {
+            if (strlen($safe['password']) <= 4) {
                 $errors[] = 'Votre mot de passe doit contenir au moins 5 caractères';
             }
             elseif($safe['password'] != $safe['comfirm_password']) {
@@ -87,6 +87,43 @@ class InscriptionController extends AbstractController
 
     public function inscription_pro()
     {
+        // Je place mes erreurs dans un tableau
+        $errors = [];
+
+        // Si mes inputs sont remplies
+        if (!empty($_POST)) {
+
+            // je nettoie les données reçues
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+            
+            if (!empty($safe['firstname'])) {
+                if (strlen($safe['firstname']) <= 1) {
+                    $errors[] = 'Votre prénom doit comporter au moins 2 caractères';
+                }
+            } else $errors[] = 'Le champ Prénom est obligatoire';
+
+            if (!empty($safe['lastname'])) {
+                if (strlen($safe['lastname']) <= 1) {
+                    $errors[] = 'Votre Nom doit comporter au moins 2 caractères';
+                }
+            } else $errors[] = 'Le champ Nom est obligatoire';
+
+            if (!empty($safe['siren'])) {
+                if (is_numeric($safe['siren'])) {
+                    if (strlen($safe['siren']) != 9) {
+                        $errors[] = 'Le N° SIREN doit être composé de 9 chiffres';
+                    }
+                } else $errors[] = 'Le champ N° SIREN doit contenir une valeur numérique';
+            } else $errors[] = 'Le champ N° SIREN est obligatoire';
+
+            if (!empty($safe['email'])) {
+                if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                    $errors[] = 'Votre adresse email n\'est pas valide';
+                }
+            } else $errors[] = 'Le champ Adresse Email est obligatoire';
+
+        } // Fin de 'if (!empty($_POST))'
+
         return $this->render('inscription/inscription-pro.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
