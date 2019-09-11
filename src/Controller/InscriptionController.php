@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 use App\Entity\User; // Intéraction
+use App\Entity\UserPro; // Intéraction
 
 
 class InscriptionController extends AbstractController
@@ -74,15 +75,17 @@ class InscriptionController extends AbstractController
                 $em->persist($userData);
                 //éxecution
                 $em->flush();
-				
-				$success = 'Votre inscription est un succès, bienvenue chez Ookan !';
+                
+                header('Location: http://127.0.0.1:8000/inscription/inscription-reussite');
+                exit();
+				// $success = 'Votre inscription est un succès, bienvenue chez Ookan !';
             }
 	    	
 	    } 
     
         return $this->render('inscription/inscription-particulier.html.twig', [
         	'mes_erreurs'     =>  $errors,
-        	'mes_validation'  =>  $success,
+        	// 'mes_validation'  =>  $success,
         ]);
      }	
 
@@ -91,12 +94,15 @@ class InscriptionController extends AbstractController
         // Je place mes erreurs dans un tableau
         $errors = [];
 
+        $success = '';
+
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
 
             // je nettoie les données reçues
             $safe = array_map('trim', array_map('strip_tags', $_POST));
             
+            // Je pose mes conditions de validation du formulaire
             if (!empty($safe['firstname'])) {
                 if (strlen($safe['firstname']) <= 1) {
                     $errors[] = 'Votre prénom doit comporter au moins 2 caractères';
@@ -123,10 +129,46 @@ class InscriptionController extends AbstractController
                 }
             } else $errors[] = 'Le champ Adresse Email est obligatoire';
 
+            if (!empty($safe['password'])) {
+                if (strlen($safe['password']) < 8) {
+                    $errors[] = 'Votre mot de passe doit contenir au moins 8 caractères';
+                }
+            } else $errors[] = 'Le champ Mot de passe est obligatoire';
+
+            if ($safe['password'] != $safe['confirm-password']) {
+                $errors[] = 'Vos mot de passe ne sont pas identiques';
+            }
+
+            if (count($errors) == 0) {
+
+                $errors = array_filter($errors);
+
+                $em = $this->getDoctrine()->getManager();
+
+                $userData = new UserPro();
+
+                $userData->setFirstname($safe['firstname'])
+                        ->setName($safe['lastname'])
+                        ->setSiret($safe['siren'])
+                        ->setEmail($safe['email'])	
+                        ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+
+                //Préparation de la requete.
+                $em->persist($userData);
+                //éxecution
+                $em->flush();
+                
+                header('Location: http://127.0.0.1:8000/inscription/inscription-reussite');
+                exit();
+				// $success = 'Votre inscription est un succès, bienvenue chez Ookan !';
+            
+            } // Fin de 'if (count($errors) == 0)'
+
         } // Fin de 'if (!empty($_POST))'
 
         return $this->render('inscription/inscription-pro.html.twig', [
-            'controller_name' => 'DefaultController',
+                'mes_erreurs'     =>  $errors,
+                // 'mes_validation'  =>  $success ?? null,
         ]);
     }
     public function inscription_reussite()

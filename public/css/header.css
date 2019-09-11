@@ -6,7 +6,6 @@
 	font-family: 'Roboto';
 }
 
-
 #li-visite .nav-visite{
 	text-decoration: none;
     color: #4a5058;
@@ -25,4 +24,11 @@
 	width: 100%;
 	background: #444;
 	color: #4a5058;	
+}
+
+header ul {
+	margin-top: -2em;
+	background-color: white;
+	margin-right: 40em;                                                                                                                                                                                                                                                                                                                                                                               
+	margin-left: 40em;                                                                                                                                                                                                                                                                                                                                                                               
 }

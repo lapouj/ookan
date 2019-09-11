@@ -9,20 +9,16 @@
         <div class="container my-5">
             
             <ul class="progressive-bar">
-                <li class="active">Profil</li>
-                <li>Inscription</li>
-                <li>Réussite</li>
+                <li class="active montserrat">Profil</li>
+                <li class="montserrat">Inscription</li>
+                <li class="montserrat">Réussite</li>
             </ul>
-            <br>
-            <div class="my-5">
-                <h2 class="text-center">Sélectionnez un profil</h2>
-            </div>
             
-            <div class="row justify-content-center">
+            <div class="row justify-content-center pt-5">
             
                 <div class="col-3 m-4 bg-light choice-div py-4">
                     <div>
-                        <h5 class="text-center">Profil Professionnel</h5>
+                        <h5 class="text-center montserrat">Professionnel</h5>
                     </div>
                     <hr class="under-profile-hr">
                     <div>
@@ -32,24 +28,23 @@
                     <div>
                         <ul class="possibilities-list">
                             <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i> Ajoutez des Fred
+                                <i class="fas fa-check"></i> Référencez votre commerce ou vos événements
                             </li>
                             <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i> Fred chauve
+                                <i class="fas fa-check"></i> Intégrez le classement par avis Ookan
                             </li>
-                            <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i> Fred Imberbe
-                            </li>
+
                         </ul>
                     </div>
                     <div class="text-center">
-                        <a href="{{ path('inscription_pro') }}" class="btn btn-success">Je suis un professionnel</a>
+                        <a class="nav-link btn" href="{{ path('inscription_pro') }}"><img src="/img/logo/logo-go.png" width="180" height="60" class="d-inline-block align-top img-fluid" alt=""></a>
                     </div>
+                    
                 </div>  
                 
                 <div class="col-3 m-4 bg-light choice-div py-4">
                     <div>
-                        <h5 class="text-center">Profil Toulousain(e)</h5>
+                        <h5 class="text-center montserrat">Toulousain(e)</h5>
                     </div>
                     <hr class="under-profile-hr">
                     <div>
@@ -59,18 +54,16 @@
                     <div>
                         <ul class="possibilities-list">
                             <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i> Fred Chauve
+                                <i class="fas fa-check"></i> Partagez vos avis avec les utilisateurs du site
                             </li>
                             <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i> Fred nul au ping-pong
-                            </li>
-                            <li class="possibilities-list-item">
-                                <i class="fas fa-check"></i> Fred nul sur Apex
+                                <i class="fas fa-check"></i> Accès gratuit à des centaines d'avis  
                             </li>
                         </ul>
                     </div>
                     <div class="text-center">
-                        <a href="{{ path('inscription_particulier') }}" class="btn btn-success">Je suis un(e) Toulousain(e)</a>
+                        <a class="nav-link btn" href="{{ path('inscription_particulier') }}"><img src="/img/logo/logo-go.png" width="180" height="60" class="d-inline-block align-top img-fluid" alt=""></a>
+                        
                     </div>
                 </div>
 
