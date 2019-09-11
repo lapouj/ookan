@@ -7,15 +7,15 @@
 		<ul class="d-flex justify-content-center">
 
 			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
-				<i class="fas fa-glass-cheers nav-visite"></i> 
+				<a href="{{ path('les_sorties')}}"><i class="fas fa-glass-cheers nav-visite"></i></a>
 				<h4>
 					<a style="text-decoration:none" class="nav-visite" href="{{ path('les_sorties')}}">Sorties</a>
-				</h4>
+				</h4>  
 			</li>
 
 
 			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
-				<i class="fas fa-utensils nav-visite"></i> 
+				<a href="{{ path('show_restos')}}"><i class="fas fa-utensils nav-visite"></i></a> 
 				<h4>
 					<a style="text-decoration:none" class="nav-visite" href="{{ path('show_restos')}}">Restos</a>
 				</h4>
@@ -23,7 +23,7 @@
 
 
 			<li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
-				<i class="fas fa-running nav-visite"></i> 
+				<a href="{{ path('les_activites')}}"><i class="fas fa-running nav-visite"></i></a>
 				<h4>
 					<a style="text-decoration:none" class="nav-visite" href="{{ path('les_activites')}}">Activités</a>
 				</h4>
