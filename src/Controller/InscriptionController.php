@@ -57,8 +57,14 @@ class InscriptionController extends AbstractController
             }
 
             $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['mail' => $safe['email']]);
-            if(!empty($emailExist)){
+            $emailProExist = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['email' => $safe['email']]);
+            if(!empty($emailExist) || (!empty($emailProExist))){
               $errors[] = 'L\'adresse email existe déjà';
+            }
+
+            $pseudoExist = $this->getDoctrine()->getRepository(User::class)->findBy(['pseudo' => $safe['pseudo']]);
+            if(!empty($pseudoExist)){
+                $errors[] = 'Ce pseudo est déjà utilisé';
             }
 
             if (count($errors) == 0) {
@@ -142,6 +148,12 @@ class InscriptionController extends AbstractController
 
             if ($safe['password'] != $safe['confirm-password']) {
                 $errors[] = 'Vos mot de passe ne sont pas identiques';
+            }
+
+            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['mail' => $safe['email']]);
+            $emailProExist = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['email' => $safe['email']]);
+            if(!empty($emailExist) || !empty($emailProExist)){
+              $errors[] = 'L\'adresse email existe déjà';
             }
 
             if (count($errors) == 0) {
