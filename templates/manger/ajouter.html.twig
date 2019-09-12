@@ -4,28 +4,32 @@
 
 {% block body %}
 
-<div class="m-5">
+
 
 	{% if mes_erreurs is not empty %}
-	        <div class="row justify-content-center">
-	            <div class="alert alert-danger text-center col-lg-4">
-	                {{ mes_erreurs|join('<br>')|raw }} 
-	            </div>
-	        </div>
+		<div class="row justify-content-center">
+			<div class="alert alert-danger text-center col-lg-4">
+				{{ mes_erreurs|join('<br>')|raw }} 
+			</div>
+		</div>
 	{% endif %}
 
-		<form id="add_form" method="post" class="border">
-			<p>
-				<label for="nom">Nom d'établissement :</label>
-				<input id="nom" type="text" name="nom">
-			</p>
-			<p>
-				<label for="description">Description :</label>
-				<textarea id="description" name="description" rows="10" cols="50"></textarea>
-			</p>
-			<p>
-				<label for="type">Type de cuisine :</label>
-				<select id="type" name="type">
+	<div>
+		<h2 class="text-center montserrat">Ajouer votre établissement</h2>
+	</div>
+
+	<div class="row justify-content-center py-4">
+
+		<form id="add_form" method="post" class="border bg-light p-4">
+			<div class="form-group">
+				<input id="nom" type="text" name="nom" placeholder="Nom d'établissement" class="form-control">
+			</div>
+			<div class="form-group">
+				<textarea id="description" name="description" rows="10" cols="50" placeholder="Description (Minimum 50 caractères)" class="form-control"></textarea>
+			</div>
+			<div class="form-group">
+				<select id="type" name="type" class="form-control">
+					<option disabled selected>Type de cuisine</option>
 					<option>Traditionnelle</option>
 					<option>Asiatique</option>
 					<option>Indienne</option>
@@ -36,27 +40,25 @@
 					<option>Polonaise</option>
 					<option>Autre</option>
 				</select>
-			</p>
-			<p>
-				<label for="street_num">N° de rue :</label>
-				<input id="street_num" type="text" name="street_num">
-			</p>
-			<p>
-				<label for="street_name">Nom de rue :</label>
-				<input id="street_name" type="text" name="street_name">
-			</p>
-			<p>
-				<label for="cp">Code postal :</label>
-				<input id="cp" type="text" name="cp">
-			</p>
-			<p>
-				<label for="ville">Ville :</label>
-				<input id="ville" type="text" name="ville">
-			</p>
-			<p class="text-center">
-				<input type="submit" name="envoyer" value="Valider">
-			</p>
+			</div>
+			<div class="form-group">
+				<input id="street_num" type="text" name="street_num" placeholder="N° de rue" class="form-control">
+			</div>
+			<div class="form-group">
+				<input id="street_name" type="text" name="street_name" placeholder="Nom de rue" class="form-control">
+			</div>
+			<div class="form-group">
+				<input id="cp" type="text" name="cp" placeholder="Code postal" class="form-control">
+			</div>
+			<div class="form-group">
+				<input id="ville" type="text" name="ville" placeholder="Ville" class="form-control">
+			</div>
+			<div class="text-center">
+				<button type="submit" class="btn btn-secondary w-100" name="envoyer">Valider</button>
+			</div>
 		</form>
-</div>
+
+	</div>
+
 
 {% endblock %}
