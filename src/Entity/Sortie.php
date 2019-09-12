@@ -16,10 +16,7 @@ class Sortie
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $photo;
+   
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -31,15 +28,9 @@ class Sortie
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $address;
+ 
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -66,10 +57,7 @@ class Sortie
      */
     private $Cp;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Phone;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -81,17 +69,7 @@ class Sortie
         return $this->id;
     }
 
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
+    
 
     public function getSortieName(): ?string
     {
@@ -113,30 +91,6 @@ class Sortie
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
 
         return $this;
     }
@@ -197,18 +151,6 @@ class Sortie
     public function setCp(string $Cp): self
     {
         $this->Cp = $Cp;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->Phone;
-    }
-
-    public function setPhone(string $Phone): self
-    {
-        $this->Phone = $Phone;
 
         return $this;
     }

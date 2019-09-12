@@ -29,6 +29,8 @@ class SortirController extends AbstractController
 
     	if(!empty($_POST)){
     		
+    		$safe = array_map('trim', array_map('strip_tags', $_POST));
+
     		// Utilisation de la base de données
     			$em = $this->getDoctrine()->getManager();
 
@@ -40,7 +42,7 @@ class SortirController extends AbstractController
     			->setStreetnum($safe['street_num'])
     			->setCp($safe['cp'])
     			->setPhone($safe['phone'])
-    			->setWebsite($safe['internet'])
+    				->setDate($safe['date'])
     			->setVille($safe['ville']);
     			// On prépare la requete.
     			$em->persist($sortieData);
