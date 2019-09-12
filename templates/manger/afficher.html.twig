@@ -5,38 +5,38 @@
 {# contenu page #}
 {% block body %}
 
-	<h2 class="text-center">Les meilleurs restOorants</h2> 
-
-	<table>
-
-		<th>Nom</th>   
-		<th>Type</th>   
-		<th>Photo</th> 
-		<th>Description</th>   
-		<th>N°</th>
-		<th>Nom de rue</th>
-		<th>Code postal</th>
-		<th>Ville</th>
-		<th><a href="{{ path('add_restos')}}">Ajouter</a></th>
-
+	<h2 class="text-center montserrat">Les meilleurs restOorants</h2>
+	
+	<div class="container text-white mb-3 mt-3 montserrat" style="border-radius:10px">
+		<a href="{{ path('add_restos')}}">Ajouter</a>
 		{% for OneResto in resto %}
-			<tr> 
-				<td>{{ OneResto.getRestoname() }}</td>
-				<td>{{ OneResto.getType() }}</td>
-				<td>{{ OneResto.getPhoto() }}</td>
-				<td>{{ OneResto.getDescription() }}</td>
-				<td>{{ OneResto.getStreetnum() }}</td>
-				<td>{{ OneResto.getStreetname() }}</td>
-				<td>{{ OneResto.getCp() }}</td>
-				<td>{{ OneResto.getVille() }}</td>
-				<td>
-					<div id="map{{OneResto.getId()}}" style="height:400px;border-radius:10px;width:400px">
-						<!-- id="map5" par exemple -->
-					</div>
-				</td>
-			</tr>
-		{%  endfor %}
-	</table>
+			<div id="cards" class="encart mb-3 mt-3 p-3" style="border-radius:10px">
+				<h2 class="d-flex justify-content-center p-2">{{ OneResto.getRestoname() }}</h2>
+
+				<p class="d-flex justify-content-center p-2">{{ OneResto.getType() }}</p>
+
+				{# <p>{{ OneResto.getPhoto() }}</p>
+				<p>{{ OneResto.getPhone() }}</p>
+				<p>{{ OneResto.getWebsite() }}</p> #}
+
+				<p>{{ OneResto.getDescription() }}</p>
+				<div class="d-flex justify-content-start">
+					<p>{{ OneResto.getStreetnum() }}</p>
+					<p>{{ OneResto.getStreetname() }}</p>
+					<p>{{ OneResto.getCp() }}</p>
+					<p>{{ OneResto.getVille() }}</p>
+				</div>
+
+				<div class="d-flex justify-content-end">
+					<p>
+						<div class="m-3 p-2" id="map{{OneResto.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
+							<!-- id="map5" par exemple -->
+						</div>
+					</p>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %} 
 
 
