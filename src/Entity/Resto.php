@@ -71,6 +71,11 @@ class Resto
      */
     private $website;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $id_userpro;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -204,6 +209,18 @@ class Resto
     public function setWebsite(?string $website): self
     {
         $this->website = $website;
+
+        return $this;
+    }
+
+    public function getIdUserpro(): ?int
+    {
+        return $this->id_userpro;
+    }
+
+    public function setIdUserpro(?int $id_userpro): self
+    {
+        $this->id_userpro = $id_userpro;
 
         return $this;
     }
