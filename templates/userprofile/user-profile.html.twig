@@ -3,10 +3,64 @@
     {% block nav %}
         {% include "partials/nav.html.twig" %}
     {% endblock %}
-        {# If pro #}
-
-        {# If particulier #}
-        
-    {% block body %}
     
-    {% endblock %}
+    {% block body %}
+    <div class="container">
+        <h2 class="text-center">Mon compte</h2>
+
+        {# If pro #}
+        <h3 class="">Modifier mes Infos</h3>
+        
+        <form action="POST" class="col-6">
+
+            <h4>Photo de profil</h4>
+            <div class="form-row my-3">
+                <div class="col">
+                    <input type="file" class="inputAvatar" name="avatar" id="avatar">
+                    <label for="avatar"><img src="/img/profil/avatar.png" height="150px" alt="Votre photo de profil" title="Photo du profil"><i class="fas fa-camera"></i></label>
+                </div>
+            </div>
+
+            <h4>Information générales</h4>
+            <div class="form-row my-3">
+                <div class="col">
+                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Prénom">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Nom">
+                </div>
+            </div>
+
+            <div class="form-row my-3">
+                <div class="col">
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="form-row my-3">
+                <div class="col">
+                    <input type="number" class="form-control" name="siren" id="siren" placeholder="SIREN" disabled>
+                </div>
+            </div>
+
+            <h4>modifier le mdp</h4>
+            <div class="form-row my-3">
+                <div class="col">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe (8 caractères min.)">
+                </div>
+            </div>
+
+            <div class="form-row my-3">
+                <div class="col">
+                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirmer le mot de passe">
+                </div>
+            </div>
+
+            <div class="form-row my-3">
+                <button type="submit" class="btn btn-success">Enregister les modifications</button>
+            </div>
+        </form>
+        {# If particulier #}
+
+    </div> {# Fin de div Container #}
+     {% endblock %}
