@@ -64,3 +64,11 @@ add_restos:
 user_profile:
     path: /mon-compte
     controller : App\Controller\UserprofileController::userprofile
+
+add_sortie:
+    path: /ajouter-sortie
+    controller: App\Controller\SortirController::add
+
+show_sortie:
+    path: /consulter-sorties
+    controller: App\Controller\SortirController::show
