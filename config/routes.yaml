@@ -7,7 +7,7 @@ connect:
     controller: App\Controller\DefaultController::connect
 
 accueil:
-    path: /
+    path: /accueil
     controller: App\Controller\AccueilController::index
 
 # Les pages d'inscription
