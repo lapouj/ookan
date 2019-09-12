@@ -27,6 +27,8 @@ inscription_reussite:
     path: /inscription/inscription-reussite
     controller: App\Controller\InscriptionController::inscription_reussite
 
+
+# A propo de Ookan
 mentions:
     path: /mentions-legales
     controller: App\Controller\MentionsController::mentions
@@ -35,26 +37,30 @@ contact:
     path: /contactez-nous
     controller: App\Controller\ContactController::contact
 
-les_restos :
+
+#les pages 
+les_restos:
     path: /les-restos
     controller: App\Controller\MangerController::manger
 
-les_sorties :
+
+les_sorties:
     path: /les-sorties
     controller: App\Controller\SortirController::index
 
-les_activites :
+les_activites:
     path: /les-activites
     controller: App\Controller\ActivitesController::index
 
-add_restos :
-    path : /ajouter-restaurant
-    controller: App\Controller\MangerController::add
-
-show_restos :
-    path : /consulter-restaurants
+show_restos:
+    path: /consulter-restaurants
     controller: App\Controller\MangerController::show
 
-user_profile :
-    path : /mon-compte
+add_restos:
+    path: /ajouter-restaurant
+    controller: App\Controller\MangerController::add
+
+# Connexion user
+user_profile:
+    path: /mon-compte
     controller : App\Controller\UserprofileController::userprofile
