@@ -18,8 +18,6 @@ class SortirController extends AbstractController
     	]);
     }
 
-
-
     public function add()
     {
 
@@ -46,19 +44,12 @@ class SortirController extends AbstractController
     			$em->persist($sortieData);
     			// On l'exécute
     			$em->flush();
-
-    		
     	}    
 
     	return $this->render('sortir/ajouterSorti.html.twig', [
     		'mes_erreurs'     =>  $errors,
     	]);
     }
-
-
-
-
-
 
     public function show()
     {

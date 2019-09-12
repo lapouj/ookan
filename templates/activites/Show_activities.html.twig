@@ -2,6 +2,11 @@
 
 {% block title %}Hello ActivitesController!{% endblock %}
 
-{% block body %}
-<h1 class="text-center">PAGE POUR AFFICHER LES ACTIVITES</h1>
-{% endblock %}
+	{% block body %}
+		<p class="text-center">
+			<a href="{{path('add_activity')}}">Ajouter une activité</a>
+		</p>
+		<div class="row justify-content-center align-items-center text-center m-5 fixed lol">
+			<h1 class="text-center"><span class="lololol">P</span><span class="lololol">A</span><span class="lololol">G</span><span class="lololol">E</span> <span class="lololol">P</span><span class="lololol">O</span><span class="lololol">U</span><span class="lololol">R</span> <span class="lololol">A</span><span class="lololol">F</span><span class="lololol">F</span><span class="lololol">I</span><span class="lololol">C</span><span class="lololol">H</span><span class="lololol">E</span><span class="lololol">R</span> <span class="lololol">L</span><span class="lololol">E</span><span class="lololol">S</span> <span class="lololol">A</span><span class="lololol">C</span><span class="lololol">T</span><span class="lololol">I</span><span class="lololol">V</span><span class="lololol">I</span><span class="lololol">T</span><span class="lololol">E</span><span class="lololol">S</span></h1>
+		</div> 
+	{% endblock %}
