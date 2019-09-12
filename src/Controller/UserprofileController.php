@@ -14,12 +14,13 @@ class UserprofileController extends AbstractController
     /**
      * @Route("/userprofile", name="userprofile")
      */
-    public function userprofile()
+    public function userprofile($id)
     {
-        // $siren = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['siret']);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(UserPro::class)->find($id);
 
         return $this->render('userprofile/user-profile.html.twig', [
-            // 'mon_siren' => $siren,
+            'user' => $user,
         ]);
     }
 }
