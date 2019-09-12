@@ -74,11 +74,6 @@ class MangerController extends AbstractController
 
 
 
-
-
-
-
-
     public function show()
     {
     	{
