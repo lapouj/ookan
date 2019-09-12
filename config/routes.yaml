@@ -43,15 +43,6 @@ les_restos:
     path: /les-restos
     controller: App\Controller\MangerController::manger
 
-
-les_sorties:
-    path: /les-sorties
-    controller: App\Controller\SortirController::show
-
-les_activites:
-    path: /les-activites
-    controller: App\Controller\ActivitesController::index
-
 show_restos:
     path: /consulter-restaurants
     controller: App\Controller\MangerController::show
@@ -69,6 +60,14 @@ add_sortie:
     path: /ajouter-sortie
     controller: App\Controller\SortirController::add
 
-show_sortie:
+show_sorties:
     path: /consulter-sorties
     controller: App\Controller\SortirController::show
+
+add_activity:
+    path: /ajouter-activité
+    controller: App\Controller\ActivitesController::add
+
+show_activies:
+    path: /consulter-activités
+    controller: App\Controller\ActivitesController::show
