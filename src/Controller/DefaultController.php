@@ -33,7 +33,7 @@ class DefaultController extends AbstractController
         
             $userData = $this->getDoctrine()->getRepository(User::class)->findBy(['email' => $safe['email']]);
             
-            foreach ($$_POST as $key => $value) {
+            foreach ($_POST as $key => $value) {
                 $post[$key] = trim(strip_tags($value));
             }
 
