@@ -9,22 +9,118 @@
 	<table>
 
 		<th>Nom</th>   
-		<th>Type</th>   
-		<th>Photo</th> 
 		<th>Description</th>   
-		<th>Adresse</th>
+		<th>Type</th>   
+		<th>N° rue</th>
+		<th>Nom de rue</th>
+		<th>CP</th>
+		<th>Ville</th>
+		
+		
 		<th><a href="{{ path('add_sortie')}}">Ajouter</a></th>
 
 		{% for OneSortie in sorties %}
 			<tr> 
-				<td>{{ OneSortie.getPlacename() }}</td>
-				<td>{{ OneSortie.getType() }}</td>
-				<td>{{ OneSortie.getPhoto() }}</td>
+				<td>{{ OneSortie.getSortiename() }}</td>
 				<td>{{ OneSortie.getDescription() }}</td>
-				<td>{{ OneSortie.getAddress() }}</td>
+				<td>{{ OneSortie.getType() }}</td>
+				<td>{{ OneSortie.getStreetnum() }}</td>
+				<td>{{ OneSortie.getStreetname() }}</td>
+				<td>{{ OneSortie.getCp() }}</td>
+				<td>{{ OneSortie.getVille() }}</td>
+
+			<td class="m-3 p-2" id="map{{OneSortie.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
+							<!-- id="map5" par exemple -->
+						</td>
 			</tr> 
+
 		{% endfor %}  
 
 	</table>
+
+{% endblock %} 
+
+{# javascript #}
+{% block js %} 
+
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyAmkMmW6mnFdvnyhblcCnqYBsXvLsuJdyQ" type="text/javascript"></script>
+{# AXIOS pour tester #}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
+
+<script type="text/javascript">
+/**
+ * Fonction d'initialisation de la carte
+ * @param param_latitude La latitude
+ * @param param_longitude La longitude
+ */
+function initMap(param_latitude, param_longitude, param_posmarker, target_id){
+
+	// Créer l'objet "map" et l'insèrer dans l'élément HTML qui a l'ID "map"
+	map = new google.maps.Map(document.getElementById(target_id), {
+		// Nous plaçons le centre de la carte avec les coordonnées ci-dessus
+		center: new google.maps.LatLng(param_latitude, param_longitude), 
+		// Nous définissons le zoom par défaut
+		zoom: 17, 
+		// Nous définissons le type de carte (ici carte routière)
+		mapTypeId: google.maps.MapTypeId.ROADMAP, 
+		// Nous activons les options de contrôle de la carte (plan, satellite...)
+		mapTypeControl: false,
+		// Nous désactivons la roulette de souris
+		scrollwheel: false, 
+		mapTypeControlOptions: {
+			// Cette option sert à définir comment les options se placent
+			style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR 
+		},
+		// Activation des options de navigation dans la carte (zoom...)
+		navigationControl: false, 
+		navigationControlOptions: {
+			// Comment ces options doivent-elles s'afficher
+			style: google.maps.NavigationControlStyle.ZOOM_PAN 
+		}
+	});
+	var marker = new google.maps.Marker({
+	     position: {lat: param_latitude, lng: param_longitude},
+	     map: map,
+     });
+}
+</script>
+
+
+<script async type="text/javascript">
+// La page est chargée
+window.onload = function(){
+
+
+	{% for OneSortie in sorties %}
+
+	// Récupération de la latitude & longitude
+	var location = '{{ OneSortie.getStreetnum() ~ OneSortie.getStreetname() ~ OneSortie.getCp() ~ OneSortie.getVille() }}';
+	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+		params:{
+			address: location,
+			key: 'AIzaSyAmkMmW6mnFdvnyhblcCnqYBsXvLsuJdyQ'
+		}
+	})
+	.then(function(response){
+		
+
+		// "response" me donne le résultat
+		var location = response.data.results[0].geometry.location;
+		var markerposition = response.data.results[0].formated_address;
+
+		initMap(location.lat, location.lng, markerposition, 'map{{OneSortie.getId()}}');
+
+	})
+	.catch(function(error){
+		
+	});
+
+	{%  endfor %}
+
+};
+
+
+</script>
+
 
 {% endblock %} 

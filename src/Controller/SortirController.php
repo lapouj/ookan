@@ -41,8 +41,6 @@ class SortirController extends AbstractController
     			->setStreetname($safe['street_name'])
     			->setStreetnum($safe['street_num'])
     			->setCp($safe['cp'])
-    			->setPhone($safe['phone'])
-    				->setDate($safe['date'])
     			->setVille($safe['ville']);
     			// On prépare la requete.
     			$em->persist($sortieData);

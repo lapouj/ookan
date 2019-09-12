@@ -46,7 +46,7 @@ les_restos:
 
 les_sorties:
     path: /les-sorties
-    controller: App\Controller\SortirController::index
+    controller: App\Controller\SortirController::show
 
 les_activites:
     path: /les-activites
