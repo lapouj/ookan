@@ -5,6 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
+
+use App\Entity\UserPro; // Intéraction
+
 class UserprofileController extends AbstractController
 {
     /**
@@ -12,8 +16,10 @@ class UserprofileController extends AbstractController
      */
     public function userprofile()
     {
+        // $siren = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['siret']);
+
         return $this->render('userprofile/user-profile.html.twig', [
-            'controller_name' => 'UserprofileController',
+            // 'mon_siren' => $siren,
         ]);
     }
 }

@@ -87,8 +87,8 @@ class InscriptionController extends AbstractController
                 //éxecution
                 $em->flush();
                 
-                header('Location: http://127.0.0.1:8000/inscription/inscription-reussite');
-                exit();
+                // Redirection
+                return $this->redirectToRoute('inscription_reussite');
 				// $success = 'Votre inscription est un succès, bienvenue chez Ookan !';
             }
 	    	
@@ -175,8 +175,8 @@ class InscriptionController extends AbstractController
                 //éxecution
                 $em->flush();
                 
-                header('Location: http://127.0.0.1:8000/inscription/inscription-reussite');
-                exit();
+                // Redirection
+                return $this->redirectToRoute('inscription_reussite');
 				// $success = 'Votre inscription est un succès, bienvenue chez Ookan !';
             
             } // Fin de 'if (count($errors) == 0)'
