@@ -13,15 +13,15 @@
 		<th>Photo</th> 
 		<th>Description</th>   
 		<th>Adresse</th>
-		<th><a href="{{ path('add_place')}}">Ajouter</a></th>
+		<th><a href="{{ path('add_sortie')}}">Ajouter</a></th>
 
-		{% for OnePlace in place %}
+		{% for OneSortie in sorties %}
 			<tr> 
-				<td>{{ OneResto.getPlacename() }}</td>
-				<td>{{ OneResto.getType() }}</td>
-				<td>{{ OneResto.getPhoto() }}</td>
-				<td>{{ OneResto.getDescription() }}</td>
-				<td>{{ OneResto.getAddress() }}</td>
+				<td>{{ OneSortie.getPlacename() }}</td>
+				<td>{{ OneSortie.getType() }}</td>
+				<td>{{ OneSortie.getPhoto() }}</td>
+				<td>{{ OneSortie.getDescription() }}</td>
+				<td>{{ OneSortie.getAddress() }}</td>
 			</tr> 
 		{% endfor %}  
 
