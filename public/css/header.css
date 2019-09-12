@@ -19,6 +19,25 @@ header ul li i {
 	font-size: 3em;
 }
 
+li {display:inline-block;min-width:50px;}
+li h4 {
+    text-decoration:none;
+    text-align: center;
+    color: #444444;
+}
+li h4:after {
+	content: '';
+	display: block;
+	margin: auto;
+	height: 1px;
+	width: 0;
+	background: transparent;
+	transition: width .5s ease, background-color .5s ease;
+}
+li h4:hover:after {
+	width: 90%;
+	background: #444;
+}
 
 
 
