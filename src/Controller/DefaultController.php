@@ -70,19 +70,14 @@ class DefaultController extends AbstractController
 
                     $mes_erreurs = true;
                     $success = 'Connexion réussi !';
-                }
+                
+                } 
 
+                   return $this->redirectToRoute('user_profile');
 
-
-
-                   
-
-            } else {
-
-                $errors[] = 'Le mot de passe ne correspond pas';
-            }
+            } 
         }
-        return $this->render('accueil/index.html.twig', [
+        return $this->render('connexion.html.twig', [
             
         ]);
     }
@@ -92,3 +87,7 @@ class DefaultController extends AbstractController
         ]);
     }
 }
+
+
+                   
+
