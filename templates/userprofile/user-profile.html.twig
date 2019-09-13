@@ -6,7 +6,7 @@
     
     {% block body %}
     <div class="container">
-        <h2 class="text-center">Mon compte</h2>
+        <img src="img/logo/mon-compte.png" class="text-center">
 
         
         <div class="row pt-5">
@@ -14,11 +14,11 @@
             {# Partie sur les infos du profil #}
             <div class="col-6">
 
-                <h3 class="py-4">Modifier mes Infos</h3>
+                <h3 class="py-4 montserrat">Modifier mes Infos</h3>
 
                 <form action="POST" enctype="multipart/form-data">
 
-                    <h4>Photo de profil</h4>
+                    <h4 class="montserrat">Photo de profil</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <input type="file" class="inputAvatar" name="avatar" id="avatar">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-                    <h4>Information générales</h4>
+                    <h4 class="montserrat">Informations générales</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="firstname" class="montserrat">Prénom :</label>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <h4>modifier le mdp</h4>
+                    <h4 class="montserrat">Modification Mot de Passe</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <input type="password" class="form-control" name="lastpassword" id="lastpassword" placeholder="Ancien mot de passe">
@@ -81,9 +81,9 @@
             {# Partie sur les ajout et vu d'activité #}
             <div class="col-6">
 
-                <h3 class="py-4">Activité professionnelle</h3>
+                <h3 class="py-4 montserrat">Activité professionnelle</h3>
 
-                <h4>Ajouter un buisness</h4>
+                <h4 class="montserrat">Ajouter un établissement</h4>
 
                     <a href="" class="col-4">
                         Sortie
