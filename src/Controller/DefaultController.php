@@ -26,37 +26,47 @@ class DefaultController extends AbstractController
 
         $errors = [];
 
-        $success = '';
-        
-
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
             $safe = array_map('trim', array_map('strip_tags', $_POST));
-        
-            
-            foreach ($_POST as $key => $value) {
-                $post[$key] = trim(strip_tags($value));
-            }
 
-            if (empty($post['email'])) {
-                $errors[] = 'Veuillez saisir votre email';
-            }
+            if (!empty($safe['email'])) {
 
-            if (empty($post['password'])) {
+                if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                    
+                    $errors[] = 'Votre adresse email n\'est pas valide';
+                }
+            } else $errors[] = 'Le champ Adresse Email est obligatoire';   
+                
+
+            if (!empty($safe['password'])) {
+
                 $errors[] = 'Veuillez saisir votre mot de passe';
+            } 
+                
+
+            $my_user_name = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
+            if(!empty($my_user_name['email'] != $my_user_name->getEmail())) {
+                $errors[] = 'Votre email n\'existe pas';
+            }
+
+            $my_user_password = $this->getDoctrine()->getRepository(User::class)->findOneBy(['password' => $safe['password']]);    
+            if(!empty($my_user_password['password'] != $my_user_password->getPassword())) {
+                $errors[] = 'Votre mot de passe n\'existe pas';
             }
 
             if (count($errors) == 0) {
+
+            $errors = array_filter($errors);
             
-                $my_user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
-
-
-                if(!empty($my_user)){
+                
+                if(!empty($my_user_name) AND (!empty($my))){
 
                     $infos_session = [
-                        'id'            => $my_user->getId(),
-                        'email'         => $my_user->getEmail(),
-                        'username'      => $my_user->getUsername(),
+                        'id'            => $my_user_name->getId(),
+                        'email'         => $my_user_name->getEmail(),
+                        'username'      => $my_user_name->getUsername(),
+                        'password'      => $my_user_name->getPassword(),
                     ];
 
                     $session = new Session();
@@ -66,28 +76,21 @@ class DefaultController extends AbstractController
                     // Affichage (exemple)
                     /*$user_en_session = $session->get('user');
                     echo $user_en_session['email']; */
-                    
-
-                    $mes_erreurs = true;
-                    $success = 'Connexion réussi !';
-                
-                } 
-
                    return $this->redirectToRoute('user_profile');
-
-            } 
+                }  
+            }      
         }
-        return $this->render('connexion.html.twig', [
-            
-        ]);
+            return $this->render('connexion.html.twig', [
+                'mes_erreurs'     =>  $errors,    
+            ]);
     }
+
     public function mentions()
     {
         return $this->render('mentions.html.twig', [
         ]);
     }
 }
-
 
                    
 

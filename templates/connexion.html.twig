@@ -6,6 +6,16 @@
 
 
     {% block body %}
+                {% if mes_erreurs is not empty %}
+            <div class="alert alert-danger">
+                {{ mes_erreurs|join('<br>')|raw }} 
+            </div>
+        {# {% elseif mes_validation is not empty %}    
+            <div class="alert alert-success">
+                {{ mes_validation|join('<br>')|raw 
+            }} 
+            </div> #}
+        {% endif %}
         <div class="container my-5">
             <h3 class="pb-2 text-center montserrat">Connectez-vous</h3>
             <div class="row justify-content-center">
