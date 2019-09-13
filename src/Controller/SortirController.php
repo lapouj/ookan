@@ -23,7 +23,7 @@ class SortirController extends AbstractController
 
     	$errors = [];
 
-    	$success = '';
+    	$success = false;
 
     	if(!empty($_POST)){
     		
@@ -80,10 +80,12 @@ class SortirController extends AbstractController
     			$em->persist($sortieData);
     			// On l'exécute
     			$em->flush();
+                $success = true;
     	}    
 }
     	return $this->render('sortir/ajouterSorti.html.twig', [
     		'mes_erreurs'     =>  $errors,
+             'success' => $success,
     	]);
     }
 
@@ -104,6 +106,7 @@ class SortirController extends AbstractController
 
     	return $this->render('sortir/afficherSorti.html.twig', [
     		'controller_name' => 'MangerController',
+
     	]);
     }
 }

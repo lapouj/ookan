@@ -10,23 +10,17 @@
 	<div class="container text-white mb-3 mt-3 montserrat" style="border-radius:10px">
 		<a href="{{ path('add_restos')}}">Ajouter</a>
 		{% for OneResto in resto %}
-			<div id="cards" class="encart mb-3 mt-3 p-3" style="border-radius:10px">
-				<h2 class="d-flex justify-content-center p-2">{{ OneResto.getRestoname() }}</h2>
-
-				<p class="d-flex justify-content-center p-2">{{ OneResto.getType() }}</p>
-
-				{# <p>{{ OneResto.getPhoto() }}</p>
-				<p>{{ OneResto.getPhone() }}</p>
-				<p>{{ OneResto.getWebsite() }}</p> #}
-
-				<p>{{ OneResto.getDescription() }}</p>
-				<div class="d-flex justify-content-start">
-					<p>{{ OneResto.getStreetnum() }}</p>
-					<p>{{ OneResto.getStreetname() }}</p>
-					<p>{{ OneResto.getCp() }}</p>
-					<p>{{ OneResto.getVille() }}</p>
+			<div id="cards" class="row encart my-3 p-3" style="border-radius:10px">
+				<div>
+					<h2>{{ OneResto.getRestoname() }}</h2>
+					<small>Style culinaire :</small>
+					<p>{{ OneResto.getType() }}</p>
+					<small>Un mot sur le restaurant :</small>
+					<p>{{ OneResto.getDescription() }}</p>
+					<div class="d-flex justify-content-start">
+						<p>{{ OneResto.getStreetnum() ~ ' ' ~ OneResto.getStreetname() ~ ' ' ~ OneResto.getCp() ~ ' ' ~ OneResto.getVille() }}</p>
+					</div>
 				</div>
-
 				<div class="d-flex justify-content-end">
 					<p>
 						<div class="m-3 p-2" id="map{{OneResto.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
