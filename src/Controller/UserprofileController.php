@@ -24,7 +24,7 @@ class UserprofileController extends AbstractController
         return $this->render('userprofile/user-profile.html.twig', [
 
             // 'user' => $user,
-            "buisness_list" => $buisness_list,
+            // "buisness_list" => $buisness_list,
 
 
 
