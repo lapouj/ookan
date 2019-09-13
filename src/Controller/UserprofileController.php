@@ -17,17 +17,13 @@ class UserprofileController extends AbstractController
      */
     public function userprofile()
     {
-        // $em = $this->getDoctrine()->getRepository();
 
-        // $user = $rem->findAll();
+        $em = $this->getDoctrine()->getRepository(UserPro::class);
+
+        $users = $em->findBy(['id' => 1]);
 
         return $this->render('userprofile/user-profile.html.twig', [
-
-            // 'user' => $user,
-            // "buisness_list" => $buisness_list,
-
-
-
+            'users'     => $users,
         ]);
     }
 }
