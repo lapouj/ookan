@@ -33,34 +33,34 @@ class DefaultController extends AbstractController
             if (!empty($safe['email'])) {
 
                 if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
-                    
+
                     $errors[] = 'Votre adresse email n\'est pas valide';
                 }
             } else $errors[] = 'Le champ Adresse Email est obligatoire';   
-                
+
 
             if (!empty($safe['password'])) {
 
                 $errors[] = 'Veuillez saisir votre mot de passe';
             } 
-                
+
 
             $my_user_name = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
-            if(!empty($my_user_name['email'] != $my_user_name->getEmail())) {
-                $errors[] = 'Votre email n\'existe pas';
-            }
 
-            $my_user_password = $this->getDoctrine()->getRepository(User::class)->findOneBy(['password' => $safe['password']]);    
-            if(!empty($my_user_password['password'] != $my_user_password->getPassword())) {
-                $errors[] = 'Votre mot de passe n\'existe pas';
-            }
+            $Usermail = $my_user_name->getEmail() ?? '';
+
+
+
+            // $my_user_password = $this->getDoctrine()->getRepository(User::class)->findOneBy(['password' => $safe['password']]);    
+            // ne trouve pas de password
+
 
             if (count($errors) == 0) {
 
-            $errors = array_filter($errors);
-            
+                $errors = array_filter($errors);
+
                 
-                if(!empty($my_user_name) AND (!empty($my))){
+                if(!empty($my_user_name) AND (!empty($my_user_password))){
 
                     $infos_session = [
                         'id'            => $my_user_name->getId(),
@@ -76,13 +76,13 @@ class DefaultController extends AbstractController
                     // Affichage (exemple)
                     /*$user_en_session = $session->get('user');
                     echo $user_en_session['email']; */
-                   return $this->redirectToRoute('user_profile');
+                    return $this->redirectToRoute('user_profile');
                 }  
             }      
         }
-            return $this->render('connexion.html.twig', [
-                'mes_erreurs'     =>  $errors,    
-            ]);
+        return $this->render('connexion.html.twig', [
+            'mes_erreurs'     =>  $errors,    
+        ]);
     }
 
     public function mentions()
@@ -97,5 +97,5 @@ class DefaultController extends AbstractController
     }
 }
 
-                   
+
 
