@@ -47,15 +47,15 @@ class DefaultController extends AbstractController
 
             $my_user_name = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
 
-            $mailfound = 0;
-
-            if ($my_user_name) {
-                $mailfound = $my_user_name->getEmail(); 
-            }
-
-            if ($mailfound===0) {
-                $errors[] = 'Utilisateur introuvable';
-            }
+           $mailfound = 0;
+           if ($my_user_name) 
+           {
+               $mailfound = $my_user_name->getEmail();
+           }
+           else 
+           {
+               $errors[] = 'Utilisateur introuvable';
+           }
            
       
 
