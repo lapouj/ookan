@@ -21,7 +21,7 @@ class ActivitesController extends AbstractController
 public function add()
     {
 
-        $errors = [];
+        $errors = [];   
 
         $success = '';
 

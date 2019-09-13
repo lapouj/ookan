@@ -17,11 +17,11 @@
 		<th>Ville</th>
 		
 		
-		<th><a href="{{ path('add_sortie')}}">Ajouter</a></th>
+		<th><a href="{{ path('add_activity')}}">Ajouter</a></th>
 
 		{% for activity in activities %}
 			<tr> 
-				<td>{{ activity.getSortiename() }}</td>
+				<td>{{ activity.getname() }}</td>
 				<td>{{ activity.getDescription() }}</td>
 				<td>{{ activity.getContact() }}</td>
 				<td>{{ activity.getStreetnum() }}</td>
