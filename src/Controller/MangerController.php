@@ -23,7 +23,7 @@ class MangerController extends AbstractController
 
     	$errors = [];
 
-    	$success = '';
+    	$success = false;
 
     	if(!empty($_POST)){
     		// Nettoyage des données
@@ -76,11 +76,14 @@ class MangerController extends AbstractController
     			// On l'exécute
     			$em->flush();
 
+                $success = true;
+
     		}
     	}    
 
     	return $this->render('manger/ajouter.html.twig', [
     		'mes_erreurs'     =>  $errors,
+            'success' => $success,
     	]);
     }
 

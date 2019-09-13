@@ -10,6 +10,8 @@ use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 use App\Entity\User; // Intéraction
 use App\Entity\UserPro; // Intéraction
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class InscriptionController extends AbstractController
 {
@@ -50,7 +52,7 @@ class InscriptionController extends AbstractController
                 $errors[] = 'Votre adresse email n\'est pas valide';
             }
 
-            if (strlen($safe['password']) <= 4) {
+            if (strlen($safe['password']) < 4) {
                 $errors[] = 'Votre mot de passe doit contenir au moins 5 caractères';
             }
             elseif($safe['password'] != $safe['comfirm_password']) {
@@ -58,7 +60,9 @@ class InscriptionController extends AbstractController
             }
 
             $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['email' => $safe['email']]);
+            
             $emailProExist = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['email' => $safe['email']]);
+            
             if(!empty($emailExist) || (!empty($emailProExist))){
               $errors[] = 'L\'adresse email existe déjà';
             }
