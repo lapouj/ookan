@@ -29,6 +29,42 @@ class SortirController extends AbstractController
     		
     		$safe = array_map('trim', array_map('strip_tags', $_POST));
 
+
+
+
+            if (strlen($safe['nom']) <= 4) {
+                $errors[] = 'Votre nom doit contenir au moins 4 caractères';
+            }
+
+            if (strlen($safe['description']) <= 50) {
+                $errors[] = 'Votre description doit contenir au moins 50 caractères';
+            }
+
+            if (!isset($safe['type'])) {
+                $errors[] = 'Votre de choisir un type';
+            }
+
+            if (!is_numeric($safe['street_num'])) {
+                $errors[] = 'Merci d\'indiquer un numéro de rue valide (Pas de texte)';
+            }
+
+            if (strlen($safe['street_name']) <= 5) {
+                $errors[] = 'Votre nom de rue doit contenir au moins 5 caractères';
+            }
+
+            if (strlen($safe['cp']) != 5) {
+                $errors[] = 'Merci d\'indiquer un code postal valide';
+            }
+
+            if (!isset($safe['ville'])) {
+                $errors[] = 'Merci d\'indiquer une ville';
+            }
+
+
+
+
+            if (count($errors) == 0) {
+            
     		// Utilisation de la base de données
     			$em = $this->getDoctrine()->getManager();
 
@@ -45,7 +81,7 @@ class SortirController extends AbstractController
     			// On l'exécute
     			$em->flush();
     	}    
-
+}
     	return $this->render('sortir/ajouterSorti.html.twig', [
     		'mes_erreurs'     =>  $errors,
     	]);
