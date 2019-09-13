@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            {% include "partials/head.html.twig" %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block nav %}
+            {% include 'partials/nav.html.twig' %}
+        {% endblock %}
+
+        {% block header %}
+            <header class="d-flex flex-column justify-content-center align-items-center">
+
+                <img src="/img/header/toulouse3.jpg" class="img-fluid w-100" alt="Responsive image">
+
+                <div class="container-fluid text-center bg-transparent">
+                    <ul class="d-flex justify-content-center">
+
+                        <li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
+                            <a href="{{ path('show_sorties')}}"><img src="/img/logo/sortie.png" width="120" height="120" alt="sortir"></a>
+                            <h4>
+                                <a style="text-decoration:none" class="nav-visite" href="{{ path('show_sorties')}}">Sorties</a>
+                            </h4> 
+                        </li>
+
+                        <li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
+                            <a href="{{ path('show_restos')}}"><img src="/img/logo/resto.png" width="120" height="120" alt="restaurants"></a> 
+                            <h4>
+                                <a style="text-decoration:none" class="nav-visite" href="{{ path('show_restos')}}">Restos</a>
+                            </h4> 
+                        </li>
+
+                        <li id="li-visite" class="my-2 mx-5 d-block text-center montserrat">
+                            <a href="{{ path('show_activies')}}"><img src="/img/logo/activity.png" width="120" height="120" alt="activités"></i></a>
+                            <h4>
+                                <a style="text-decoration:none" class="nav-visite" href="{{ path('show_activies')}}">Activités</a>
+                            </h4> 
+                        </li>
+
+                    </ul>
+                </div>
+
+            </header>
+        {% endblock %}
+
+        
+
+        
+
+
+
+        {% block body %}{% endblock %}
+
+        
+        {% include 'partials/footer.html.twig' %}
+
+        {% include "partials/javascript.html.twig" %}
+        
+        {% block js %}{% endblock %}
+    </body>
+</html>
