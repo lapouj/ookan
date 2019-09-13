@@ -19,12 +19,7 @@ class Activity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $photo;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $activity_name;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -34,33 +29,43 @@ class Activity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $address;
+    private $contact;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $streetnum;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $streetname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cp;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+   
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPhoto(): ?string
+    public function getName(): ?string
     {
-        return $this->photo;
+        return $this->name;
     }
 
-    public function setPhoto(string $photo): self
+    public function setName(string $name): self
     {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    public function getActivityName(): ?string
-    {
-        return $this->activity_name;
-    }
-
-    public function setActivityName(string $activity_name): self
-    {
-        $this->activity_name = $activity_name;
+        $this->name = $name;
 
         return $this;
     }
@@ -77,15 +82,65 @@ class Activity
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getContact(): ?string
     {
-        return $this->address;
+        return $this->contact;
     }
 
-    public function setAddress(string $address): self
+    public function setContact(string $contact): self
     {
-        $this->address = $address;
+        $this->contact = $contact;
 
         return $this;
     }
+
+    public function getStreetnum(): ?int
+    {
+        return $this->streetnum;
+    }
+
+    public function setStreetnum(?int $streetnum): self
+    {
+        $this->streetnum = $streetnum;
+
+        return $this;
+    }
+
+    public function getStreetname(): ?string
+    {
+        return $this->streetname;
+    }
+
+    public function setStreetname(string $streetname): self
+    {
+        $this->streetname = $streetname;
+
+        return $this;
+    }
+
+    public function getCp(): ?string
+    {
+        return $this->cp;
+    }
+
+    public function setCp(string $cp): self
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    
 }

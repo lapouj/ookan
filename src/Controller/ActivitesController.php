@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Activity;
 
 class ActivitesController extends AbstractController
 {
@@ -17,7 +18,7 @@ class ActivitesController extends AbstractController
         ]);
     }
 
-    public function add()
+public function add()
     {
         return $this->render('activites/add_activity.html.twig', [
             'controller_name' => 'ActivitesController',
