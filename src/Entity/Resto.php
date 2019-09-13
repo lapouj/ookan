@@ -31,10 +31,7 @@ class Resto
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $address;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -117,17 +114,6 @@ class Resto
         return $this;
     }
 
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
 
     public function getType(): ?string
     {
