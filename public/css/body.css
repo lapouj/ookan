@@ -8,25 +8,15 @@ body {
 }
 
 .encart {
-	background-color: #4a5058;
+	border: 1px solid grey;
+	color: black;
 }
 
 #cards {
-	margin-left: 12rem;
-	margin-right: 12rem;
+	margin-left: 6rem;
+	margin-right: 6rem;
 }
 
-.lololol{
-	transition: 2s;
-}
-
-.lololol:hover{
-	 font-size: 110px;
-	transition: 0.1s;
-color: red;
-}
-
-.lol{
-	height: 150px;
-	max-height: 150px;
+.vignette{
+	max-width: 15rem;
 }

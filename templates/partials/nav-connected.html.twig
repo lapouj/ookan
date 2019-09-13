@@ -7,15 +7,20 @@
     <ul class="nav justify-content-end">
 
         <li class="nav-item">
-            Bonjour
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">User</a>
-        </li>
-        <li class="nav-item mr-5">
-            <a class="nav-link" href="#">Photo</a>
-        </li>
+            <a class="nav-link" href="#">Bonjour 
+                {% for OneUser in user %}
 
+                {% endblock %}
+            </a>
+        </li>
+        <li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+		    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+			    <a class="dropdown-item" href="#">Mes infos</a>
+			    <a class="dropdown-item" href="#">Déconnexion</a>
+		    </div>
+        </li>
+        
     </ul>
     
 </nav> 

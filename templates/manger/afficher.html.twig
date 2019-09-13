@@ -2,58 +2,64 @@
 
 {% block title %}Consulter les restOorants{% endblock %}
 
-{# contenu page #}
-{% block body %}
+	{# contenu page #}
+	{% block body %}
 
-	<h2 class="text-center montserrat">Les meilleurs restOorants</h2>
-	
-	<div class="container text-white mb-3 mt-3 montserrat" style="border-radius:10px">
-		<a href="{{ path('add_restos')}}">Ajouter</a>
-		{% for OneResto in resto %}
-			<div id="cards" class="encart mb-3 mt-3 p-3" style="border-radius:10px">
-				<h2 class="d-flex justify-content-center p-2">{{ OneResto.getRestoname() }}</h2>
+		<h2 class="text-center montserrat">Les meilleurs restOorants</h2>
 
-				<p class="d-flex justify-content-center p-2">{{ OneResto.getType() }}</p>
-
-				{# <p>{{ OneResto.getPhoto() }}</p>
-				<p>{{ OneResto.getPhone() }}</p>
-				<p>{{ OneResto.getWebsite() }}</p> #}
-
-				<p>{{ OneResto.getDescription() }}</p>
-				<div class="d-flex justify-content-start">
-					<p>{{ OneResto.getStreetnum() }}</p>
-					<p>{{ OneResto.getStreetname() }}</p>
-					<p>{{ OneResto.getCp() }}</p>
-					<p>{{ OneResto.getVille() }}</p>
-				</div>
-
-				<div class="d-flex justify-content-end">
-					<p>
-						<div class="m-3 p-2" id="map{{OneResto.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
-							<!-- id="map5" par exemple -->
+		<div class="col-10 m-auto text-white mb-3 mt-3 montserrat" style="border-radius:10px">
+			<a href="{{ path('add_restos')}}">Ajouter</a>
+			{% for OneResto in resto %}
+				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
+					<div class="d-flex justify-content-center m-auto align-items-center">
+						<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+					</div>
+					<div class="col-7">
+						<div class="row">
+							<div class="col-6">
+								<h2>{{ OneResto.getRestoname() }}</h2>
+								<small>Style culinaire :</small>
+								<p>{{ OneResto.getType() }}</p>
+								<small>Un mot sur le restaurant :</small>
+								<p>{{ OneResto.getDescription() }}</p>
+							</div>
+							<div class="col-6">
+								<small>Adresse :</small>
+								<p>{{ OneResto.getStreetnum() ~ ' ' ~ OneResto.getStreetname() ~ ' ' ~ OneResto.getCp() ~ ' ' ~ OneResto.getVille() }}</p>
+								<small>Contact :</small>
+								<p>{{ OneResto.getPhone() }}</p>
+								<small>Site internet :</small>
+								<a href="http://{{OneResto.getWebsite()}}" target="blank"><p>{{ OneResto.getWebsite() }}</p></a>
+							</div>
 						</div>
-					</p>
+					</div>
+					<div class="col-3">
+						<p>
+							<div class="border m-3 p-2" id="map{{OneResto.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
+								<!-- id="map5" par exemple -->
+							</div>
+						</p>
+					</div>
 				</div>
-			</div>
-		{% endfor %}
-	</div>
-{% endblock %} 
+			{% endfor %}
+		</div>
+	{% endblock %} 
 
 
-{# javascript #}
-{% block js %} 
+	{# javascript #}
+	{% block js %} 
 
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyAmkMmW6mnFdvnyhblcCnqYBsXvLsuJdyQ" type="text/javascript"></script>
-{# AXIOS pour tester #}
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
+		<script src="https://maps.google.com/maps/api/js?key=AIzaSyAmkMmW6mnFdvnyhblcCnqYBsXvLsuJdyQ" type="text/javascript"></script>
+		{# AXIOS pour tester #}
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
 
-<script type="text/javascript">
+		<script type="text/javascript">
 /**
  * Fonction d'initialisation de la carte
  * @param param_latitude La latitude
  * @param param_longitude La longitude
  */
-function initMap(param_latitude, param_longitude, param_posmarker, target_id){
+ function initMap(param_latitude, param_longitude, param_posmarker, target_id){
 
 	// Créer l'objet "map" et l'insèrer dans l'élément HTML qui a l'ID "map"
 	map = new google.maps.Map(document.getElementById(target_id), {
@@ -79,10 +85,14 @@ function initMap(param_latitude, param_longitude, param_posmarker, target_id){
 		}
 	});
 	var marker = new google.maps.Marker({
-	     position: {lat: param_latitude, lng: param_longitude},
-	     map: map,
-     });
+		position: {lat: param_latitude, lng: param_longitude},
+		map: map,
+		 animation: google.maps.Animation.DROP,
+
+	});
+
 }
+
 </script>
 
 
@@ -118,7 +128,6 @@ window.onload = function(){
 	{%  endfor %}
 
 };
-
 
 </script>
 

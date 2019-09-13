@@ -10,6 +10,8 @@
 				{{ mes_erreurs|join('<br>')|raw }} 
 			</div>
 		</div>
+	{% elseif success == true %}
+		<div class="alert alert-success text-center">Votre restaurant a bien été créé</div>
 	{% endif %}
 
 	<div>
@@ -22,6 +24,10 @@
 			<small>Les champs marqués d'une * sont obligatoires</small>
 			<div class="form-group">
 				<input id="nom" type="text" name="nom" placeholder="Nom d'établissement*" class="form-control" required>
+			</div>
+			<div class="form-group">
+				<small>Veuillez sélectionner la photo de votre établissement
+				<input type="file" name="photo">
 			</div>
 			<div class="form-group">
 				<textarea id="description" name="description" rows="10" cols="50" placeholder="Description (Minimum 50 caractères)*" class="form-control" required></textarea>

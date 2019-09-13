@@ -23,7 +23,7 @@ class MangerController extends AbstractController
 
     	$errors = [];
 
-    	$success = '';
+    	$success = false;
 
     	if(!empty($_POST)){
     		// Nettoyage des données
@@ -61,6 +61,11 @@ class MangerController extends AbstractController
     		// Utilisation de la base de données
     			$em = $this->getDoctrine()->getManager();
 
+                // On enlève un éventuel http ou https pour pouvoir le remettre à l'affichage.
+                if(!empty($safe['internet'])){
+                    $web_site = str_replace(['http://', 'https://'], '', $safe['internet']);
+                }
+
     			$restoData = new Resto(); 
     			$restoData   ->setRestoName($safe['nom'])
     			->setDescription($safe['description'])
@@ -69,18 +74,21 @@ class MangerController extends AbstractController
     			->setStreetnum($safe['street_num'])
     			->setCp($safe['cp'])
                 ->setPhone($safe['phone'])
-                ->setWebsite($safe['internet'])
+                ->setWebsite($web_site ?? '')
     			->setVille($safe['ville']);
     			// On prépare la requete.
     			$em->persist($restoData);
     			// On l'exécute
     			$em->flush();
 
+                $success = true;
+
     		}
     	}    
 
     	return $this->render('manger/ajouter.html.twig', [
     		'mes_erreurs'     =>  $errors,
+            'success' => $success,
     	]);
     }
 
