@@ -7,6 +7,12 @@
 	z-index: -1;
 }
 
+.photoAvatar {
+	border: 3px solid #e3ad5a;;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
 .fa-camera {
     position: absolute;
     z-index: 1;

@@ -22,36 +22,45 @@
                     <div class="form-row my-3">
                         <div class="col">
                             <input type="file" class="inputAvatar" name="avatar" id="avatar">
-                            <label for="avatar"><img src="/img/profil/avatar.png" height="150px" alt="Votre photo de profil" title="Photo du profil"><i class="fas fa-camera"></i></label>
+                            <label for="avatar"><img class="photoAvatar" src="/img/profil/avatar.png" height="150px" alt="Votre photo de profil" title="Photo du profil"><i class="fas fa-camera"></i></label>
                         </div>
                     </div>
 
                     <h4>Information générales</h4>
                     <div class="form-row my-3">
                         <div class="col">
-                            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="">
+                            <label for="firstname" class="montserrat">Prénom :</label>
+                            <input type="text" class="form-control" name="firstname" id="firstname" value="{% for user in users %}{{ user.firstname }}{% endfor %}" disabled>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" name="lastname" id="lastname" placeholder="">
-                        </div>
-                    </div>
-
-                    <div class="form-row my-3">
-                        <div class="col">
-                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Email">
+                            <label for="lastname" class="montserrat">Nom :</label>
+                            <input type="text" class="form-control" name="lastname" id="lastname" value="{% for user in users %}{{ user.name }}{% endfor %}" disabled>
                         </div>
                     </div>
 
                     <div class="form-row my-3">
                         <div class="col">
-                            <input type="number" class="form-control" name="siren" id="siren" placeholder="SIREN" disabled>
+                            <label for="email" class="montserrat">Adresse Email :</label>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{% for user in users %}{{ user.email }}{% endfor %}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row my-3">
+                        <div class="col">
+                            <label for="siren" class="montserrat">N° SIREN :</label>
+                            <input type="number" class="form-control" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" disabled>
                         </div>
                     </div>
 
                     <h4>modifier le mdp</h4>
                     <div class="form-row my-3">
                         <div class="col">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe (8 caractères min.)">
+                            <input type="password" class="form-control" name="lastpassword" id="lastpassword" placeholder="Ancien mot de passe">
+                        </div>
+                    </div>
+                    <div class="form-row my-3">
+                        <div class="col">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Nouveau mot de passe (8 caractères min.)">
                         </div>
                     </div>
 
@@ -64,6 +73,7 @@
                     <div class="form-row my-3">
                         <button type="submit" class="btn btn-success">Enregister les modifications</button>
                     </div>
+
                 </form>
                 {# If particulier #}
             </div>    
@@ -84,6 +94,9 @@
                     <a href=""class="col-4">
                         activitée
                     </a>
+
+                    
+
 
             </div>
 
