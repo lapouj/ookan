@@ -26,7 +26,7 @@ class DefaultController extends AbstractController
 
         $errors = [];
 
-        if (!empty($_POST['email']) && !empty($_POST['password'])) {
+        if (!empty($_POST['email']) || !empty($_POST['password'])) {
 
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
@@ -47,12 +47,17 @@ class DefaultController extends AbstractController
 
             $my_user_name = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
 
-            $Usermail = $my_user_name->getEmail() ?? '';
+            $mailfound = 0;
 
+            if ($my_user_name) {
+                $mailfound = $my_user_name->getEmail(); 
+            }
 
-
-            // $my_user_password = $this->getDoctrine()->getRepository(User::class)->findOneBy(['password' => $safe['password']]);    
-            // ne trouve pas de password
+            if ($mailfound===0) {
+                $errors[] = 'Utilisateur introuvable';
+            }
+           
+      
 
 
             if (count($errors) == 0) {
