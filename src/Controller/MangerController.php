@@ -33,6 +33,10 @@ class MangerController extends AbstractController
     			$errors[] = 'Votre nom doit contenir au moins 4 caractères';
     		}
 
+              if (!isset($safe['type'])) {
+                $errors[] = 'Votre de choisir un type';
+            }
+
     		if (strlen($safe['description']) <= 50) {
     			$errors[] = 'Votre description doit contenir au moins 50 caractères';
     		}
@@ -41,6 +45,17 @@ class MangerController extends AbstractController
     			$errors[] = 'Merci d\'indiquer un numéro de rue valide (Pas de texte)';
     		}
 
+            if (strlen($safe['street_name']) <= 5) {
+                $errors[] = 'Votre nom de rue doit contenir au moins 5 caractères';
+            }
+
+            if (strlen($safe['cp']) != 5) {
+                $errors[] = 'Merci d\'indiquer un code postal valide';
+            }
+
+            if (!isset($safe['ville'])) {
+                $errors[] = 'Merci d\'indiquer une ville';
+            }
 
     		if (count($errors) == 0) {
     		// Utilisation de la base de données
@@ -68,11 +83,6 @@ class MangerController extends AbstractController
     		'mes_erreurs'     =>  $errors,
     	]);
     }
-
-
-
-
-
 
     public function show()
     {
