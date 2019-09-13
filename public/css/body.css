@@ -10,3 +10,23 @@ body {
 .encart {
 	background-color: #4a5058;
 }
+
+#cards {
+	margin-left: 12rem;
+	margin-right: 12rem;
+}
+
+.lololol{
+	transition: 2s;
+}
+
+.lololol:hover{
+	 font-size: 110px;
+	transition: 0.1s;
+color: red;
+}
+
+.lol{
+	height: 150px;
+	max-height: 150px;
+}

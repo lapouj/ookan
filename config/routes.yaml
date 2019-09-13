@@ -10,7 +10,9 @@ accueil:
     path: /
     controller: App\Controller\AccueilController::index
 
-# Les pages d'inscription
+
+
+# Les pages d'inscription -------------------------------------------
 inscription_choix:
     path: /inscription/choisissez-votre-profil
     controller: App\Controller\InscriptionController::inscription_choix_profil
@@ -28,7 +30,45 @@ inscription_reussite:
     controller: App\Controller\InscriptionController::inscription_reussite
 
 
-# A propo de Ookan
+
+# Connexion user
+user_profile:
+    path: /mon-compte
+    controller : App\Controller\UserprofileController::userprofile
+
+
+
+# Catégories -------------------------------------------
+# Les restaurants --------------------------------------
+add_restos:
+    path: /ajouter-restaurant
+    controller: App\Controller\MangerController::add
+
+show_restos:
+    path: /consulter-restaurants
+    controller: App\Controller\MangerController::show
+
+# Les sorties -----------------------------------------
+add_sortie:
+    path: /ajouter-sortie
+    controller: App\Controller\SortirController::add
+
+show_sorties:
+    path: /consulter-sorties
+    controller: App\Controller\SortirController::show
+
+# Les activités -----------------------------------------
+add_activity:
+    path: /ajouter-activité
+    controller: App\Controller\ActivitesController::add
+
+show_activies:
+    path: /consulter-activités
+    controller: App\Controller\ActivitesController::show
+
+
+
+# A propos de Ookan -------------------------------------------
 mentions:
     path: /mentions-legales
     controller: App\Controller\MentionsController::mentions
@@ -36,31 +76,3 @@ mentions:
 contact:
     path: /contactez-nous
     controller: App\Controller\ContactController::contact
-
-
-#les pages 
-les_restos:
-    path: /les-restos
-    controller: App\Controller\MangerController::manger
-
-
-les_sorties:
-    path: /les-sorties
-    controller: App\Controller\SortirController::index
-
-les_activites:
-    path: /les-activites
-    controller: App\Controller\ActivitesController::index
-
-show_restos:
-    path: /consulter-restaurants
-    controller: App\Controller\MangerController::show
-
-add_restos:
-    path: /ajouter-restaurant
-    controller: App\Controller\MangerController::add
-
-# Connexion user
-user_profile:
-    path: /mon-compte
-    controller : App\Controller\UserprofileController::userprofile

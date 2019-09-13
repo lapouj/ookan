@@ -16,4 +16,18 @@ class ActivitesController extends AbstractController
             'controller_name' => 'ActivitesController',
         ]);
     }
+
+    public function add()
+    {
+        return $this->render('activites/add_activity.html.twig', [
+            'controller_name' => 'ActivitesController',
+        ]);
+    }
+
+     public function show()
+    {
+        return $this->render('activites/show_activities.html.twig', [
+            'controller_name' => 'ActivitesController',
+        ]);
+    }
 }

@@ -4,8 +4,6 @@
 
 {% block body %}
 
-
-
 	{% if mes_erreurs is not empty %}
 		<div class="row justify-content-center">
 			<div class="alert alert-danger text-center col-lg-4">
@@ -34,12 +32,20 @@
 					<option>Asiatique</option>
 					<option>Indienne</option>
 					<option>Turque</option>
+					<option>Tunisienne</option>
+					<option>Anglaise</option>
 					<option>Marrocaine</option>
 					<option>Italienne</option>
 					<option>Russe</option>
 					<option>Polonaise</option>
 					<option>Autre</option>
 				</select>
+			</div>
+			<div class="form-group">
+				<input id="internet" type="text" name="internet" placeholder="Adresse internet" class="form-control" required>
+			</div>
+			<div class="form-group">
+				<input id="phone" type="text" name="phone" placeholder="N° de téléphone" class="form-control" required>
 			</div>
 			<div class="form-group">
 				<input id="street_num" type="text" name="street_num" placeholder="N° de rue" class="form-control" required>

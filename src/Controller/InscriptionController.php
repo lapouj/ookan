@@ -33,15 +33,15 @@ class InscriptionController extends AbstractController
     		// je nettoie les données reçues
     		$safe = array_map('trim', array_map('strip_tags', $_POST));
 
-            if (strlen($safe['nom']) <= 4) {
+            if (strlen($safe['nom']) <= 3) {
                 $errors[] = 'Votre nom doit contenir au moins 4 caractères';
             }
 
-            if (strlen($safe['prenom']) <= 4) {
+            if (strlen($safe['prenom']) <= 3) {
                 $errors[] = 'Votre prénom doit contenir au moins 5 caractères';
             }
 
-            if (strlen($safe['pseudo']) <= 4) {
+            if (strlen($safe['pseudo']) <= 3) {
                 $errors[] = 'Votre pseudo doit contenir au moins 5 caractères';
             }
 
@@ -56,7 +56,7 @@ class InscriptionController extends AbstractController
                 $errors[] = 'Votre mot de passe n\'est pas identique';
             }
 
-            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['mail' => $safe['email']]);
+            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['email' => $safe['email']]);
             $emailProExist = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['email' => $safe['email']]);
             if(!empty($emailExist) || (!empty($emailProExist))){
               $errors[] = 'L\'adresse email existe déjà';
@@ -77,10 +77,10 @@ class InscriptionController extends AbstractController
 
                 $userData = new User();
                 $userData->setName($safe['nom'])
-                        ->setPseudo($safe['pseudo'])
-                        ->setFirstname($safe['prenom'])
-                        ->setMail($safe['email'])	
-                        ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                         ->setPseudo($safe['pseudo'])
+                         ->setFistname($safe['prenom'])
+                         ->setEmail($safe['email'])	
+                         ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
 
                 //Préparation de la requete.
                 $em->persist($userData);
@@ -150,7 +150,7 @@ class InscriptionController extends AbstractController
                 $errors[] = 'Vos mot de passe ne sont pas identiques';
             }
 
-            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['mail' => $safe['email']]);
+            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['email' => $safe['email']]);
             $emailProExist = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['email' => $safe['email']]);
             if(!empty($emailExist) || !empty($emailProExist)){
               $errors[] = 'L\'adresse email existe déjà';

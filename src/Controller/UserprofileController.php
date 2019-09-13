@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 
 use App\Entity\UserPro; // Intéraction
+use App\Entity\User; // Intéraction
 
 class UserprofileController extends AbstractController
 {
@@ -16,10 +17,17 @@ class UserprofileController extends AbstractController
      */
     public function userprofile()
     {
-        // $siren = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['siret']);
+        // $em = $this->getDoctrine()->getRepository();
+
+        // $user = $rem->findAll();
 
         return $this->render('userprofile/user-profile.html.twig', [
-            // 'mon_siren' => $siren,
+
+            // 'user' => $user,
+            "buisness_list" => $buisness_list,
+
+
+
         ]);
     }
 }

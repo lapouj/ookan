@@ -53,6 +53,8 @@ class MangerController extends AbstractController
     			->setStreetname($safe['street_name'])
     			->setStreetnum($safe['street_num'])
     			->setCp($safe['cp'])
+                ->setPhone($safe['phone'])
+                ->setWebsite($safe['internet'])
     			->setVille($safe['ville']);
     			// On prépare la requete.
     			$em->persist($restoData);
@@ -66,11 +68,6 @@ class MangerController extends AbstractController
     		'mes_erreurs'     =>  $errors,
     	]);
     }
-
-
-
-
-
 
 
 
