@@ -8,10 +8,15 @@ body {
 }
 
 .encart {
-	background-color: #4a5058;
+	border: 1px solid grey;
+	color: black;
 }
 
 #cards {
 	margin-left: 6rem;
 	margin-right: 6rem;
+}
+
+.vignette{
+	max-width: 15rem;
 }

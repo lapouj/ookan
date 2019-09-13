@@ -7,11 +7,14 @@
 
 	<h2 class="text-center montserrat">Les meilleurs restOorants</h2>
 	
-	<div class="container text-white mb-3 mt-3 montserrat" style="border-radius:10px">
+	<div class="col-10 m-auto text-white mb-3 mt-3 montserrat" style="border-radius:10px">
 		<a href="{{ path('add_restos')}}">Ajouter</a>
 		{% for OneResto in resto %}
-			<div id="" class="row encart my-3 p-3" style="border-radius:10px">
-				<div class="col-9">
+			<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
+				<div class="d-flex justify-content-center m-auto align-items-center">
+					<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+				</div>
+				<div class="col-7">
 					<h2>{{ OneResto.getRestoname() }}</h2>
 					<small>Style culinaire :</small>
 					<p>{{ OneResto.getType() }}</p>
@@ -22,9 +25,9 @@
 						<p>{{ OneResto.getStreetnum() ~ ' ' ~ OneResto.getStreetname() ~ ' ' ~ OneResto.getCp() ~ ' ' ~ OneResto.getVille() }}</p>
 					</div>
 				</div>
-				<div class="col-2">
+				<div class="col-3">
 					<p>
-						<div class="m-3 p-2" id="map{{OneResto.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
+						<div class="border m-3 p-2" id="map{{OneResto.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
 							<!-- id="map5" par exemple -->
 						</div>
 					</p>
