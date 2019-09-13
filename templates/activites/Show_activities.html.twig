@@ -17,19 +17,19 @@
 		<th>Ville</th>
 		
 		
-		<th><a href="{{ path('add_sortie')}}">Ajouter</a></th>
+		<th><a href="{{ path('add_activity')}}">Ajouter</a></th>
 
-		{% for OneSortie in sorties %}
+		{% for activity in activities %}
 			<tr> 
-				<td>{{ OneSortie.getSortiename() }}</td>
-				<td>{{ OneSortie.getDescription() }}</td>
-				<td>{{ OneSortie.getContact() }}</td>
-				<td>{{ OneSortie.getStreetnum() }}</td>
-				<td>{{ OneSortie.getStreetname() }}</td>
-				<td>{{ OneSortie.getCp() }}</td>
-				<td>{{ OneSortie.getVille() }}</td>
+				<td>{{ activity.getname() }}</td>
+				<td>{{ activity.getDescription() }}</td>
+				<td>{{ activity.getContact() }}</td>
+				<td>{{ activity.getStreetnum() }}</td>
+				<td>{{ activity.getStreetname() }}</td>
+				<td>{{ activity.getCp() }}</td>
+				<td>{{ activity.getVille() }}</td>
 
-			<td class="m-3 p-2" id="map{{OneSortie.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
+			<td class="m-3 p-2" id="map{{activity.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
 							<!-- id="map5" par exemple -->
 						</td>
 			</tr> 
@@ -91,10 +91,10 @@ function initMap(param_latitude, param_longitude, param_posmarker, target_id){
 window.onload = function(){
 
 
-	{% for OneSortie in sorties %}
+	{% for activity in activities %}
 
 	// Récupération de la latitude & longitude
-	var location = '{{ OneSortie.getStreetnum() ~ OneSortie.getStreetname() ~ OneSortie.getCp() ~ OneSortie.getVille() }}';
+	var location = '{{ activity.getStreetnum() ~ activity.getStreetname() ~ activity.getCp() ~ activity.getVille() }}';
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
 		params:{
 			address: location,
@@ -108,7 +108,7 @@ window.onload = function(){
 		var location = response.data.results[0].geometry.location;
 		var markerposition = response.data.results[0].formated_address;
 
-		initMap(location.lat, location.lng, markerposition, 'map{{OneSortie.getId()}}');
+		initMap(location.lat, location.lng, markerposition, 'map{{activity.getId()}}');
 
 	})
 	.catch(function(error){
