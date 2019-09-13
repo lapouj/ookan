@@ -86,6 +86,11 @@ class DefaultController extends AbstractController
         return $this->render('mentions.html.twig', [
         ]);
     }
+    public function ookan_team()
+    {
+        return $this->render('ookanteam.html.twig', [
+        ]);
+    }
 }
 
 
