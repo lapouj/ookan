@@ -87,8 +87,12 @@
 	var marker = new google.maps.Marker({
 		position: {lat: param_latitude, lng: param_longitude},
 		map: map,
+		 animation: google.maps.Animation.DROP,
+
 	});
+
 }
+
 </script>
 
 
@@ -124,7 +128,6 @@ window.onload = function(){
 	{%  endfor %}
 
 };
-
 
 </script>
 
