@@ -29,7 +29,7 @@ class MangerController extends AbstractController
     		// Nettoyage des données
     		$safe = array_map('trim', array_map('strip_tags', $_POST));
 
-    		if (strlen($safe['nom']) <= 4) {
+    		if (strlen($safe['nom']) < 4) {
     			$errors[] = 'Votre nom doit contenir au moins 4 caractères';
     		}
 
@@ -37,7 +37,7 @@ class MangerController extends AbstractController
                 $errors[] = 'Votre de choisir un type';
             }
 
-    		if (strlen($safe['description']) <= 50) {
+    		if (strlen($safe['description']) < 50) {
     			$errors[] = 'Votre description doit contenir au moins 50 caractères';
     		}
 
@@ -45,7 +45,7 @@ class MangerController extends AbstractController
     			$errors[] = 'Merci d\'indiquer un numéro de rue valide (Pas de texte)';
     		}
 
-            if (strlen($safe['street_name']) <= 5) {
+            if (strlen($safe['street_name']) < 5) {
                 $errors[] = 'Votre nom de rue doit contenir au moins 5 caractères';
             }
 
