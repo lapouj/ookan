@@ -6,37 +6,39 @@
 
 	<h2 class="text-center">Les meilleurs endroOits</h2> 
 
-	<table>
-
-		<th>Nom</th>   
-		<th>Description</th>   
-		<th>Type</th>   
-		<th>N° rue</th>
-		<th>Nom de rue</th>
-		<th>CP</th>
-		<th>Ville</th>
-		
-		
-		<th><a href="{{ path('add_sortie')}}">Ajouter</a></th>
-
-		{% for OneSortie in sorties %}
-			<tr> 
-				<td>{{ OneSortie.getSortiename() }}</td>
-				<td>{{ OneSortie.getDescription() }}</td>
-				<td>{{ OneSortie.getType() }}</td>
-				<td>{{ OneSortie.getStreetnum() }}</td>
-				<td>{{ OneSortie.getStreetname() }}</td>
-				<td>{{ OneSortie.getCp() }}</td>
-				<td>{{ OneSortie.getVille() }}</td>
-
-			<td class="m-3 p-2" id="map{{OneSortie.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
-							<!-- id="map5" par exemple -->
-						</td>
-			</tr> 
-
-		{% endfor %}  
-
-	</table>
+<div class="col-10 m-auto text-white mb-3 mt-3 montserrat" style="border-radius:10px">
+			<a href="{{ path('add_sortie')}}">Ajouter</a>
+			{% for OneSortie in sorties %}
+				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
+					<div class="d-flex justify-content-center m-auto align-items-center">
+						<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+					</div>
+					<div class="col-7">
+						<div class="row">
+							<div class="col-6">
+								<h2>{{ OneSortie.getSortiename() }}</h2>
+								<hr>
+								<small>Style du lieu :</small>
+								<p>{{ OneSortie.getType() }}</p>
+								<small>Un mot sur l'endroit' :</small>
+								<p>{{ OneSortie.getDescription() }}</p>
+							</div>
+							<div class="col-6">
+								<small>Adresse :</small>
+								<p>{{ OneSortie.getStreetnum() ~ ' ' ~ OneSortie.getStreetname() ~ ' ' ~ OneSortie.getCp() ~ ' ' ~ OneSortie.getVille() }}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-3">
+						<p>
+							<div class="border m-3 p-2" id="map{{OneSortie.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
+								<!-- id="map5" par exemple -->
+							</div>
+						</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 
 {% endblock %} 
 
