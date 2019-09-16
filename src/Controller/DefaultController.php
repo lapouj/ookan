@@ -81,6 +81,7 @@ public function connect()
                 $session->set('email',  $userdata->getEmail());
                 $session->set('firstname',  $userdata->getFistname());
                 $session->set('lastname',  $userdata->getName());
+                $session->set('pro', 'non');
 
                 return $this->redirectToRoute('user_profile');
 
@@ -90,8 +91,9 @@ public function connect()
                 $session = new Session();
                 $session->set('pseudo',  $userdatapro->getPseudo());
                 $session->set('email',  $userdatapro->getEmail());
-                $session->set('firstname',  $userdatapro->getFistname());
+                $session->set('firstname',  $userdatapro->getFirstname());
                 $session->set('lastname',  $userdatapro->getName());
+                $session->set('pro', 'oui');
 
                 return $this->redirectToRoute('user_profile');
 
