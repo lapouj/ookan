@@ -6,6 +6,14 @@
 	font-family: 'Roboto';
 }
 
+.gold-ookan {
+	color: #e3ad5a;
+}
+
+.grey-ookan {
+	color: #4a5058;
+}
+
 #li-visite .nav-visite{
 	text-decoration: none;
     color: #4a5058;
