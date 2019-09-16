@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 use App\Entity\UserPro; // Intéraction
 use App\Entity\User; // Intéraction
 
+
 class UserprofileController extends AbstractController
 {
     /**
@@ -23,6 +24,9 @@ class UserprofileController extends AbstractController
         $errors = [];
 
         $success = '';
+
+        // Image limité a 3 Mo    
+        $maxFileSize = 3 * 1000 * 1000;
 
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
@@ -69,6 +73,35 @@ class UserprofileController extends AbstractController
 
             if ($safe['password'] != $safe['confirm-password']) {
                 $errors[] = 'Vos mot de passe ne sont pas identiques';
+            }
+
+            if ($_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
+                
+                $image_size = $_FILES['avatar']['size'];
+
+                if ($image_size > $maxFileSize) {
+                    $errors[] = 'Votre image est supérieur a 3 Mo';
+                }
+
+                $info = new finfo(FILEINFO_MIME_TYPE);
+                $mime = $info->file($_FILES['avatar']['tmp_name']);
+
+                $type = substr($mime, 0, 5);
+                if ($type == 'image') {
+                    $extension = substr($_FILES['avatar']['name'], strrpos($_FILES['avatar']['name'], '.'));
+
+                    $new_file_name = md5(uniqid(rand(), true)).$extension;
+
+                    if (move_uploaded_file($_FILES['avatar']['tmp_name'], 'public/image_compte/'.$new_file_name) === flase) {
+                        $errors[] = 'Une erreur est survenue lors de l\'ajout de l\'image';
+                    }
+                }
+                else {
+                    $errors[] = 'Le fichier que vous avez envoyé n\'est pas une image';
+                }
+            }
+            else { // Autre cas d'erreurs
+                $errors[] = 'Une erreur est survenue lors de l\'envoi de votre image';
             }
             
             if (count($errors) == 0) {

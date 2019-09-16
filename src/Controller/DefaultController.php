@@ -78,7 +78,7 @@ public function connect()
                 $session->set('email',  $userdata->getEmail());
                 $session->set('firstname',  $userdata->getFistname());
                 $session->set('lastname',  $userdata->getName());
-                $session->set('pro', 'non'),
+                $session->set('pro', 'non');
                 $session->set('connected', 'true');
 
                 return $this->redirectToRoute('user_profile');
