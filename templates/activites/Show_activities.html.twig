@@ -4,12 +4,16 @@
 
 {% block body %}
 
-	<h2 class="text-center montserrat">Les meilleures activités Toulousaines</h2>
+	<h2 class="text-center montserrat grey-ookan">Les meilleures activités Toulousaines</h2>
 
-	<p class="text-center montserrat">Classement basé sur les notes et avis des utilisateurs Ookan</p> 
+	<p class="text-center montserrat grey-ookan">Classement basé sur les notes et avis des utilisateurs Ookan</p> 
 
 	<div class="col-10 m-auto text-white mb-3 mt-3 montserrat" style="border-radius:10px">
-			<a href="{{ path('add_activity')}}">Ajouter</a>
+
+			<div class="text-center py-5">
+			<a href="{{ path('add_activity')}}" class="montserrat grey-ookan">Ajouter votre établissement</a>
+			</div>
+
 			{% for OneActivity in activities %}
 				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
 					<div class="d-flex justify-content-center m-auto align-items-center">
