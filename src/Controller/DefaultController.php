@@ -43,32 +43,29 @@ public function connect()
                 }
             }   
 
-            // if (empty($safe['password'])) {
-
-            // $errors[] = 'Veuillez saisir votre mot de passe';
-
-            // } 
-
-
+            // Cherche avec l'email dans la table User.
             $userdata = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
 
+            // Cherche avec l'email dans la table User Pro.
             $userdatapro = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $safe['email']]);
 
-            $mailfound = 0;
-
-            if ($userdata){
-                $mailfound = $userdata->getEmail();
-            }
-            else if ($userdatapro){
-                $mailfound = $userdatapro->getEmail();
+            if ($userdata){//Si on trouve le mail dans la table User...
+                
+                if(!password_verify($safe["password"],$userdata->getPassword())){ //Check du mdp dans $safe et celui stocké dans la BDD
+                    $errors[] = 'Erreur de mot de passe';
+                }
             }
 
-            else{
+            else if ($userdatapro){//...Sinon on continu de chercher dans la table User Pro
+                
+                if(!password_verify($safe["password"],$userdatapro->getPassword())){
+                    $errors[] = 'Erreur de mot de passe';
+                }
+            }
+
+            else{// Si on ne trouve rien.
                 $errors[] = 'Utilisateur introuvable';
             }
-
-
-
 
             if (count($errors) == 0) {
 
@@ -81,6 +78,7 @@ public function connect()
                 $session->set('email',  $userdata->getEmail());
                 $session->set('firstname',  $userdata->getFistname());
                 $session->set('lastname',  $userdata->getName());
+                $session->set('pro', 'non');
 
                 return $this->redirectToRoute('user_profile');
 
@@ -90,8 +88,9 @@ public function connect()
                 $session = new Session();
                 $session->set('pseudo',  $userdatapro->getPseudo());
                 $session->set('email',  $userdatapro->getEmail());
-                $session->set('firstname',  $userdatapro->getFistname());
+                $session->set('firstname',  $userdatapro->getFirstname());
                 $session->set('lastname',  $userdatapro->getName());
+                $session->set('pro', 'oui');
 
                 return $this->redirectToRoute('user_profile');
 

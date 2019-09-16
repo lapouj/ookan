@@ -132,6 +132,12 @@ class InscriptionController extends AbstractController
                 }
             } else $errors[] = 'Le champ Nom est obligatoire';
 
+            if (!empty($safe['pseudo'])) {
+                if (strlen($safe['pseudo']) <= 1) {
+                    $errors[] = 'Votre Pseudo doit comporter au moins 2 caractères';
+                }
+            } else $errors[] = 'Le champ Pseudo est obligatoire';
+
             if (!empty($safe['siren'])) {
                 if (is_numeric($safe['siren'])) {
                     if (strlen($safe['siren']) != 9) {
@@ -172,6 +178,7 @@ class InscriptionController extends AbstractController
 
                 $userData->setFirstname($safe['firstname'])
                         ->setName($safe['lastname'])
+                        ->setPseudo($safe['pseudo'])
                         ->setSiret($safe['siren'])
                         ->setEmail($safe['email'])	
                         ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));

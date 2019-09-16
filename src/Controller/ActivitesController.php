@@ -19,15 +19,15 @@ class ActivitesController extends AbstractController
         ]);
     }
 
-public function add()
-    {
+    public function add()
+        {
 
-        $errors = [];   
+            $errors = [];   
 
-        $success = '';
+            $success = false;
 
 
-if(!empty($_POST)){
+    if(!empty($_POST)){
             // Nettoyage des données
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
@@ -77,6 +77,8 @@ if(!empty($_POST)){
                 // On l'exécute
                 $em->flush();
 
+                $success = true;
+
             }
         }    
 
@@ -88,22 +90,20 @@ if(!empty($_POST)){
         ]);
     }
 
-     public function show()
+    public function show()
     {
-       
-
-            // Récupération de l'article
-            $em = $this->getDoctrine()->getManager();
-            // Permet de chercher les articles données via le repository
-            $activitiesFound = $em->getRepository(activity::class)->findAll();
-
-            // la vue
-          return $this->render('activites/show_activities.html.twig', 
-                ['activities'=> $activitiesFound,
-                 'controller_name' => 'MangerController',
-            ]);
-        }
-
     
-    
+
+        // Récupération de l'article
+        $em = $this->getDoctrine()->getManager();
+        // Permet de chercher les articles données via le repository
+        $activitiesFound = $em->getRepository(activity::class)->findAll();
+
+        // la vue
+        return $this->render('activites/show_activities.html.twig', 
+            ['activities'=> $activitiesFound,
+            'controller_name' => 'MangerController',
+        ]);
+    }  
+        
 }
