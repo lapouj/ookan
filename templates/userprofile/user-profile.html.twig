@@ -13,8 +13,14 @@
             
             {# Partie sur les infos du profil #}
             <div class="col-lg-6 col-sm-12">
+                <h3 class="py-4 montserrat"> Profil de : {{ app.session.get('pseudo') }}</h3>
+                <h3 class="py-4 montserrat">Modifier mes Infos : </h3>
 
-                <h3 class="py-4 montserrat">Modifier mes Infos : {{ app.session.get('pseudo') }}</h3>
+                {% if app.session.get('pro') == 'oui'  %} 
+
+                    <p><b> UTILISATEUR PRO </b></p>
+
+                {% endif %}
 
                 <form method="POST" enctype="multipart/form-data">
 
@@ -79,6 +85,7 @@
             </div>    
 
             {# Partie sur les ajout et vu d'activité #}
+             {% if app.session.get('pro') == 'oui'  %} 
             <div class="col-lg-6 col-sm-12">
 
                 <h3 class="py-4 montserrat">Activité professionnelle</h3>
@@ -95,7 +102,7 @@
                         activitée
                     </a>
 
-                    
+                    {% endif %} 
 
 
             </div>
