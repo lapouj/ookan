@@ -67,10 +67,6 @@ public function connect()
                 $errors[] = 'Utilisateur introuvable';
             }
 
-
-            
-
-
             if (count($errors) == 0) {
 
                 $errors = array_filter($errors);
