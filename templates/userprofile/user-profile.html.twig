@@ -30,18 +30,18 @@
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="firstname" class="montserrat">Prénom :</label>
-                            <input type="text" class="form-control" name="firstname" id="firstname" value="{% for user in users %}{{ user.firstname }}{% endfor %}" disabled>
+                            <input type="text" class="form-control" name="firstname" id="firstname" value="{{ app.session.get('firstname') }}" disabled>
                         </div>
                         <div class="col">
                             <label for="lastname" class="montserrat">Nom :</label>
-                            <input type="text" class="form-control" name="lastname" id="lastname" value="{% for user in users %}{{ user.name }}{% endfor %}" disabled>
+                            <input type="text" class="form-control" name="lastname" id="lastname" value="{{ app.session.get('lastname') }}" disabled>
                         </div>
                     </div>
 
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="email" class="montserrat">Adresse Email :</label>
-                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{% for user in users %}{{ user.email }}{% endfor %}" disabled>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{ app.session.get('email') }}" disabled>
                         </div>
                     </div>
 
