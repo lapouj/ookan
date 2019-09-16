@@ -2,10 +2,6 @@ index:
     path: /base
     controller: App\Controller\DefaultController::index
 
-connect:
-    path: /connexion
-    controller: App\Controller\DefaultController::connect
-
 accueil:
     path: /
     controller: App\Controller\AccueilController::index
@@ -36,6 +32,13 @@ user_profile:
     path: /mon-compte
     controller : App\Controller\UserprofileController::userprofile
 
+connect:
+    path: /connexion
+    controller: App\Controller\DefaultController::connect
+
+disconnect:
+    path: /deconnexion
+    controller: App\Controller\DefaultController::disconnect
 
 
 # Catégories -------------------------------------------
