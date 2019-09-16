@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 use Symfony\Component\HttpFoundation\Session\Session;
 
 use App\Entity\User; // Intéraction
-use Symfony\Component\HttpFoundation\Session\Session;
+// use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends AbstractController
 {
