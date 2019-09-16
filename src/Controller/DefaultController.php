@@ -26,9 +26,13 @@ class DefaultController extends AbstractController
 
         $errors = [];
 
+        if (!empty($_POST)) {
+            $errors[] = 'Veuillez renseigner tous les champs';
+            
+
         if (!empty($_POST['email']) || !empty($_POST['password'])) {
 
-            $safe = array_map('trim', array_map('strip_tags', $_POST));
+        $safe = array_map('trim', array_map('strip_tags', $_POST));
 
             if (!empty($safe['email'])) {
 
@@ -36,7 +40,7 @@ class DefaultController extends AbstractController
 
                     $errors[] = 'Votre adresse email n\'est pas valide';
                 }
-            } else $errors[] = 'Le champ Adresse Email est obligatoire';   
+            }   
 
 
             if (!empty($safe['password'])) {
@@ -65,13 +69,12 @@ class DefaultController extends AbstractController
                 $errors = array_filter($errors);
 
                 
-                if(!empty($my_user_name) AND (!empty($my_user_password))){
+                if(!empty($my_user_name)){
 
                     $infos_session = [
                         'id'            => $my_user_name->getId(),
                         'email'         => $my_user_name->getEmail(),
                         'username'      => $my_user_name->getUsername(),
-                        'password'      => $my_user_name->getPassword(),
                     ];
 
                     $session = new Session();
@@ -82,9 +85,15 @@ class DefaultController extends AbstractController
                     /*$user_en_session = $session->get('user');
                     echo $user_en_session['email']; */
                     return $this->redirectToRoute('user_profile');
-                }  
+                }
+
+            if (password_verify($safe['password'], $infos_session->getPassword())) {
+                  
+              }  
             }      
-        }
+        } 
+    }
+        
         return $this->render('connexion.html.twig', [
             'mes_erreurs'     =>  $errors,    
         ]);
