@@ -7,11 +7,9 @@
     <ul class="nav justify-content-end">
 
         <li class="nav-item">
-            <a class="nav-link" href="#">Bonjour 
-                {% for OneUser in user %}
-
-                {% endblock %}
-            </a>
+            {# {% for OneUser in user %}
+                <h2>{{ OneUser.getUsername() }}</h2>
+            {% end for %} #}
         </li>
         <li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>

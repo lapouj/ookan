@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
     {% block nav %}
-        {% include "partials/nav.html.twig" %}
+        {% include "partials/nav-connected.html.twig" %}
     {% endblock %}
     
     {% block body %}
@@ -14,7 +14,7 @@
             {# Partie sur les infos du profil #}
             <div class="col-lg-6 col-sm-12">
 
-                <h3 class="py-4 montserrat">Modifier mes Infos</h3>
+                <h3 class="py-4 montserrat">Modifier mes Infos : {{ app.session.get('pseudo') }}</h3>
 
                 <form method="POST" enctype="multipart/form-data">
 
@@ -85,13 +85,13 @@
 
                 <h4 class="montserrat">Ajouter un établissement</h4>
 
-                    <a href="" class="col-4">
+                    <a href="{{ path('add_sortie') }}" class="col-4">
                         Sortie
                     </a>
                     <a href="{{ path('add_restos') }}" class="col-4">
                         Restaurant
                     </a>
-                    <a href=""class="col-4">
+                    <a href=" {{ path('add_activity') }}"class="col-4">
                         activitée
                     </a>
 

@@ -5,9 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
+use Symfony\Component\HttpFoundation\Session\Session;
 
 use App\Entity\User; // Intéraction
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends AbstractController
 {
@@ -21,10 +21,14 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function connect()
-    {
+public function connect()
+{
 
-        $errors = [];
+    $errors = [];
+
+    if (!empty($_POST)) {
+        $errors[] = 'Veuillez renseigner tous les champs';
+
 
         if (!empty($_POST['email']) || !empty($_POST['password'])) {
 
@@ -34,72 +38,68 @@ class DefaultController extends AbstractController
 
                 if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
 
-                    $errors[] = 'Votre adresse email n\'est pas valide';
+                $errors[] = 'Votre adresse email n\'est pas valide';
                 }
-            } else $errors[] = 'Le champ Adresse Email est obligatoire';   
+            }   
 
+            if (empty($safe['password'])) {
 
-            if (!empty($safe['password'])) {
+            $errors[] = 'Veuillez saisir votre mot de passe';
 
-                $errors[] = 'Veuillez saisir votre mot de passe';
             } 
 
 
-            $my_user_name = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
+            $userdata = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
 
-           $mailfound = 0;
-           if ($my_user_name) 
-           {
-               $mailfound = $my_user_name->getEmail();
-           }
-           else 
-           {
-               $errors[] = 'Utilisateur introuvable';
-           }
-           
-      
+            $mailfound = 0;
+
+            if ($userdata){
+                $mailfound = $my_user_name->getEmail();
+            }
+            else{
+                $errors[] = 'Utilisateur introuvable';
+            }
+
 
 
             if (count($errors) == 0) {
 
                 $errors = array_filter($errors);
 
-                
-                if(!empty($my_user_name) AND (!empty($my_user_password))){
+                if(!empty($my_user_name)){
 
-                    $infos_session = [
-                        'id'            => $my_user_name->getId(),
-                        'email'         => $my_user_name->getEmail(),
-                        'username'      => $my_user_name->getUsername(),
-                        'password'      => $my_user_name->getPassword(),
-                    ];
 
-                    $session = new Session();
-                    $session->set('user', $infos_session);
+                $session = new Session();
+                $session->set('pseudo',  $my_user_name->getPseudo());
 
-                    
-                    // Affichage (exemple)
-                    /*$user_en_session = $session->get('user');
-                    echo $user_en_session['email']; */
-                    return $this->redirectToRoute('user_profile');
+                return $this->redirectToRoute('user_profile');
+
                 }  
-            }      
-        }
-        return $this->render('connexion.html.twig', [
-            'mes_erreurs'     =>  $errors,    
-        ]);
-    }
+            }   
 
-    public function mentions()
-    {
-        return $this->render('mentions.html.twig', [
-        ]);
+
+            return $this->render('connexion.html.twig', [
+            'mes_erreurs'     =>  $errors,    
+            ]);
+        }
+
     }
-    public function ookan_team()
-    {
-        return $this->render('ookanteam.html.twig', [
-        ]);
-    }
+    return $this->render('connexion.html.twig', [
+    'mes_erreurs'     =>  $errors,    
+    ]);
+}
+
+public function mentions()
+{
+    return $this->render('mentions.html.twig', [
+    ]);
+}
+public function ookan_team()
+{
+    return $this->render('ookanteam.html.twig', [
+    ]);
+}
+
 }
 
 
