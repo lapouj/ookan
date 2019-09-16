@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Resto;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class MangerController extends AbstractController
 {
