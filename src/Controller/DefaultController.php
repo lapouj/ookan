@@ -5,9 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
-use Symfony\Component\HttpFoundation\Session\Session;
 
 use App\Entity\User; // Intéraction
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends AbstractController
 {
@@ -27,7 +27,7 @@ public function connect()
     $errors = [];
 
     if (!empty($_POST)) {
-        $errors[] = 'Veuillez renseigner tous les champs';
+       
 
 
         if (!empty($_POST['email']) || !empty($_POST['password'])) {
@@ -42,11 +42,11 @@ public function connect()
                 }
             }   
 
-            if (empty($safe['password'])) {
+            // if (empty($safe['password'])) {
 
-            $errors[] = 'Veuillez saisir votre mot de passe';
+            // $errors[] = 'Veuillez saisir votre mot de passe';
 
-            } 
+            // } 
 
 
             $userdata = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
@@ -54,7 +54,7 @@ public function connect()
             $mailfound = 0;
 
             if ($userdata){
-                $mailfound = $my_user_name->getEmail();
+                $mailfound = $userdata->getEmail();
             }
             else{
                 $errors[] = 'Utilisateur introuvable';
@@ -66,11 +66,14 @@ public function connect()
 
                 $errors = array_filter($errors);
 
-                if(!empty($my_user_name)){
+                if(!empty($userdata)){
 
 
                 $session = new Session();
-                $session->set('pseudo',  $my_user_name->getPseudo());
+                $session->set('pseudo',  $userdata->getPseudo());
+                $session->set('email',  $userdata->getEmail());
+                $session->set('firstname',  $userdata->getFistname());
+                $session->set('lastname',  $userdata->getName());
 
                 return $this->redirectToRoute('user_profile');
 
