@@ -14,7 +14,7 @@
             {# Partie sur les infos du profil #}
             <div class="col-6">
 
-                <h3 class="py-4 montserrat">Modifier mes Infos</h3>
+                <h3 class="py-4 montserrat">Modifier mes Infos : {{ app.session.get('pseudo') }}</h3>
 
                 <form action="POST" enctype="multipart/form-data">
 
