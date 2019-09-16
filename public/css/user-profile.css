@@ -7,6 +7,14 @@
 	z-index: -1;
 }
 
+.photoAvatar:hover {
+	cursor: pointer;
+}
+
+.main:hover{
+	cursor: pointer;
+}
+
 .photoAvatar {
 	border: 3px solid #e3ad5a;;
 	border-radius: 50%;
