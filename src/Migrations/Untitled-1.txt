@@ -1,0 +1,64 @@
+activity :
+id
+name
+description
+contact
+streetnum
+streetname
+cp
+ville
+
+admin :
+id
+pseudo
+password
+email
+photo
+
+newsletter :
+id
+mail
+
+resto :
+id 
+photo 
+restoname
+description
+type
+streetnum
+streetname
+cp
+ville
+phone
+website
+id_userpro
+
+sortie :
+id
+sortiename
+description
+type
+streetnum
+streetname
+cp
+ville
+
+user :
+id 
+email
+role
+password
+pseudo
+fistname
+name
+photo
+
+user_pro :
+id
+firstname
+name
+password
+email
+siret
+pseudo
+photo
