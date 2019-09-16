@@ -78,7 +78,8 @@ public function connect()
                 $session->set('email',  $userdata->getEmail());
                 $session->set('firstname',  $userdata->getFistname());
                 $session->set('lastname',  $userdata->getName());
-                $session->set('pro', 'non');
+                $session->set('pro', 'non'),
+                $session->set('connected', 'true');
 
                 return $this->redirectToRoute('user_profile');
 
@@ -108,6 +109,13 @@ public function connect()
     return $this->render('connexion.html.twig', [
     'mes_erreurs'     =>  $errors,    
     ]);
+}
+
+public function disconnect(){
+
+    session_destroy();
+
+    return $this->redirectToRoute('accueil');
 }
 
 public function mentions()

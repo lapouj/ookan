@@ -7,6 +7,12 @@
     </head>
     <body>
         {% block nav %}
+
+               {% if app.session %} 
+
+                     {% include 'partials/nav-connected.html.twig' %}
+
+                {% endif %}
             {% include 'partials/nav.html.twig' %}
         {% endblock %}
 
