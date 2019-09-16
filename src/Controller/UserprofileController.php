@@ -28,29 +28,51 @@ class UserprofileController extends AbstractController
 
             // je nettoie les données reçues
             $safe = array_map('trim', array_map('strip_tags', $_POST));
-            
-            if (!empty($_FILES['avatar']['name'])) {
-                $maxsize = 2097152;
-                $extensionValide = array('jpg', 'jpeg', 'png');
-                if ($_FILES['avatar']['size'] <= $taillemax) {
-                    $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-                    if (in_array($extensionUpload, $extensionValide)) {
-                        $chemin = '/img/profil/'.$_SESSION['id'].'.'.$extensionUpload;
-                        $result = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
-                        if ($result) {
-                            $updateAvatar = $this->getDoctrine()->getManager(UserPro::class);
-                        } else $errors[] = 'Erreur durant l\'importation du fichier';
-                    } else $errors[] = 'Votre photo de profil doit être au format jpg, jpeg ou png';
-                } else $errors[] = 'Votre photo de profil ne doit pas dépasser 2Mo';
-            }
 
+            // Je pose mes conditions de validation du formulaire
+            if (!empty($safe['firstname'])) {
+                if (strlen($safe['firstname']) <= 1) {
+                    $errors[] = 'Votre prénom doit comporter au moins 2 caractères';
+                }
+            } else $errors[] = 'Le champ Prénom est obligatoire';
+
+            if (!empty($safe['lastname'])) {
+                if (strlen($safe['lastname']) <= 1) {
+                    $errors[] = 'Votre Nom doit comporter au moins 2 caractères';
+                }
+            } else $errors[] = 'Le champ Nom est obligatoire';
+
+            if (!empty($safe['siren'])) {
+                if (is_numeric($safe['siren'])) {
+                    if (strlen($safe['siren']) != 9) {
+                        $errors[] = 'Le N° SIREN doit être composé de 9 chiffres';
+                    }
+                } else $errors[] = 'Le champ N° SIREN doit contenir une valeur numérique';
+            } else $errors[] = 'Le champ N° SIREN est obligatoire';
+
+            if (!empty($safe['email'])) {
+                if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                    $errors[] = 'Votre adresse email n\'est pas valide';
+                }
+            } else $errors[] = 'Le champ Adresse Email est obligatoire';
+
+            if (!empty($safe['password'])) {
+                if (strlen($safe['password']) < 8) {
+                    $errors[] = 'Votre mot de passe doit contenir au moins 8 caractères';
+                }
+            } else $errors[] = 'Le champ Mot de passe est obligatoire';
+
+            if ($safe['password'] != $safe['confirm-password']) {
+                $errors[] = 'Vos mot de passe ne sont pas identiques';
+            }
+            
             if (count($errors) == 0) {
 
                 $errors = array_filter($errors);
 
                 $em = $this->getDoctrine()->getManager();
 
-                $userData = new UserPro();
+                $userData = getUserPro();
 
                 $userData->setPhoto($_FILES['photo']);
 
@@ -71,6 +93,7 @@ class UserprofileController extends AbstractController
         $users = $em->findBy(['id' => 1]);
 
         return $this->render('userprofile/user-profile.html.twig', [
+            'success'   => $success ?? null,
             'users'     => $users,
         ]);
     }
