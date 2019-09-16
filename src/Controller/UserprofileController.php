@@ -57,6 +57,10 @@ class UserprofileController extends AbstractController
                 }
             } else $errors[] = 'Le champ Adresse Email est obligatoire';
 
+            if (!empty($safe['lastpassword'])) {
+                
+            } else $errors[] = 'Le champ Ancien mot de passe est obligatoire';
+
             if (!empty($safe['password'])) {
                 if (strlen($safe['password']) < 8) {
                     $errors[] = 'Votre mot de passe doit contenir au moins 8 caractères';
