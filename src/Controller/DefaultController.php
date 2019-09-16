@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 
 use App\Entity\User; // Intéraction
+use App\Entity\UserPro; // Intéraction
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends AbstractController
@@ -51,14 +52,21 @@ public function connect()
 
             $userdata = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
 
+            $userdatapro = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $safe['email']]);
+
             $mailfound = 0;
 
             if ($userdata){
                 $mailfound = $userdata->getEmail();
             }
+            else if ($userdatapro){
+                $mailfound = $userdatapro->getEmail();
+            }
+
             else{
                 $errors[] = 'Utilisateur introuvable';
             }
+
 
 
 
@@ -67,7 +75,6 @@ public function connect()
                 $errors = array_filter($errors);
 
                 if(!empty($userdata)){
-
 
                 $session = new Session();
                 $session->set('pseudo',  $userdata->getPseudo());
@@ -78,6 +85,18 @@ public function connect()
                 return $this->redirectToRoute('user_profile');
 
                 }  
+                else if (!empty($userdatapro)){
+
+                $session = new Session();
+                $session->set('pseudo',  $userdatapro->getPseudo());
+                $session->set('email',  $userdatapro->getEmail());
+                $session->set('firstname',  $userdatapro->getFistname());
+                $session->set('lastname',  $userdatapro->getName());
+
+                return $this->redirectToRoute('user_profile');
+
+
+                }
             }   
 
 

@@ -41,6 +41,11 @@ class UserPro
      */
     private $siret;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pseudo;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class UserPro
     public function setSiret(string $siret): self
     {
         $this->siret = $siret;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
