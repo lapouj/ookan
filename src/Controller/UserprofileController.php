@@ -10,6 +10,9 @@ use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 
 use App\Entity\UserPro; // Intéraction
 use App\Entity\User; // Intéraction
+ 
+use \Behat\Transliterator\Transliterator as tr;
+use \Intervention\Image\ImageManagerStatic as Image;
 
 
 class UserprofileController extends AbstractController
@@ -25,8 +28,10 @@ class UserprofileController extends AbstractController
 
         $success = '';
 
-        // Image limité a 3 Mo    
-        $maxFileSize = 3 * 1000 * 1000;
+        $errors = $errorsForm = $errorsImg = [];
+        $maxSizeFile = 3 * 1000 * 1000; 
+        $uploadDir = '../image_compte/';
+        $allowMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
@@ -75,34 +80,28 @@ class UserprofileController extends AbstractController
                 $errors[] = 'Vos mot de passe ne sont pas identiques';
             }
 
+        if (!empty($_FILES['avatar'])) {
             if ($_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
                 
-                $image_size = $_FILES['avatar']['size'];
+                $img = Image::make($_FILES['avatar']['tmp_name']);
 
-                if ($image_size > $maxFileSize) {
-                    $errors[] = 'Votre image est supérieur a 3 Mo';
+                if ($img->filesize() > $maxSizeFile) {
+                    $errorsImg[] = 'Votre image ne doit pas dépasser 3 Mo';
                 }
-
-                $info = new finfo(FILEINFO_MIME_TYPE);
-                $mime = $info->file($_FILES['avatar']['tmp_name']);
-
-                $type = substr($mime, 0, 5);
-                if ($type == 'image') {
-                    $extension = substr($_FILES['avatar']['name'], strrpos($_FILES['avatar']['name'], '.'));
-
-                    $new_file_name = md5(uniqid(rand(), true)).$extension;
-
-                    if (move_uploaded_file($_FILES['avatar']['tmp_name'], 'public/image_compte/'.$new_file_name) === flase) {
-                        $errors[] = 'Une erreur est survenue lors de l\'ajout de l\'image';
-                    }
-                }
-                else {
-                    $errors[] = 'Le fichier que vous avez envoyé n\'est pas une image';
+                elseif (!v::in($allowMimes)->validate($img->mime())) {
+                    $errorsImg[] = 'Votre image n\'est pas valide';
                 }
             }
-            else { // Autre cas d'erreurs
-                $errors[] = 'Une erreur est survenue lors de l\'envoi de votre image';
+            elseif($_FILES['avatar']['error'] == UPLOAD_ERR_NO_FILE){
+                $errorsImg[] = 'Aucune photo n\'à été selectionner';
             }
+            else {
+                $errorsImg[] = 'Une erreur est survenue lors de l\'envoie de l\'image';
+            }
+        }
+
+        $pathInfo = pathinfo($_FILES['avatar']['name']);
+
             
             if (count($errors) == 0) {
 
