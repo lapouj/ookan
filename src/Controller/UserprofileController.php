@@ -67,7 +67,8 @@ class UserprofileController extends AbstractController
             $totalerrors = array_merge($errors, $errorsSiren);
 
 
-
+$test = count($totalerrors);
+var_dump($test);
 
             if (count($totalerrors) == 1) {
 				$success = true;
