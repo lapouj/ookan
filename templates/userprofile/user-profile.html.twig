@@ -13,8 +13,8 @@
             
             {# Partie sur les infos du profil #}
             <div class="col-lg-6 col-sm-12">
-                <h3 class="py-4 montserrat"> Profil de : {{ app.session.get('pseudo') }}</h3>
-                <h3 class="py-4 montserrat">Modifier mes Infos : </h3>
+                <h3 class="py-4 montserrat grey-ookan"> Profil de {{ app.session.get('pseudo') }}</h3>
+                <h3 class="py-4 montserrat grey-ookan">Modifier mes Infos : </h3>
 
                 {% if app.session.get('pro') == 'oui'  %} 
                 
@@ -26,7 +26,7 @@
 
                 <form method="POST" enctype="multipart/form-data">
 
-                    <h4 class="montserrat">Photo de profil</h4>
+                    <h4 class="grey-ookan montserrat">Photo de profil</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize;?>">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    <h4 class="montserrat">Informations générales</h4>
+                    <h4 class="grey-ookan montserrat">Informations générales</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="firstname" class="montserrat">Prénom :</label>
@@ -49,7 +49,7 @@
 
                     <div class="form-row my-3">
                         <div class="col">
-                            <label for="email" class="montserrat">Adresse Email :</label>
+                            <label for="email" class="montserrat">Email :</label>
                             <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{ app.session.get('email') }}" disabled>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
 
                 {% endif %}
 
-                    <h4 class="montserrat">Modification Mot de Passe</h4>
+                    <h4 class="grey-ookan montserrat">Modification Mot de Passe</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <input type="password" class="form-control" name="lastpassword" id="lastpassword" placeholder="Ancien mot de passe">
