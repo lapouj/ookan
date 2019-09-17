@@ -28,9 +28,13 @@ inscription_reussite:
 
 
 # Connexion user
+user_pro_profile:
+    path: /mon-compte-pro
+    controller : App\Controller\UserprofileController::userProProfile
+
 user_profile:
-    path: /mon-compte
-    controller : App\Controller\UserprofileController::userprofile
+    path: /mon-compte-toulousain
+    controller : App\Controller\UserprofileController::userProfile
 
 connect:
     path: /connexion

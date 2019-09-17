@@ -27,7 +27,8 @@
                     <h4 class="montserrat">Photo de profil</h4>
                     <div class="form-row my-3">
                         <div class="col">
-                            <input type="file" class="inputAvatar" name="avatar" id="avatar">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize;?>">
+                            <input type="file" class="inputAvatar" name="avatar" id="avatar" accept="image/*">
                             <label for="avatar"><img class="photoAvatar" src="/img/profil/avatar.png" height="150px" alt="Votre photo de profil" title="Photo du profil"><i class="main fas fa-camera"></i></label>
                         </div>
                     </div>
@@ -54,7 +55,7 @@
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="siren" class="montserrat">N° SIREN :</label>
-                            <input type="number" class="form-control" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" disabled>
+                            <input type="number" class="form-control {% if disp_none is not empty %} {{ disp_none }} {% endif %}" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" disabled>
                         </div>
                     </div>
 
