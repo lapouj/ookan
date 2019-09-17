@@ -20,7 +20,7 @@
         {% elseif success == true %}
 
             <div class="alert alert-success text-center">Compte modifié avec succés</div>
-            
+
         {% endif %}
         
         <div class="justify-content-center text-center row pt-5">
@@ -75,7 +75,7 @@
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="siren" class="montserrat">N° SIREN :</label>
-                            <input type="number" class="form-control" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" >
+                            <input type="number" class="form-control" name="siren" id="siren" value="{{ app.session.get('siret') }}" >
                         </div>
                     </div>
 

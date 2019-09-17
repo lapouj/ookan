@@ -92,6 +92,7 @@ public function connect()
                 $session->set('email',  $userdatapro->getEmail());
                 $session->set('firstname',  $userdatapro->getFirstname());
                 $session->set('lastname',  $userdatapro->getName());
+                $session->set('siret',  $userdatapro->getSiret());
                 $session->set('pro', 'oui');
                 $session->set('connected', 'true');
                 $session->set('password', $userdatapro->getPassword());

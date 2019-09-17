@@ -70,12 +70,10 @@ class UserprofileController extends AbstractController
             } // Fin de 'if (count($errors) == 0)'
 
         } // Fin de 'if (!empty($_POST))'
-
-     
+       
 
         return $this->render('userprofile/user-profile.html.twig', [
             'success'   => $success,
-            'users'     => $users,
             'liste_erreurs' => $errors,
         ]);
     }
