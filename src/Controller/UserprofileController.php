@@ -12,6 +12,9 @@ use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 
 use App\Entity\UserPro; // Intéraction
 use App\Entity\User; // Intéraction
+ 
+use \Behat\Transliterator\Transliterator as tr;
+use \Intervention\Image\ImageManagerStatic as Image;
 
 
 class UserprofileController extends AbstractController

@@ -2,18 +2,18 @@
 
     <a class="navbar-brand" href="{{path('accueil')}}">
 
-        <img src="/img/logo/logo-ookan.png" width="210" height="60" class="d-inline-block align-top" alt="Petit logo Ookan">
+        <img src="/img/logo/logo-ookan.png" width="250" height="70" class="d-inline-block align-top" alt="Petit logo Ookan">
 
     </a>
                
     <ul class="nav justify-content-end">
 
-        <li class="nav-item">
-                <h3 class="grey-ookan montserrat">Bonjour </h3>
+        <li class="nav-item d-flex align-items-center">
+                <h5 class="grey-ookan montserrat pt-1">Bonjour </h5>
         </li>
 
         <li class="nav-item dropdown">
-        
+
 			<a class="nav-link dropdown-toggle montserrat text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.session.get('pseudo') }}</a>
 
 		    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
