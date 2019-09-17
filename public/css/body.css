@@ -20,3 +20,25 @@ body {
 .vignette{
 	max-width: 15rem;
 }
+
+
+/* Système de notation */
+.rating {
+	font-size: 1.3em;
+}
+.rating a {
+	/* J'inverse le sens des étoiles avec float */
+	float: right;
+	color: #4a5058;
+	text-decoration: none;
+	transition: color .4s;
+}
+
+.rating a:hover,
+.rating a:focus,
+.rating a:hover ~ a,
+.rating a:focus ~ a {
+	/* Je fais en sorte que les étoiles positionnées avant se colore également */
+	color: #e3ad5a;
+	cursor: pointer;
+}
