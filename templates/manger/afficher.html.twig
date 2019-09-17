@@ -11,9 +11,11 @@
 
 		<div class="col-10 m-auto text-white mb-3 mt-3 montserrat" style="border-radius:10px">
 
-			<div class="text-center py-5">
-			<a href="{{ path('add_restos')}}"class="montserrat grey-ookan text-dark text-decoration-none">Ajouter votre établissement</a>
-			</div>
+			{% if app.session.get('pro') == 'oui'  %}
+				<div class="text-center py-5">
+				<a href="{{ path('add_restos')}}"class="montserrat grey-ookan text-dark text-decoration-none">Ajouter votre établissement</a>
+				</div>
+			{% endif %}
 
 			{% for OneResto in resto %}
 				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">

@@ -35,24 +35,36 @@ header ul li i {
 	font-size: 3em;
 }
 
-li {display:inline-block;min-width:50px;}
+li {
+	display:inline-block;
+	min-width:50px;
+}
+
 li h4 {
     text-decoration:none;
     text-align: center;
     color: #444444;
 }
+
 li h4:after {
 	content: '';
 	display: block;
 	margin: auto;
-	height: 1px;
+	height: 2px;
+	background-color: #e3ad5a !important;
 	width: 0;
 	background: transparent;
 	transition: width .5s ease, background-color .5s ease;
 }
-li h4:hover:after {
+
+li:hover h4:after {
 	width: 90%;
 	background: #444;
+} 
+
+li:hover img {
+	transform: rotate(-15deg);
+	transition: all ease 1s;
 } 
 
 

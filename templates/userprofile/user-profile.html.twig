@@ -1,6 +1,9 @@
 {% extends "base.html.twig" %}
 
-   
+    {% block nav %}
+        {% include "partials/nav-connected.html.twig" %}
+    {% endblock %}
+    
     {% block body %}
     <div class="container">
         <img src="img/logo/mon-compte.png" class="text-center" width="320" height="60">
@@ -14,6 +17,8 @@
                 <h3 class="py-4 montserrat">Modifier mes Infos : </h3>
 
                 {% if app.session.get('pro') == 'oui'  %} 
+                
+
 
                     <p><b> UTILISATEUR PRO </b></p>
 
@@ -24,7 +29,8 @@
                     <h4 class="montserrat">Photo de profil</h4>
                     <div class="form-row my-3">
                         <div class="col">
-                            <input type="file" class="inputAvatar" name="avatar" id="avatar">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize;?>">
+                            <input type="file" class="inputAvatar" name="avatar" id="avatar" accept="image/*">
                             <label for="avatar"><img class="photoAvatar" src="/img/profil/avatar.png" height="150px" alt="Votre photo de profil" title="Photo du profil"><i class="main fas fa-camera"></i></label>
                         </div>
                     </div>
@@ -48,12 +54,16 @@
                         </div>
                     </div>
 
+                    {% if app.session.get('pro') == 'oui'  %}
+
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="siren" class="montserrat">N° SIREN :</label>
                             <input type="number" class="form-control" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" disabled>
                         </div>
                     </div>
+
+                {% endif %}
 
                     <h4 class="montserrat">Modification Mot de Passe</h4>
                     <div class="form-row my-3">
