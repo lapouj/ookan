@@ -71,8 +71,35 @@ public function connect()
 
                 $errors = array_filter($errors);
 
+                $infos_user = [
+                    'id_user'   => $userdata->getId(),
+                    'pseudo'    => $userdata->getPseudo(),
+                    'connected' => 'true',
+                ];
+
+                // User particulier
                 if(!empty($userdata)){
 
+                    $infos_user['pro'] = 'non';
+                }
+                // User pro
+                elseif (!empty($userdatapro)){
+
+                    $infos_user['pro'] = 'oui';
+                }
+
+                $session = new Session();
+                $session->set('user', $infos_user);
+
+                return $this->redirectToRoute('user_profile');
+
+
+                // $my_user_connected = $session->get('user');
+                //  $my_user_connected['id_user'];
+                //  $my_user_connected['email'];
+
+
+               /* if(!empty($userdata)){
                 $session = new Session();
                 $session->set('pseudo',  $userdata->getPseudo());
                 $session->set('email',  $userdata->getEmail());
@@ -100,7 +127,7 @@ public function connect()
                 return $this->redirectToRoute('user_profile');
 
 
-                }
+                }*/
             }   
 
 
