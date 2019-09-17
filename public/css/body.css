@@ -24,7 +24,7 @@ body {
 
 /* Système de notation */
 .rating {
-	font-size: 1.3em;
+	font-size: 1.2em;
 }
 .rating a {
 	/* J'inverse le sens des étoiles avec float */
