@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% block head %}
-            {% include "partials/head.html.twig" %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block nav %}
-            {% include 'partials/nav.html.twig' %}
-        {% endblock %}
+{% extends "base.html.twig" %}
+
 
         {% block header %}
             <header class="d-flex flex-column justify-content-center align-items-center">
@@ -54,10 +45,6 @@
         {% block body %}{% endblock %}
 
         
-        {% include 'partials/footer.html.twig' %}
-
-        {% include "partials/javascript.html.twig" %}
         
         {% block js %}{% endblock %}
-    </body>
-</html>
+

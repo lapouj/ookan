@@ -92,6 +92,7 @@ public function connect()
                 $session->set('firstname',  $userdatapro->getFirstname());
                 $session->set('lastname',  $userdatapro->getName());
                 $session->set('pro', 'oui');
+                $session->set('connected', 'true');
 
                 return $this->redirectToRoute('user_profile');
 

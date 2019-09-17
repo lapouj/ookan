@@ -7,13 +7,14 @@
     </head>
     <body>
         {% block nav %}
+            {% if app.session.get('connected') == 'true' %}
 
-               {% if app.session %} 
+                {% include 'partials/nav-connected.html.twig' %}            
+            {% else %}
 
-                     {% include 'partials/nav-connected.html.twig' %}
-
-                {% endif %}
-            {% include 'partials/nav.html.twig' %}
+                {% include 'partials/nav.html.twig' %}
+            {% endif %}
+         
         {% endblock %}
 
         {% block header %}
@@ -21,9 +22,6 @@
         {% endblock %}
 
         
-
-        
-
 
 
         {% block body %}{% endblock %}
