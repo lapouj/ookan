@@ -25,10 +25,11 @@ class UserprofileController extends AbstractController
     public function userprofile()
     {
         $session = new Session();
-        $user_connected = $session->get('user');
+        $pro_connected = $session->get('pro');
 
         // Je place mes erreurs dans un tableau
         $errors = [];
+        $errorsSiren = [];
         $totalerrors = [];
 
         $success = false;
@@ -36,7 +37,15 @@ class UserprofileController extends AbstractController
 
         // $userFound contient les informations de mon utilisateur qui sont en base de données
         $em = $this->getDoctrine()->getManager();
-        $userFound = $em->getRepository(UserPro::class)->find( $session->get('user_id'));
+
+        $userFound = $em->getRepository(User::class)->find( $session->get('user_id'));
+        $userProFound = $em->getRepository(UserPro::class)->find( $session->get('user_id'));
+
+
+
+           
+
+
 
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
@@ -49,17 +58,17 @@ class UserprofileController extends AbstractController
                 (!v::notEmpty()->length(3,15)->validate($safe['firstname'])) ? 'Votre prénom doit comporter entre 3 et 15 caractères' : null,
                 (!v::notEmpty()->length(3,15)->validate($safe['lastname'])) ? 'Votre nom doit comporter entre 3 et 15 caractères' : null,
             ];
+            
 
-            if ($user_connected['pro'] == 'oui'){
-
+            if ($pro_connected == 'oui'){
                 $errorsSiren = [
                     (!v::notEmpty()->length(9,9)->validate($safe['siren'])) ? 'Votre siren doit comporter 9 caractères' : null,
                 ];
             } 
 
-            if(password_verify($safe["password"], $userFound['password'])){
-                $errors[] = (!v::notEmpty()->length(5,15)->validate($safe['password'])) ? 'Votre mot de passe doit comporter entre 3 et 15 caractères' : null;
-            }
+            // if(password_verify($safe["password"], $userFound['password'])){
+            //     $errors[] = (!v::notEmpty()->length(5,15)->validate($safe['password'])) ? 'Votre mot de passe doit comporter entre 3 et 15 caractères' : null;
+            // }
 
 
 
@@ -83,8 +92,8 @@ class UserprofileController extends AbstractController
 
 
 
-                if ($user_connected['pro'] == 'oui'){
-                    $userFound->setFirstname($safe['firstname'])
+                if ($pro_connected == 'oui'){
+                    $userProFound->setFirstname($safe['firstname'])
                                 ->setName($safe['lastname'])
                                 ->setEmail($safe['email'])  
                                 ->setSiret($safe['siren'])
@@ -94,14 +103,16 @@ class UserprofileController extends AbstractController
                     $em->flush();
                 }
                
-
-                 $infos_user_update = [
-                    'id_user'   => $userFound->getId(),
-                    'pseudo'    => $userFound->getPseudo(),
-                    'connected' => 'true',
-                    'pro'       => $user_connected['pro'],
-                ];
-                $session->set('user', $infos_user_update);
+                $session = new Session();
+                $session->set('user_id',  $userProFound->getId());
+                $session->set('pseudo',  $userProFound->getPseudo());
+                $session->set('email',  $userProFound->getEmail());
+                $session->set('firstname',  $userProFound->getFirstname());
+                $session->set('lastname',  $userProFound->getName());
+                $session->set('siret',  $userProFound->getSiret());
+                $session->set('pro', 'oui');
+                $session->set('connected', 'true');
+                $session->set('password', $userProFound->getPassword());
             
                 return $this->render('userprofile/user-profile.html.twig', [
                     'success'   => $success,
