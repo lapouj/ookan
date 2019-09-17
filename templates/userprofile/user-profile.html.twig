@@ -9,6 +9,15 @@
 
         <h1 class="montserrat grey-ookan text-center">Mon C<scan class="gold-ookan">Oo</scan>mpte</h1>
 
+        {% if mes_erreurs is not empty %}
+        <div class="row justify-content-center">
+            <div class="alert alert-danger text-center col-lg-4">
+                {{ mes_erreurs|join('<br>')|raw }} 
+            </div>
+        </div>
+        {% elseif success == true %}
+            <div class="alert alert-success text-center">Votre activité a bien été ajoutée</div>
+        {% endif %}
         
         <div class="justify-content-center text-center row pt-5">
             
@@ -40,18 +49,20 @@
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="firstname" class="montserrat">Prénom :</label>
-                            <input type="text" class="form-control" name="firstname" id="firstname" value="{{ app.session.get('firstname') }}" disabled>
+                            <input type="text" class="form-control" name="firstname" id="firstname" value="{{ app.session.get('firstname') }}" >
                         </div>
                         <div class="col">
                             <label for="lastname" class="montserrat">Nom :</label>
-                            <input type="text" class="form-control" name="lastname" id="lastname" value="{{ app.session.get('lastname') }}" disabled>
+                            <input type="text" class="form-control" name="lastname" id="lastname" value="{{ app.session.get('lastname') }}" >
                         </div>
                     </div>
 
                     <div class="form-row my-3">
                         <div class="col">
+
                             <label for="email" class="montserrat">Email :</label>
-                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{ app.session.get('email') }}" disabled>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{ app.session.get('email') }}" >
+
                         </div>
                     </div>
 
@@ -60,7 +71,7 @@
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="siren" class="montserrat">N° SIREN :</label>
-                            <input type="number" class="form-control" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" disabled>
+                            <input type="number" class="form-control" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" >
                         </div>
                     </div>
 

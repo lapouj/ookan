@@ -80,6 +80,7 @@ public function connect()
                 $session->set('lastname',  $userdata->getName());
                 $session->set('pro', 'non');
                 $session->set('connected', 'true');
+                $session->set('password', $userdata->getPassword());
 
                 return $this->redirectToRoute('user_profile');
 
@@ -93,6 +94,7 @@ public function connect()
                 $session->set('lastname',  $userdatapro->getName());
                 $session->set('pro', 'oui');
                 $session->set('connected', 'true');
+                $session->set('password', $userdatapro->getPassword());
 
                 return $this->redirectToRoute('user_profile');
 
