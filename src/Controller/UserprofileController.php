@@ -101,7 +101,7 @@ class UserprofileController extends AbstractController
                     'connected' => 'true',
                     'pro'       => $user_connected['pro'],
                 ];
-                $session->set('user', $infos_user_update)
+                $session->set('user', $infos_user_update);
             
                 return $this->render('userprofile/user-profile.html.twig', [
                     'success'   => $success,
