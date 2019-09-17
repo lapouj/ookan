@@ -4,6 +4,8 @@
  
 <div class="container">
 
+	<div class="row">
+
 	<p class="text-center montserrat">
 	Un restaurant ? Une sortie ? Vous êtes au bon endroit !
 	<br>
@@ -27,7 +29,39 @@
 
 	</div>
 
+	
 	<img src="/img/logo/pub.jpg" class="img-fluid w-100 my-5" alt="Responsive image">
+	
+	<div class="offset-lg-3 col-lg-6 my-5">
 
-</div>
+		{% if success is not empty %}
+			<div class="alert alert-success text-center">
+				{{ success|join('<br>')|raw }}
+			</div>    
+		{% elseif mes_erreurs is not empty %}
+			<div class="alert alert-danger text-center">
+				{{ mes_erreurs|join('<br>')|raw }}
+			</div>    
+		{% endif %}
+
+		<div class="{% if disp_none is not empty %} {{ disp_none }} {% endif %}">
+			<h3 class="text-center montserrat">Incrivez vous à notre Newsletter</h3>
+
+			<p class="text-center roboto">Recevez les dernières informations concernant les avancé du projet Ookan, soyez les premiers au courrant des dernières activitées, sortie ou restaurant populaires autour de chez vous.</p>
+
+			<form action="" method="POST">
+				<div class="offset-lg-2 col-lg-8 form-group">
+					<input class="form-control" type="email" name="email-newsletter" id="email-newsletter" placeholder="Votre adresse mail">
+				</div>
+				<div class="form-group text-center">
+					<button class="btn btn-gold">Je m'inscris !</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	</div> <!-- Fin de div.row -->
+
+</div> <!-- Fin de div.container -->
+
 {% endblock %}
