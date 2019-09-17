@@ -6,15 +6,25 @@
     
     {% block body %}
     <div class="container">
-        <img src="img/logo/mon-compte.png" class="text-center" width="320" height="60">
 
+        <h1 class="montserrat grey-ookan text-center">Mon C<scan class="gold-ookan">Oo</scan>mpte</h1>
+
+        {% if mes_erreurs is not empty %}
+        <div class="row justify-content-center">
+            <div class="alert alert-danger text-center col-lg-4">
+                {{ mes_erreurs|join('<br>')|raw }} 
+            </div>
+        </div>
+        {% elseif success == true %}
+            <div class="alert alert-success text-center">Votre activité a bien été ajoutée</div>
+        {% endif %}
         
-        <div class="row pt-5">
+        <div class="justify-content-center text-center row pt-5">
             
             {# Partie sur les infos du profil #}
             <div class="col-lg-6 col-sm-12">
-                <h3 class="py-4 montserrat"> Profil de : {{ app.session.get('pseudo') }}</h3>
-                <h3 class="py-4 montserrat">Modifier mes Infos : </h3>
+                <h3 class="py-4 montserrat grey-ookan"> Profil de {{ app.session.get('pseudo') }}</h3>
+                <h3 class="py-4 montserrat grey-ookan">Modifier mes Infos : </h3>
 
                 {% if app.session.get('pro') == 'oui'  %} 
                 
@@ -26,7 +36,7 @@
 
                 <form method="POST" enctype="multipart/form-data">
 
-                    <h4 class="montserrat">Photo de profil</h4>
+                    <h4 class="grey-ookan montserrat">Photo de profil</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize;?>">
@@ -35,22 +45,24 @@
                         </div>
                     </div>
 
-                    <h4 class="montserrat">Informations générales</h4>
+                    <h4 class="grey-ookan montserrat">Informations générales</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="firstname" class="montserrat">Prénom :</label>
-                            <input type="text" class="form-control" name="firstname" id="firstname" value="{{ app.session.get('firstname') }}" disabled>
+                            <input type="text" class="form-control" name="firstname" id="firstname" value="{{ app.session.get('firstname') }}" >
                         </div>
                         <div class="col">
                             <label for="lastname" class="montserrat">Nom :</label>
-                            <input type="text" class="form-control" name="lastname" id="lastname" value="{{ app.session.get('lastname') }}" disabled>
+                            <input type="text" class="form-control" name="lastname" id="lastname" value="{{ app.session.get('lastname') }}" >
                         </div>
                     </div>
 
                     <div class="form-row my-3">
                         <div class="col">
-                            <label for="email" class="montserrat">Adresse Email :</label>
-                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{ app.session.get('email') }}" disabled>
+
+                            <label for="email" class="montserrat">Email :</label>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{ app.session.get('email') }}" >
+
                         </div>
                     </div>
 
@@ -59,13 +71,13 @@
                     <div class="form-row my-3">
                         <div class="col">
                             <label for="siren" class="montserrat">N° SIREN :</label>
-                            <input type="number" class="form-control" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" disabled>
+                            <input type="number" class="form-control" name="siren" id="siren" value="{% for user in users %}{{ user.siret }}{% endfor %}" >
                         </div>
                     </div>
 
                 {% endif %}
 
-                    <h4 class="montserrat">Modification Mot de Passe</h4>
+                    <h4 class="grey-ookan montserrat">Modification Mot de Passe</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <input type="password" class="form-control" name="lastpassword" id="lastpassword" placeholder="Ancien mot de passe">

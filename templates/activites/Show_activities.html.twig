@@ -10,9 +10,11 @@
 
 	<div class="col-10 m-auto text-white mb-3 mt-3 montserrat" style="border-radius:10px">
 
+		{% if app.session.get('pro') == 'oui'  %}
 			<div class="text-center py-5">
-			<a href="{{ path('add_activity')}}" class="montserrat grey-ookan text-dark text-decoration-none">Ajouter votre activité</a>
+				<a href="{{ path('add_activity')}}" class="btn btn-gold">Ajouter votre activité</a>
 			</div>
+		{% endif %}
 
 			{% for OneActivity in activities %}
 				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
