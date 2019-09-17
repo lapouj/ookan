@@ -30,6 +30,7 @@ class UserprofileController extends AbstractController
         // Je place mes erreurs dans un tableau
         $errors = [];
         $errorsSiren = [];
+        $errorsPassword = [];
         $totalerrors = [];
 
         $success = false;
@@ -40,11 +41,6 @@ class UserprofileController extends AbstractController
 
         $userFound = $em->getRepository(User::class)->find( $session->get('user_id'));
         $userProFound = $em->getRepository(UserPro::class)->find( $session->get('user_id'));
-
-
-
-           
-
 
 
         // Si mes inputs sont remplies
@@ -64,45 +60,52 @@ class UserprofileController extends AbstractController
                 $errorsSiren = [
                     (!v::notEmpty()->length(9,9)->validate($safe['siren'])) ? 'Votre siren doit comporter 9 caractères' : null,
                 ];
-            } 
 
-            // if(password_verify($safe["password"], $userFound['password'])){
-            //     $errors[] = (!v::notEmpty()->length(5,15)->validate($safe['password'])) ? 'Votre mot de passe doit comporter entre 3 et 15 caractères' : null;
-            // }
-
-
-
-            if (!empty($safe['email'])) {
-                if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
-                    $errors[] = 'Votre adresse email n\'est pas valide';
+                //Check du mdp dans BDD user_pro
+                if(!password_verify($safe["lastpassword"], $userProFound->getPassword())){
+                    $errorsPassword[] = 'Le mot de passe ne correspond pas';
                 }
+            }//fin de if Pro_connected
+
+
+            else if ($pro_connected == 'non'){
+             if(!password_verify($safe["lastpassword"], $userFound->getPassword())){
+                $errorsPassword[] = 'Le mot de passe ne correspond pas';
             }
-            else {
-                $errors[] = 'Le champ Adresse Email est obligatoire';
-            } 
 
-            $errors = array_filter($errors);
-            $errorsSiren = array_filter($errorsSiren);
-            $totalerrors = array_merge($errors, $errorsSiren);
+        }
 
 
 
-            if (count($totalerrors) == 0) {
-                $success = true;
+
+        if (!empty($safe['email'])) {
+            if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Votre adresse email n\'est pas valide';
+            }
+        }
+        else {
+            $errors[] = 'Le champ Adresse Email est obligatoire';
+        } 
+
+        $errors = array_filter($errors);
+        $errorsSiren = array_filter($errorsSiren);
+        $totalerrors = array_merge($errors, $errorsSiren, $errorsPassword);
+
+        if (count($totalerrors) == 0) {
+            $success = true;
 
 
 
-                if ($pro_connected == 'oui'){
-                    $userProFound->setFirstname($safe['firstname'])
-                                ->setName($safe['lastname'])
-                                ->setEmail($safe['email'])  
-                                ->setSiret($safe['siren'])
-                                ->setPseudo($userFound->getPseudo())
-                                ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+            if ($pro_connected == 'oui'){
+                $userProFound->setFirstname($safe['firstname'])
+                ->setName($safe['lastname'])
+                ->setEmail($safe['email'])  
+                ->setSiret($safe['siren'])
+                ->setPseudo($userProFound->getPseudo())
+                ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
                     //éxecution
-                    $em->flush();
-                }
-               
+                $em->flush();
+
                 $session = new Session();
                 $session->set('user_id',  $userProFound->getId());
                 $session->set('pseudo',  $userProFound->getPseudo());
@@ -112,12 +115,50 @@ class UserprofileController extends AbstractController
                 $session->set('siret',  $userProFound->getSiret());
                 $session->set('pro', 'oui');
                 $session->set('connected', 'true');
-                $session->set('password', $userProFound->getPassword());
-            
-                return $this->render('userprofile/user-profile.html.twig', [
-                    'success'   => $success,
-                    'liste_erreurs' => $totalerrors,
-                ]);
+                
+
+                }//fin pro_connected
+
+                if ($pro_connected == 'non'){
+                    $userFound->setFistname($safe['firstname'])
+                    ->setName($safe['lastname'])
+                    ->setEmail($safe['email']) 
+                    ->setPseudo($userFound->getPseudo())
+                    ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                    //éxecution
+                    $em->flush();
+
+                    $session = new Session();
+                    $session->set('user_id',  $userFound->getId());
+                    $session->set('pseudo',  $userFound->getPseudo());
+                    $session->set('email',  $userFound->getEmail());
+                    $session->set('firstname',  $userFound->getFistname());
+                    $session->set('lastname',  $userFound->getName());
+                    $session->set('pro', 'oui');
+                    $session->set('connected', 'true');
+
+
+                }//fin user normal connected
+
+
+                //Manque à faire basculer les info BDD des $userfound et $userprofound dans le twig.
+
+
+                if ($pro_connected == 'non') {
+                    return $this->render('userprofile/user-profile.html.twig', [
+                        'success'   => $success,
+                        'liste_erreurs' => $totalerrors,
+                        'info_user' => $userFound,
+                    ]);
+
+                }
+                else if ($pro_connected == 'oui'){
+                    return $this->render('userprofile/user-profile.html.twig', [
+                        'success'   => $success,
+                        'liste_erreurs' => $totalerrors,
+                        'info_user' => $userProFound,
+                    ]);
+                }
             } // Fin de 'if (count($errors) == 0)'
 
         } // Fin de 'if (!empty($_POST))'

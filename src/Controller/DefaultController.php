@@ -113,7 +113,6 @@ class DefaultController extends AbstractController
                 $session->set('lastname',  $userdata->getName());
                 $session->set('pro', 'non');
                 $session->set('connected', 'true');
-                $session->set('password', $userdata->getPassword());
 
                 return $this->redirectToRoute('user_profile');
 
@@ -129,7 +128,6 @@ class DefaultController extends AbstractController
                 $session->set('siret',  $userdatapro->getSiret());
                 $session->set('pro', 'oui');
                 $session->set('connected', 'true');
-                $session->set('password', $userdatapro->getPassword());
 
                 return $this->redirectToRoute('user_profile');
 
