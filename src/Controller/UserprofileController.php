@@ -31,7 +31,6 @@ class UserprofileController extends AbstractController
 
         $success = false;
 
-
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
 
@@ -41,12 +40,14 @@ class UserprofileController extends AbstractController
 
             $errors = [
                 (!v::notEmpty()->length(3,15)->validate($safe['firstname'])) ? 'Votre prénom doit comporter entre 3 et 15 caractères' : null,
-                (!v::notEmpty()->length(3,15)->validate($safe['lastname'])) ? 'Votre nom doit comporter entre 3 et 15 caractères' : null,
+                
                 ];
 
                 if ($session->get('pro') == 'oui'){
 
-                    $errors = [(!v::notEmpty()->length(9,9)->validate($safe['siren'])) ? 'Votre siren doit comporter 9 caractères' : null,];
+                    $errorsSiren = [
+                        (!v::notEmpty()->length(9,9)->validate($safe['siren'])) ? 'Votre siren doit comporter 9 caractères' : null,
+                    ];
                 } 
 
                 if(password_verify($safe["password"],$session->get('password'))){
@@ -62,9 +63,13 @@ class UserprofileController extends AbstractController
             }
             else $errors[] = 'Le champ Adresse Email est obligatoire';
 
+            $errors = array_filter($errors);
+            $totalerrors = array_merge($errors, $errorsSiren);
 
-            if (count($errors) == 0) {
 
+
+
+            if (count($totalerrors) == 1) {
 				$success = true;
             
             } // Fin de 'if (count($errors) == 0)'
