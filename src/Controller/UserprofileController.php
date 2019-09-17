@@ -28,7 +28,8 @@ class UserprofileController extends AbstractController
 
         // Je place mes erreurs dans un tableau
         $errors = [];
-
+        $totalerrors = [];
+ 
         $success = false;
 
         // Si mes inputs sont remplies
@@ -40,7 +41,7 @@ class UserprofileController extends AbstractController
 
             $errors = [
                 (!v::notEmpty()->length(3,15)->validate($safe['firstname'])) ? 'Votre prénom doit comporter entre 3 et 15 caractères' : null,
-                
+                (!v::notEmpty()->length(3,15)->validate($safe['lastname'])) ? 'Votre nom doit comporter entre 3 et 15 caractères' : null,
                 ];
 
                 if ($session->get('pro') == 'oui'){
@@ -64,13 +65,12 @@ class UserprofileController extends AbstractController
             else $errors[] = 'Le champ Adresse Email est obligatoire';
 
             $errors = array_filter($errors);
+            $errorsSiren = array_filter($errorsSiren);
             $totalerrors = array_merge($errors, $errorsSiren);
 
+    var_dump($totalerrors);
 
-$test = count($totalerrors);
-var_dump($test);
-
-            if (count($totalerrors) == 1) {
+            if (count($totalerrors) == 0) {
 				$success = true;
             
             } // Fin de 'if (count($errors) == 0)'
@@ -80,7 +80,7 @@ var_dump($test);
 
         return $this->render('userprofile/user-profile.html.twig', [
             'success'   => $success,
-            'liste_erreurs' => $errors,
+            'liste_erreurs' => $totalerrors,
         ]);
     }
 }
