@@ -11,9 +11,13 @@
         <li class="nav-item">
                 <h3 class="grey-ookan montserrat">Bonjour </h3>
         </li>
+
         <li class="nav-item dropdown">
+        
 			<a class="nav-link dropdown-toggle montserrat text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.session.get('pseudo') }}</a>
+
 		    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
 			    <a class="dropdown-item" href="{{path('user_profile')}}">Mes infos</a>
 			    <a class="dropdown-item" href="{{path('disconnect')}}">Déconnexion</a>
 		    </div>
