@@ -25,7 +25,7 @@
             
             {# Partie sur les infos du profil #}
             <div class="col-lg-6 col-sm-12">
-                <h3 class="py-4 montserrat grey-ookan"> Profil de {{ user.getId }}</h3>
+                <h3 class="py-4 montserrat grey-ookan"> Profil de {{ app.session.get('pseudo') }}</h3>
                 <h3 class="py-4 montserrat grey-ookan">Modifier mes Infos : </h3>
 
                 {% if app.session.get('pro') == 'oui'  %} 
@@ -72,7 +72,7 @@
 
                     <div class="form-row my-3">
                         <div class="col">
-                            <label for="siren" class="montserrat">N° SIREN :</label>
+                            <label for="siren" class="montserrat">N° SIRET :</label>
                             <input type="number" class="form-control" name="siren" id="siren" value="{{ app.session.get('siret') }}" >
                         </div>
                     </div>

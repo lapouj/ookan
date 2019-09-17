@@ -68,7 +68,7 @@ class DefaultController extends AbstractController
             }
 
             if (count($errors) == 0) {
-
+                /*
                 $errors = array_filter($errors);
 
                 if ($userdata){
@@ -96,7 +96,7 @@ class DefaultController extends AbstractController
                 'userinfo'     =>  $infos_user,    
                 'user'         =>  $userdata,    
                 'userpro'      =>  $userdatapro,    
-                 ]);
+                 ]);*/
 
 
                 // $my_user_connected = $session->get('user');
@@ -104,8 +104,9 @@ class DefaultController extends AbstractController
                 //  $my_user_connected['email'];
 
 
-               /* if(!empty($userdata)){
+                if(!empty($userdata)){
                 $session = new Session();
+                $session->set('user_id',  $userdata->getId());
                 $session->set('pseudo',  $userdata->getPseudo());
                 $session->set('email',  $userdata->getEmail());
                 $session->set('firstname',  $userdata->getFistname());
@@ -120,6 +121,7 @@ class DefaultController extends AbstractController
                 else if (!empty($userdatapro)){
 
                 $session = new Session();
+                $session->set('user_id',  $userdatapro->getId());
                 $session->set('pseudo',  $userdatapro->getPseudo());
                 $session->set('email',  $userdatapro->getEmail());
                 $session->set('firstname',  $userdatapro->getFirstname());
@@ -132,7 +134,7 @@ class DefaultController extends AbstractController
                 return $this->redirectToRoute('user_profile');
 
 
-            }*/
+            }
         }   
 
 

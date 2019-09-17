@@ -36,7 +36,7 @@ class UserprofileController extends AbstractController
 
         // $userFound contient les informations de mon utilisateur qui sont en base de données
         $em = $this->getDoctrine()->getManager();
-        $userFound = $em->getRepository(UserPro::class)->find($user_connected['id_user']);
+        $userFound = $em->getRepository(UserPro::class)->find( $session->get('user_id'));
 
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
