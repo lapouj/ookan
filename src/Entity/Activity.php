@@ -51,6 +51,11 @@ class Activity
      */
     private $ville;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $note;
+
    
 
     public function getId(): ?int
@@ -138,6 +143,18 @@ class Activity
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(?int $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }
