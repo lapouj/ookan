@@ -48,7 +48,7 @@ class UserprofileController extends AbstractController
                 if(password_verify($safe["password"],$session->get('password'))){
                     $errors=[(!v::notEmpty()->length(5,15)->validate($safe['password'])) ? 'Votre mot de passe doit comporter entre 3 et 15 caractères' : null,];
                 }
-          
+
 
 
             if (!empty($safe['email'])) {
@@ -58,30 +58,11 @@ class UserprofileController extends AbstractController
             }
             else $errors[] = 'Le champ Adresse Email est obligatoire';
 
-           
-           
 
-
-
-
-            
             if (count($errors) == 0) {
 
-                $errors = array_filter($errors);
-
-                $em = $this->getDoctrine()->getManager();
-
-                $userData = getUserPro();
-
-                $userData->setPhoto($_FILES['photo']);
-
-                //Préparation de la requete.
-                $em->persist($userData);
-                //éxecution
-                $em->flush();
-                
-                // Redirection
-				$success = 'Votre profil a été mis à jour!';
+               
+				$success = true;
             
             } // Fin de 'if (count($errors) == 0)'
 
@@ -94,7 +75,7 @@ class UserprofileController extends AbstractController
         return $this->render('userprofile/user-profile.html.twig', [
             'success'   => $success ?? null,
             'users'     => $users,
-            'mes_erreurs' => $errors
+            'mes_erreurs' => $errors,
         ]);
     }
 }
