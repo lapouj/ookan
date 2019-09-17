@@ -29,7 +29,7 @@ class UserprofileController extends AbstractController
         // Je place mes erreurs dans un tableau
         $errors = [];
 
-        $success = '';
+        $success = false;
 
 
         // Si mes inputs sont remplies
@@ -45,6 +45,7 @@ class UserprofileController extends AbstractController
                 ];
 
                 if ($session->get('pro') == 'oui'){
+
                     $errors = [(!v::notEmpty()->length(9,9)->validate($safe['siren'])) ? 'Votre siren doit comporter 9 caractères' : null,];
                 } 
 
@@ -64,21 +65,18 @@ class UserprofileController extends AbstractController
 
             if (count($errors) == 0) {
 
-               
 				$success = true;
             
             } // Fin de 'if (count($errors) == 0)'
 
         } // Fin de 'if (!empty($_POST))'
 
-        $em = $this->getDoctrine()->getRepository(UserPro::class);
-
-        $users = $em->findBy(['id' => 1]);
+     
 
         return $this->render('userprofile/user-profile.html.twig', [
-            'success'   => $success ?? null,
+            'success'   => $success,
             'users'     => $users,
-            'mes_erreurs' => $errors,
+            'liste_erreurs' => $errors,
         ]);
     }
 }

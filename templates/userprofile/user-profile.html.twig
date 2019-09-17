@@ -9,14 +9,18 @@
 
         <h1 class="montserrat grey-ookan text-center">Mon C<scan class="gold-ookan">Oo</scan>mpte</h1>
 
-        {% if mes_erreurs is not empty %}
+        {% if liste_erreurs is not empty %}
+
             <div class="row justify-content-center">
                 <div class="alert alert-danger text-center col-lg-4">
-                    {{ mes_erreurs|join('<br>')|raw }} 
+                    {{ liste_erreurs|join('<br>')|raw }} 
                 </div>
             </div>
+
         {% elseif success == true %}
+
             <div class="alert alert-success text-center">Compte modifié avec succés</div>
+            
         {% endif %}
         
         <div class="justify-content-center text-center row pt-5">
