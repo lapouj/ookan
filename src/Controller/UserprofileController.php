@@ -42,7 +42,7 @@ class UserprofileController extends AbstractController
                 ];
 
                 if ($session->get('pro') == 'oui'){
-                    $errors = [(!v::notEmpty()->length(9)->validate($safe['siren'])) ? 'Votre siren doit comporter 9 caractères' : null,];
+                    $errors = [(!v::notEmpty()->length(9,9)->validate($safe['siren'])) ? 'Votre siren doit comporter 9 caractères' : null,];
                 } 
 
                 if(password_verify($safe["password"],$session->get('password'))){
@@ -55,7 +55,7 @@ class UserprofileController extends AbstractController
                 if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
                     $errors[] = 'Votre adresse email n\'est pas valide';
                 }
-            } 
+            }
             else $errors[] = 'Le champ Adresse Email est obligatoire';
 
            
