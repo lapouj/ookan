@@ -25,7 +25,7 @@
             
             {# Partie sur les infos du profil #}
             <div class="col-lg-6 col-sm-12">
-                <h3 class="py-4 montserrat grey-ookan"> Profil de {{ app.session.get('pseudo') }}</h3>
+                <h3 class="py-4 montserrat grey-ookan"> Profil de {{ user.getId }}</h3>
                 <h3 class="py-4 montserrat grey-ookan">Modifier mes Infos : </h3>
 
                 {% if app.session.get('pro') == 'oui'  %} 

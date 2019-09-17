@@ -22,42 +22,42 @@ class DefaultController extends AbstractController
         ]);
     }
 
-public function connect()
-{
+    public function connect()
+    {
 
-    $errors = [];
+        $errors = [];
 
-    if (!empty($_POST)) {
-       
+        if (!empty($_POST)) {
 
 
-        if (!empty($_POST['email']) || !empty($_POST['password'])) {
 
-            $safe = array_map('trim', array_map('strip_tags', $_POST));
+            if (!empty($_POST['email']) || !empty($_POST['password'])) {
 
-            if (!empty($safe['email'])) {
+                $safe = array_map('trim', array_map('strip_tags', $_POST));
 
-                if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                if (!empty($safe['email'])) {
 
-                $errors[] = 'Votre adresse email n\'est pas valide';
-                }
-            }   
+                    if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+
+                        $errors[] = 'Votre adresse email n\'est pas valide';
+                    }
+                }   
 
             // Cherche avec l'email dans la table User.
-            $userdata = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
+                $userdata = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
 
             // Cherche avec l'email dans la table User Pro.
-            $userdatapro = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $safe['email']]);
+                $userdatapro = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $safe['email']]);
 
             if ($userdata){//Si on trouve le mail dans la table User...
-                
+
                 if(!password_verify($safe["password"],$userdata->getPassword())){ //Check du mdp dans $safe et celui stocké dans la BDD
                     $errors[] = 'Erreur de mot de passe';
                 }
             }
 
             else if ($userdatapro){//...Sinon on continu de chercher dans la table User Pro
-                
+
                 if(!password_verify($safe["password"],$userdatapro->getPassword())){
                     $errors[] = 'Erreur de mot de passe';
                 }
@@ -71,27 +71,32 @@ public function connect()
 
                 $errors = array_filter($errors);
 
-                $infos_user = [
-                    'id_user'   => $userdata->getId(),
-                    'pseudo'    => $userdata->getPseudo(),
-                    'connected' => 'true',
-                ];
-
-                // User particulier
-                if(!empty($userdata)){
-
-                    $infos_user['pro'] = 'non';
+                if ($userdata){
+                    $infos_user = [
+                        'id_user'   => $userdata->getId(),
+                        'pseudo'    => $userdata->getPseudo(),
+                        'connected' => 'true',
+                        'pro'       => 'non'
+                    ];
                 }
-                // User pro
-                elseif (!empty($userdatapro)){
-
-                    $infos_user['pro'] = 'oui';
+                else if ($userdatapro){
+                      $infos_user = [
+                        'id_user'   => $userdatapro->getId(),
+                        'pseudo'    => $userdatapro->getPseudo(),
+                        'connected' => 'true',
+                        'pro'       => 'oui'
+                    ];
                 }
+
 
                 $session = new Session();
                 $session->set('user', $infos_user);
 
-                return $this->redirectToRoute('user_profile');
+                return $this->redirectToRoute('user_profile', [
+                'userinfo'     =>  $infos_user,    
+                'user'         =>  $userdata,    
+                'userpro'      =>  $userdatapro,    
+                 ]);
 
 
                 // $my_user_connected = $session->get('user');
@@ -127,19 +132,19 @@ public function connect()
                 return $this->redirectToRoute('user_profile');
 
 
-                }*/
-            }   
+            }*/
+        }   
 
 
-            return $this->render('connexion.html.twig', [
+        return $this->render('connexion.html.twig', [
             'mes_erreurs'     =>  $errors,    
-            ]);
-        }
-
+        ]);
     }
-    return $this->render('connexion.html.twig', [
+
+}
+return $this->render('connexion.html.twig', [
     'mes_erreurs'     =>  $errors,    
-    ]);
+]);
 }
 
 public function disconnect(){
