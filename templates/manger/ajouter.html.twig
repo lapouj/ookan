@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Ajouter un restOorants{% endblock %}
 
 {% block body %}
 
@@ -11,11 +11,11 @@
 			</div>
 		</div>
 	{% elseif success == true %}
-		<div class="alert alert-success text-center">Votre restaurant a bien été ajoutée</div>
+		<div class="alert alert-success text-center">Votre restaurant a bien été ajouté</div>
 	{% endif %}
 
 	<div>
-		<h2 class="text-center montserrat">Ajouter votre établissement</h2>
+		<h2 class="text-center montserrat grey-ookan">Ajouter votre établissement</h2>
 	</div>
 
 	<div class="row justify-content-center py-4">
@@ -23,18 +23,18 @@
 		<form id="add_form" method="post" class="border bg-light p-4" >
 			<small>Les champs marqués d'une * sont obligatoires</small>
 			<div class="form-group">
-				<input id="nom" type="text" name="nom" placeholder="Nom d'établissement*" class="form-control" required>
+				<input id="nom" type="text" name="nom" placeholder="Nom d'établissement *" class="form-control" required>
 			</div>
 			<div class="form-group">
 				<small>Veuillez sélectionner la photo de votre établissement
 				<input type="file" name="photo">
 			</div>
 			<div class="form-group">
-				<textarea id="description" name="description" rows="10" cols="50" placeholder="Description (Minimum 50 caractères)*" class="form-control" required></textarea>
+				<textarea id="description" name="description" rows="10" cols="50" placeholder="Description (Minimum 50 caractères) *" class="form-control" required></textarea>
 			</div>
 			<div class="form-group">
 				<select id="type" name="type" class="form-control" required>
-					<option disabled selected>Type de cuisine*</option>
+					<option disabled selected>Type de cuisine *</option>
 					<option>Traditionnelle</option>
 					<option>Asiatique</option>
 					<option>Indienne</option>
@@ -55,16 +55,16 @@
 				<input id="phone" type="text" name="phone" placeholder="N° de téléphone" class="form-control" >
 			</div>
 			<div class="form-group">
-				<input id="street_num" type="text" name="street_num" placeholder="N° de rue*" class="form-control" required>
+				<input id="street_num" type="text" name="street_num" placeholder="N° de rue *" class="form-control" required>
 			</div>
 			<div class="form-group">
-				<input id="street_name" type="text" name="street_name" placeholder="Nom de rue*" class="form-control" required>
+				<input id="street_name" type="text" name="street_name" placeholder="Rue *" class="form-control" required>
 			</div>
 			<div class="form-group">
-				<input id="cp" type="text" name="cp" placeholder="Code postal*" class="form-control" required>
+				<input id="cp" type="text" name="cp" placeholder="Code postal *" class="form-control" required>
 			</div>
 			<div class="form-group">
-				<input id="ville" type="text" name="ville" placeholder="Ville*" class="form-control" required>
+				<input id="ville" type="text" name="ville" placeholder="Ville *" class="form-control" required>
 			</div>
 			<div class="text-center">
 				<button type="submit" class="btn w-100" name="envoyer"><img src="/img/logo/logo-go.png" width="180" height="60" class="d-inline-block align-top img-fluid" alt=""></button>

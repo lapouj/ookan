@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Consulter les restOorants{% endblock %}
+{% block title %}Consulter les activités{% endblock %}
 
 {% block body %}
 
@@ -11,7 +11,7 @@
 	<div class="col-10 m-auto text-white mb-3 mt-3 montserrat" style="border-radius:10px">
 
 			<div class="text-center py-5">
-			<a href="{{ path('add_activity')}}" class="montserrat grey-ookan text-dark text-decoration-none">Ajouter votre établissement</a>
+			<a href="{{ path('add_activity')}}" class="montserrat grey-ookan text-dark text-decoration-none">Ajouter votre activité</a>
 			</div>
 
 			{% for OneActivity in activities %}
