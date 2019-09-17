@@ -37,16 +37,16 @@ class InscriptionController extends AbstractController
     		// je nettoie les données reçues
     		$safe = array_map('trim', array_map('strip_tags', $_POST));
 
-            if (strlen($safe['nom']) <= 3) {
+            if (strlen($safe['nom']) <= 4) {
                 $errors[] = 'Votre nom doit contenir au moins 4 caractères';
             }
 
-            if (strlen($safe['prenom']) <= 3) {
+            if (strlen($safe['prenom']) <= 5) {
                 $errors[] = 'Votre prénom doit contenir au moins 5 caractères';
             }
 
-            if (strlen($safe['pseudo']) <= 3) {
-                $errors[] = 'Votre pseudo doit contenir au moins 5 caractères';
+            if (strlen($safe['pseudo']) <= 6) {
+                $errors[] = 'Votre pseudo doit contenir au moins 6 caractères';
             }
 
             if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
