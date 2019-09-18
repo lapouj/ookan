@@ -166,8 +166,6 @@ class MangerController extends AbstractController
 				// Redirection
 				
 				$success = 'Votre avis a bien été pris en compte !';
-
-				return $this->redirectToRoute('avis_restos{id}');
             
             } // Fin de 'if (count($errors) == 0)'
 

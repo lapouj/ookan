@@ -45,8 +45,8 @@ class InscriptionController extends AbstractController
                 $errors[] = 'Votre prénom doit contenir au moins 2 caractères';
             }
 
-            if (strlen($safe['pseudo']) <= 5) {
-                $errors[] = 'Votre pseudo doit contenir au moins 5 caractères';
+            if (strlen($safe['pseudo']) <= 6) {
+                $errors[] = 'Votre pseudo doit contenir au moins 6 caractères';
             }
 
             if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
@@ -188,6 +188,8 @@ class InscriptionController extends AbstractController
                 //éxecution
                 $em->flush();
                 
+                // Redirection
+                return $this->redirectToRoute('inscription_reussite');
 				// $success = 'Votre inscription est un succès, bienvenue chez Ookan !';
             
             } // Fin de 'if (count($errors) == 0)'
