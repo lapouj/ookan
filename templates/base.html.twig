@@ -32,10 +32,13 @@
         
         {% include 'partials/footer.html.twig' %}
 
+        {% block scrollUp %}
+            {% include "partials/javascript.html.twig" %}
+        {% endblock %}
+        
         
         
         {% block javascripts %}
-            {% include "partials/javascript.html.twig" %}
         {% endblock %}
     </body>
 </html>

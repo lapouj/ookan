@@ -1,10 +1,15 @@
+/*** HTML ***/
+html {
+	scroll-behavior: smooth
+}
+
 /*** BOUTTON HAUT DE PAGE ***/
 #scrollUp {
     position: fixed;
 	bottom : 1rem;
 	left: -4rem;
     opacity: 1;
-    font-size: 3rem;
+	font-size: 3rem;
 }
 
 /*** BODY ***/
