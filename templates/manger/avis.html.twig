@@ -15,7 +15,7 @@
 
                 <div class="row">
 
-                    <h3 class="col-12 text-center secondary-title mt-5 mb-4">{{ OneResto.getRestoname() }}</h3>
+                    <h2 class="col-12 text-center primary-title mt-5 mb-4">{{ OneResto.getRestoname() }}</h2>
 
                     {% if OneResto.getNote() > 0 %}<p class="col-12 text-center mb-4"><span class="span-rate">{{ OneResto.getNote() }}/5 <i class="fas fa-star rated-star"></i></span></p>{% endif %}
                     
@@ -30,7 +30,7 @@
                             <p>{{ OneResto.getDescription() }}</p>
                         </div>
                         
-                        <div class="col-lg-6 col-sm-12 d-flex p-0 mb-4 mr-3">
+                        <div class="col-lg-6 col-md-12 d-flex p-0 mb-4 mr-3">
 
                             <div class="col-12 p-0">
                                 <h5 class="">Site web</h5>
@@ -44,7 +44,7 @@
 
                         </div>
 
-                        <div class="col-lg-6 col-sm-12 d-flex p-0 mb-4 mr-3">
+                        <div class="col-lg-6 col-md-12 d-flex p-0 mb-4 mr-3">
 
                             <div class="col-12 p-0">
                                 <h5 class="">Type de cuisine</h5>
@@ -62,15 +62,22 @@
                     
                     <div class="col-lg-4 col-md-12 mb-4">  
                         <p>
-                            <div class="border m-3 p-2" id="map{{OneResto.getId()}}" style="height:100%;border-radius:10px;width:100%">
+                            <div class="border m-3 p-2" id="map{{OneResto.getId()}}" style="min-height:300px;border-radius:10px;width:100%">
                                 <!-- id="map5" par exemple -->
                             </div>
                         </p>
                     </div>
 
-                    <div class="mb-5">
-d
+                    <div class="my-5 col-12">
+                        <h3 class="text-center secondary-title">Avis des utilisateurs</h3>
                     </div>
+
+                    <div class="offset-lg-2 col-lg-8 col-md-12">
+                        yrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+                    </div>
+
+
+
                         
                     
                 </div> <!-- Fin de div.row -->
@@ -89,7 +96,7 @@ d
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
 
         <script type="text/javascript">
-        
+
             /**
             * Fonction d'initialisation de la carte
             * @param param_latitude La latitude
