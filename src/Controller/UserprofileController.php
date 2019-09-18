@@ -95,7 +95,6 @@ class UserprofileController extends AbstractController
             $success = true;
 
 
-
             if ($pro_connected == 'oui'){
                 $userProFound->setFirstname($safe['firstname'])
                 ->setName($safe['lastname'])
@@ -119,6 +118,9 @@ class UserprofileController extends AbstractController
 
                 }//fin pro_connected
 
+
+            $test = count($totalerrors);
+
                 if ($pro_connected == 'non'){
                     $userFound->setFistname($safe['firstname'])
                     ->setName($safe['lastname'])
@@ -136,6 +138,7 @@ class UserprofileController extends AbstractController
                     $session->set('lastname',  $userFound->getName());
                     $session->set('pro', 'oui');
                     $session->set('connected', 'true');
+
 
 
                 }//fin user normal connected
