@@ -77,12 +77,28 @@
 
                     {% for comments in commentaires %}
 
-                        <div class="comment-div mb-3">
-                            <h6 class="gold-ookan">{{ comments.getAuthor() }}</h6>
-                            <p>{{ comments.getContent() }}</p>
+                        <div class="comment-div mb-3 p-2">
+                            <h6 class="montserrat author-pseudo">{{ comments.getAuthor() }}</h6>
+                            <p class="roboto">{{ comments.getContent() }}</p>
                         </div>
                             
                     {% endfor %}
+
+                        <div class="mt-5 mb-3 col-12">
+                            <h3 class="text-center secondary-title">Poster un avis</h3>
+                        </div>
+
+                        <div class="my-comment mb-5">
+                            <form action="" method="POST">
+                                <div class="form-group">
+                                    <label class="montserrat author-pseudo" for="ControlTextarea">{{ app.session.get('pseudo') }}</label>
+                                    <textarea class="form-control text-center" id="ControlTextarea" rows="3" placeholder="{{ app.session.get('pseudo') }}, dites nous ce que vous pensez de {{ OneResto.getRestoname() }}"></textarea>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-gold">Envoyer</button>
+                                </div>
+                            </form>
+                        </div>
                             
                     </div>
 

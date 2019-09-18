@@ -110,7 +110,7 @@ class DefaultController extends AbstractController
                 // $my_user_connected['email'];
 
 
-                if(!empty($userdata)){
+            if(!empty($userdata)){
                     
                 $session = new Session();
                 $session->set('user_id',  $userdata->getId());
@@ -136,11 +136,17 @@ class DefaultController extends AbstractController
                 $session->set('pro', 'oui');
                 $session->set('connected', 'true');
 
-                return $this->redirectToRoute('user_profile');
+                    return $this->redirectToRoute('user_profile');
+                }
+            }   
+            return $this->render('connexion.html.twig', [
+                'mes_erreurs'     =>  $errors,    
+            ]);
+        }
+    }
 
 
-            }
-        }   
+
 
 
         return $this->render('connexion.html.twig', [
@@ -148,31 +154,24 @@ class DefaultController extends AbstractController
         ]);
     }
 
-}
-return $this->render('connexion.html.twig', [
-    'mes_erreurs'     =>  $errors,    
-]);
-}
+    public function disconnect()
+    {
+        session_destroy();
+        return $this->redirectToRoute('accueil');
+    }
 
-public function disconnect(){
+    public function mentions()
+    {
+        return $this->render('mentions.html.twig', [
+        ]);
+    }
+    public function ookan_team()
+    {
+        return $this->render('ookanteam.html.twig', [
+        ]);
+    }
 
-    session_destroy();
-
-    return $this->redirectToRoute('accueil');
-}
-
-public function mentions()
-{
-    return $this->render('mentions.html.twig', [
-    ]);
-}
-public function ookan_team()
-{
-    return $this->render('ookanteam.html.twig', [
-    ]);
-}
-
- public function PasswordForget()
+    public function PasswordForget()
     {
         $mail = new PHPMailer;
 
@@ -185,13 +184,11 @@ public function ookan_team()
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
             if (!empty($safe['email'])) {
+                if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                    $errors[] = 'Votre adresse email n\'est pas valide';
+                }
+            }      
 
-                    if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
-
-                        $errors[] = 'Votre adresse email n\'est pas valide';
-                    }
-                }      
-            
 
             if (count($errors) == 0) {
 
@@ -217,30 +214,30 @@ public function ookan_team()
                                     'verify_peer_name' => false,
                                     'allow_self_signed' => true]
                                 ];
-            // $mail->SMTPDebug = 3; //mode debug si > 2
-            $mail->CharSet = 'UTF-8'; //charset utf-8
-            $mail->isSMTP(); //connexion directe à un serveur SMTP
-            $mail->isHTML(true); //mail au format HTML
-            $mail->Host = 'smtp.gmail.com'; //serveur SMTP
-            $mail->SMTPAuth = true; //serveur sécurisé
-            $mail->Port = 465; //port utilisé par le serveur
-            $mail->SMTPSecure = 'ssl'; //certificat SSL
-            $mail->Username = 'wf3toulouse@gmail.com'; //login 
-            $mail->Password = '244Seysses'; //mot de passe
-            $mail->AddAddress($safe['email']); //destinataire
-            $mail->SetFrom('wf3toulouse@gmail.com', 'Ookan'); //expediteur
-            $mail->Subject = 'Mot de passe perdu'; //sujet
-            // le corps du mail au forma HTML
-            $mail->Body = ' <html>
-                                <head>
+                // $mail->SMTPDebug = 3; //mode debug si > 2
+                $mail->CharSet = 'UTF-8'; //charset utf-8
+                $mail->isSMTP(); //connexion directe à un serveur SMTP
+                $mail->isHTML(true); //mail au format HTML
+                $mail->Host = 'smtp.gmail.com'; //serveur SMTP
+                $mail->SMTPAuth = true; //serveur sécurisé
+                $mail->Port = 465; //port utilisé par le serveur
+                $mail->SMTPSecure = 'ssl'; //certificat SSL
+                $mail->Username = 'wf3toulouse@gmail.com'; //login 
+                $mail->Password = '244Seysses'; //mot de passe
+                $mail->AddAddress($safe['email']); //destinataire
+                $mail->SetFrom('wf3toulouse@gmail.com', 'Ookan'); //expediteur
+                $mail->Subject = 'Mot de passe perdu'; //sujet
+                // le corps du mail au forma HTML
+                $mail->Body = ' <html>
+                                    <head>
                                     <style>
                                         h1{color: green; }
                                     </style>
-                                </head>
-                                <body>
-                                    <p>Pour réinitialiser votre mot de passe veuillez cliquer <a href="http://127.0.0.1:8000/new-password?token='.$token.'">ici</a></p>
-                                </body>
-                            </html>';
+                                    </head>
+                                    <body>
+                                        <p>Pour réinitialiser votre mot de passe veuillez cliquer <a href="http://127.0.0.1:8000/new-password?token='.$token.'">ici</a></p>
+                                    </body>
+                                </html>';
 
                 // envoi email
                 if ($mail->Send()) {
@@ -251,63 +248,68 @@ public function ookan_team()
         return $this->render('password_forget.html.twig', [
                     'mes_validation'    => $success,
                     'mes_erreurs'       => $errors,
-                ]);   
-     }
+
+        ]);   
+    }
+
 
     public function NewPassword()
-        {
-            $em = $this->getDoctrine()->getManager();
+    {
+        $em = $this->getDoctrine()->getManager();
 
-            $errors = [];
+        $errors = [];
 
-            $success = false;
+        $success = false;
 
-            if (!empty($_POST)) {
 
-                $safe = array_map('trim', array_map('strip_tags', $_POST));
+        if (!empty($_POST)) {
+
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+            
+            if (strlen($safe['password']) < 4) {
+            $errors[] = 'Votre mot de passe doit contenir au moins 5 caractères';
+            }
+            elseif($safe['password'] != $safe['comfirm_password']) {
+            $errors[] = 'Votre mot de passe n\'est pas identique';
+            }
+
+            if (count($errors) == 0) {
+
+                $resultat = $this->getDoctrine()->getRepository(PasswordForget::class)->findOneBy(['token' => $_GET['token']]);
+
+                $userToChange = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $resultat->getPseudo()]);
+                $userProToChange = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $resultat->getPseudo()]);
                 
-                if (strlen($safe['password']) < 4) {
-                    $errors[] = 'Votre mot de passe doit contenir au moins 5 caractères';
+                if ($userToChange) {
+                
+                $userToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                //éxecution
+                $em->flush();
                 }
-                elseif($safe['password'] != $safe['comfirm_password']) {
-                    $errors[] = 'Votre mot de passe n\'est pas identique';
+
+
+                else if ($userProToChange) {
+                    $userProToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                //éxecution
+                $em->flush();
                 }
 
-
-              if (count($errors) == 0) {
-
-                    $resultat = $this->getDoctrine()->getRepository(PasswordForget::class)->findOneBy(['token' => $_GET['token']]);
-
-                    $userToChange = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $resultat->getPseudo()]);
-                    $userProToChange = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $resultat->getPseudo()]);
-                    
-                    if($userToChange) {
-                    
-                        $userToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
-                        //éxecution
-                        $em->flush();
-
-                    }
-                    else if ($userProToChange) {
-                        $userProToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
-
-                        $em->remove($resultat);
-
-                        $em->flush();
-                    }
 
 
                 $success = true;
+            }    
 
-                }    
-            }
-            return $this->render('new-password.html.twig', [
-                'mes_erreurs'       => $errors,
-                'success'           => $success,
-            ]);
         }
-
+        return $this->render('new-password.html.twig', [
+            'mes_erreurs'       => $errors,
+            'success'           => $success,
+        ]);
+    }
 }
+
+
+
+            
 
 
 

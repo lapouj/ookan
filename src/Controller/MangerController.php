@@ -122,8 +122,9 @@ class MangerController extends AbstractController
     	// Permet de chercher l'article donnée en id via le repository
 		$restoFound = $em->getRepository(Resto::class)->findById($id);
 
-		$comments = $em->getRepository(Comments::class)->findAll();
+		// $comments = $em->getRepository(Comments::class)->findAll();
 
+		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id]);
 
     	// la vue
         return $this->render('manger/avis.html.twig', [
