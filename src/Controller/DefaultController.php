@@ -34,80 +34,78 @@ class DefaultController extends AbstractController
 
         if (!empty($_POST)) {
 
-
-
             if (!empty($_POST['email']) || !empty($_POST['password'])) {
 
-                $safe = array_map('trim', array_map('strip_tags', $_POST));
+                    $safe = array_map('trim', array_map('strip_tags', $_POST));
 
-                if (!empty($safe['email'])) {
+                    if (!empty($safe['email'])) {
 
-                    if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                        if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
 
-                        $errors[] = 'Votre adresse email n\'est pas valide';
+                            $errors[] = 'Votre adresse email n\'est pas valide';
+                        }
+                    }   
+
+                // Cherche avec l'email dans la table User.
+                    $userdata = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
+
+                // Cherche avec l'email dans la table User Pro.
+                    $userdatapro = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $safe['email']]);
+
+                if ($userdata){//Si on trouve le mail dans la table User...
+
+                    if(!password_verify($safe["password"],$userdata->getPassword())){ //Check du mdp dans $safe et celui stocké dans la BDD
+                        $errors[] = 'Erreur de mot de passe';
                     }
+                }
+
+                else if ($userdatapro){//...Sinon on continu de chercher dans la table User Pro
+
+                    if(!password_verify($safe["password"],$userdatapro->getPassword())){
+                        $errors[] = 'Erreur de mot de passe';
+                    }
+                }
+
+                else{// Si on ne trouve rien.
+                    $errors[] = 'Utilisateur introuvable';
+                }
+
+                if (count($errors) == 0) {
+
+                    if(!empty($userdata)){
+                            
+                        $session = new Session();
+                        $session->set('user_id',  $userdata->getId());
+                        $session->set('pseudo',  $userdata->getPseudo());
+                        $session->set('email',  $userdata->getEmail());
+                        $session->set('firstname',  $userdata->getFistname());
+                        $session->set('lastname',  $userdata->getName());
+                        $session->set('pro', 'non');
+                        $session->set('connected', 'true');
+
+                        return $this->redirectToRoute('user_profile');
+
+                        }  
+                        else if (!empty($userdatapro)){
+
+                        $session = new Session();
+                        $session->set('user_id',  $userdatapro->getId());
+                        $session->set('pseudo',  $userdatapro->getPseudo());
+                        $session->set('email',  $userdatapro->getEmail());
+                        $session->set('firstname',  $userdatapro->getFirstname());
+                        $session->set('lastname',  $userdatapro->getName());
+                        $session->set('siret',  $userdatapro->getSiret());
+                        $session->set('pro', 'oui');
+                        $session->set('connected', 'true');
+
+                            return $this->redirectToRoute('user_profile');
+                        }
                 }   
-
-            // Cherche avec l'email dans la table User.
-                $userdata = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $safe['email']]);
-
-            // Cherche avec l'email dans la table User Pro.
-                $userdatapro = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $safe['email']]);
-
-            if ($userdata){//Si on trouve le mail dans la table User...
-
-                if(!password_verify($safe["password"],$userdata->getPassword())){ //Check du mdp dans $safe et celui stocké dans la BDD
-                    $errors[] = 'Erreur de mot de passe';
-                }
+                return $this->render('connexion.html.twig', [
+                    'mes_erreurs'     =>  $errors,    
+                ]);
             }
-
-            else if ($userdatapro){//...Sinon on continu de chercher dans la table User Pro
-
-                if(!password_verify($safe["password"],$userdatapro->getPassword())){
-                    $errors[] = 'Erreur de mot de passe';
-                }
-            }
-
-            else{// Si on ne trouve rien.
-                $errors[] = 'Utilisateur introuvable';
-            }
-
-            if (count($errors) == 0) {
-
-            if(!empty($userdata)){
-                    
-                $session = new Session();
-                $session->set('user_id',  $userdata->getId());
-                $session->set('pseudo',  $userdata->getPseudo());
-                $session->set('email',  $userdata->getEmail());
-                $session->set('firstname',  $userdata->getFistname());
-                $session->set('lastname',  $userdata->getName());
-                $session->set('pro', 'non');
-                $session->set('connected', 'true');
-
-                return $this->redirectToRoute('user_profile');
-
-                }  
-                else if (!empty($userdatapro)){
-
-                $session = new Session();
-                $session->set('user_id',  $userdatapro->getId());
-                $session->set('pseudo',  $userdatapro->getPseudo());
-                $session->set('email',  $userdatapro->getEmail());
-                $session->set('firstname',  $userdatapro->getFirstname());
-                $session->set('lastname',  $userdatapro->getName());
-                $session->set('siret',  $userdatapro->getSiret());
-                $session->set('pro', 'oui');
-                $session->set('connected', 'true');
-
-                    return $this->redirectToRoute('user_profile');
-                }
-            }   
-            return $this->render('connexion.html.twig', [
-                'mes_erreurs'     =>  $errors,    
-            ]);
         }
-    }
 
 
         return $this->render('connexion.html.twig', [
