@@ -102,10 +102,6 @@ class MangerController extends AbstractController
     // Permet de chercher les articles données via le repository
 	$restoFound = $em->getRepository(resto::class)->findAll();
 
-	
-echo '<pre>';
-var_dump($restoFound);
-echo '<pre>';
         // la vue
     	return $this->render('manger/afficher.html.twig', [
 			'resto'		=> $restoFound,
