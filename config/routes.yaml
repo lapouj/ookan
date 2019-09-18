@@ -59,6 +59,12 @@ show_restos:
     path: /consulter-restaurants
     controller: App\Controller\MangerController::show
 
+avis_restos: 
+    path: /avis-restaurant{id} # url d'accès a ma page. Le paramètre {id} est un paramètre get.
+    controller: App\Controller\MangerController::avisResto
+    requirements: 
+      id: '\d+' # veut dire que le paramètre id n'acceptera que des chiffres
+
 # Les sorties -----------------------------------------
 add_sortie:
     path: /ajouter-sortie
