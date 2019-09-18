@@ -118,7 +118,7 @@ class UserprofileController extends AbstractController
 
                 }//fin pro_connected
 
-                if ($pro_connected == 'non'){
+             else if ($pro_connected == 'non'){
                     $userFound->setFistname($safe['firstname'])
                     ->setName($safe['lastname'])
                     ->setEmail($safe['email']) 
