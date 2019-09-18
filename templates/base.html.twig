@@ -24,11 +24,16 @@
 
         {% block body %}{% endblock %}
 
+        {% include 'partials/scrollUp.html.twig' %}
+
+
         
         {% include 'partials/footer.html.twig' %}
 
-        {% include "partials/javascript.html.twig" %}
         
-        {% block js %}{% endblock %}
+        
+        {% block js %}
+            {% include "partials/javascript.html.twig" %}
+        {% endblock %}
     </body>
 </html>
