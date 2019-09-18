@@ -95,21 +95,26 @@ class MangerController extends AbstractController
 
     public function show()
     {
-    	{
+		
+	 // Récupération de l'article
+	$em = $this->getDoctrine()->getManager();
+	
+    // Permet de chercher les articles données via le repository
+	$restoFound = $em->getRepository(resto::class)->findAll();
 
-            // Récupération de l'article
-    		$em = $this->getDoctrine()->getManager();
-            // Permet de chercher les articles données via le repository
-    		$restoFound = $em->getRepository(resto::class)->findAll();
+	// $noteExist = $this->getDoctrine()->getRepository(resto::class)->find(['note']);
+    //     if(!empty($noteExist)){
+    //        	$note = 'note';
+    //     } else $note = '';
+	
 
-            // la vue
-    		return $this->render('manger/afficher.html.twig', 
-    			['resto'=> $restoFound,
-    		]);
-    	}
 
+        // la vue
     	return $this->render('manger/afficher.html.twig', [
-    		'controller_name' => 'MangerController',
+			'resto'		=> $restoFound,
+			'note'		=> $note ?? null,
     	]);
-    }
+    	
+	}
+	
 }

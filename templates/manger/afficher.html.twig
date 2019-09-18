@@ -26,7 +26,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="d-flex justify-content-between">
-									<h2>{{ OneResto.getRestoname() }}</h2>
+									<h2>{{ OneResto.getRestoname() }}{% if note is not empty %}<span class="span-rate">{{ OneResto.getNote() }} - /5 <i class="fas fa-star rated-star"></i></span>{% endif %}</h2>
 									
 									<!-- Système de notation -->
 									<div class="rating">Noter l'établissement :
