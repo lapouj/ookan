@@ -95,7 +95,6 @@ class UserprofileController extends AbstractController
             $success = true;
 
 
-
             if ($pro_connected == 'oui'){
                 $userProFound->setFirstname($safe['firstname'])
                 ->setName($safe['lastname'])
