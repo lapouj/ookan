@@ -110,9 +110,6 @@ class DefaultController extends AbstractController
     }
 
 
-
-
-
         return $this->render('connexion.html.twig', [
             'mes_erreurs'     =>  $errors,    
         ]);
