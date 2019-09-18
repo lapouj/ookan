@@ -26,15 +26,20 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="d-flex justify-content-between">
-									<h2>{{ OneResto.getRestoname() }} - {% if OneResto.getNote() > 0 %}<span class="span-rate">{{ OneResto.getNote() }}/5 <i class="fas fa-star rated-star"></i></span>{% endif %}</h2>
+									<h2>{{ OneResto.getRestoname() }}{% if OneResto.getNote() > 0 %}<span class="span-rate"> - {{ OneResto.getNote() }}/5 <i class="fas fa-star rated-star"></i></span>{% endif %}</h2>
 									
-									<!-- Système de notation -->
-									<div class="rating">Noter l'établissement :
-											<a href="{{ path('show_restos') }}?note=5" title="Donner 5 étoiles"><i class="far fa-star"></i></a><!--
-											--><a href="{{ path('show_restos') }}?note=4" title="Donner 4 étoiles"><i class="far fa-star"></i></a><!--
-											--><a href="{{ path('show_restos') }}?note=3" title="Donner 3 étoiles"><i class="far fa-star"></i></a><!--
-											--><a href="{{ path('show_restos') }}?note=2" title="Donner 2 étoiles"><i class="far fa-star"></i></a><!--
-											--><a href="{{ path('show_restos') }}?note=1" title="Donner 1 étoile"><i class="far fa-star"></i></a>
+									<div>
+										<!-- Système de notation -->
+										<div class="rating">Noter l'établissement :
+												<a href="{{ path('show_restos') }}?note=5" title="Donner 5 étoiles"><i class="far fa-star"></i></a><!--
+												--><a href="{{ path('show_restos') }}?note=4" title="Donner 4 étoiles"><i class="far fa-star"></i></a><!--
+												--><a href="{{ path('show_restos') }}?note=3" title="Donner 3 étoiles"><i class="far fa-star"></i></a><!--
+												--><a href="{{ path('show_restos') }}?note=2" title="Donner 2 étoiles"><i class="far fa-star"></i></a><!--
+												--><a href="{{ path('show_restos') }}?note=1" title="Donner 1 étoile"><i class="far fa-star"></i></a>
+										</div>
+										<div>
+											<a href="">Voir les avis</a>
+										</div>
 									</div>
 
 								</div>
