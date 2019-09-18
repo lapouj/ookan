@@ -16,6 +16,10 @@ use App\Entity\User; // Intéraction
 use \Behat\Transliterator\Transliterator as tr;
 use \Intervention\Image\ImageManagerStatic as Image;
 
+/* import des classes de PHPMailer */
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 
 class UserprofileController extends AbstractController
 {
@@ -168,8 +172,8 @@ class UserprofileController extends AbstractController
 
 
         return $this->render('userprofile/user-profile.html.twig', [
-            'success'   => $success,
+            'success'       => $success,
             'liste_erreurs' => $totalerrors,
         ]);
-    }
+    }     
 }
