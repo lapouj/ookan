@@ -64,5 +64,14 @@ body {
 }
 
 .comment-div {
-	border: #e3ad5a 2px solid;
+	border: #fff 1px solid;
+	box-shadow: 1px 1px #fff;
+	border-radius: 5px;
+}
+
+.author-pseudo {
+	font-weight: 700;
+	color: #e3ad5a;
+	font-size: 1.2em;
+	text-shadow: #000 1px 1px;
 }
