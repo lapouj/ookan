@@ -1,3 +1,14 @@
+/*** BOUTTON HAUT DE PAGE ***/
+#scrollUp {
+    position: fixed;
+	bottom : 1rem;
+	left: -4rem;
+    opacity: 1;
+    font-size: 3rem;
+}
+
+/*** BODY ***/
+
 #add_form, label{
 	display: inline-block;
 	width: 30%;
@@ -43,9 +54,7 @@ body {
 	cursor: pointer;
 }
 
-.span-rate {
-}
-
 .rated-star {
 	color: #e3ad5a;
 }
+

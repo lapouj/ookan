@@ -83,24 +83,24 @@
                     <div class="form-row my-3">
                         <div class="col">
                             <small class="montserrat grey-ookan">Ancien Mot de Passe</small>
-                            <input type="text" class="form-control" name="lastpassword" id="lastpassword" placeholder="Ancien mot de passe">
+                            <input type="password" class="form-control" name="lastpassword" id="lastpassword" placeholder="Ancien mot de passe">
                         </div>
                     </div>
                     <div class="form-row my-3">
                         <div class="col">
                             <small class="montserrat grey-ookan">Nouveau Mot de Passe</small>
-                            <input type="text" class="form-control" name="password" id="password" placeholder="Nouveau mot de passe (8 caractères min.)">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Nouveau mot de passe (8 caractères min.)">
                         </div>
                     </div>
 
                     <div class="form-row my-3">
                         <div class="col">
                             <small class="montserrat grey-ookan">Confirmation nouveau Mot de Passe</small>
-                            <input type="text" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirmer le mot de passe">
+                            <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirmer le mot de passe">
                         </div>
                     </div>
 
-                    <div class="form-row my-3">
+                    <div class="form-row my-5">
                         <button type="submit" class="btn "><img src="/img/logo/enregistrer.png" width="180" height="60" class="d-inline-block align-top img-fluid" alt=""></button>
                     </div>
 
@@ -114,17 +114,19 @@
 
                 <h3 class="py-4 montserrat grey-ookan">Activité professionnelle</h3>
 
-                <h4 class="montserrat grey-ookan mb-5">Ajouter votre établissement</h4>
+                <h5 class="montserrat grey-ookan mb-5">Ajouter votre établissement</h5>
 
-                    <a href="{{ path('add_sortie') }}" class="col-4">
+                    <button type="button" class="btn btn-outline-secondary"><a href="{{ path('add_sortie') }}" class="col-4 text-decoration-none text-dark grey-ookan">
                         Sortie
-                    </a>
-                    <a href="{{ path('add_restos') }}" class="col-4">
+                    </a></button>
+
+                    <button type="button" class="btn btn-outline-secondary"><a href="{{ path('add_restos') }}" class="col-4 text-decoration-none text-dark grey-ookan">
                         Restaurant
-                    </a>
-                    <a href=" {{ path('add_activity') }}"class="col-4">
+                    </a></button>
+
+                    <button type="button" class="btn btn-outline-secondary"><a href=" {{ path('add_activity') }}"class="col-4 text-decoration-none text-dark grey-ookan">
                         Activité
-                    </a>
+                    </a></button>
 
                     {% endif %} 
 

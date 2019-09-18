@@ -8,13 +8,11 @@
                
     <ul class="nav justify-content-end">
 
-        <li class="nav-item d-flex align-items-center">
-                <h6 class="grey-ookan montserrat pt-1">Bienvenue</h6>
-        </li>
+        
 
         <li class="nav-item dropdown">
 
-			<a class="nav-link dropdown-toggle montserrat text-dark mr-5" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.session.get('pseudo') }}</a>
+			<a class="nav-link dropdown-toggle montserrat text-dark mr-5" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bienvenue <span class="gold-ookan">{{ app.session.get('pseudo') }}</span></a>
 
 		    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 

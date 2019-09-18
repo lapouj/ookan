@@ -14,10 +14,18 @@
 	color: #4a5058;
 }
 
-.page-title {
+.primary-title {
 	font-family: 'Montserrat';
 	font-weight: 700;
-	font-size: 2.4em;
+	font-size: 2.2em;
+	text-shadow: 0 1px #000;
+	color: #4a5058;
+}
+
+.secondary-title {
+	font-family: 'Montserrat';
+	font-weight: 500;
+	font-size: 1.6em;
 	text-shadow: 0 1px #000;
 	color: #4a5058;
 }

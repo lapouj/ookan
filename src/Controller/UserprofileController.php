@@ -35,6 +35,7 @@ class UserprofileController extends AbstractController
         $errors = [];
         $errorsSiren = [];
         $errorsPassword = [];
+        $checkpassword = [];
         $totalerrors = [];
 
         $success = false;
@@ -60,6 +61,15 @@ class UserprofileController extends AbstractController
             ];
             
 
+            if (($safe['password'] != $safe['confirm-password']) && (!empty($safe['password']))) {
+                $checkpassword[] = 'Erreur lors de la confirmation du nouveau mot de passe';
+            }
+
+            if ((strlen($safe['password'])<3) || (strlen($safe['password'])>15)) {
+                $checkpassword[] = 'Votre mot de passe doit comporter entre 3 et 15 caractères';
+            }
+
+
             if ($pro_connected == 'oui'){
                 $errorsSiren = [
                     (!v::notEmpty()->length(9,9)->validate($safe['siren'])) ? 'Votre siren doit comporter 9 caractères' : null,
@@ -67,14 +77,14 @@ class UserprofileController extends AbstractController
 
                 //Check du mdp dans BDD user_pro
                 if(!password_verify($safe["lastpassword"], $userProFound->getPassword())){
-                    $errorsPassword[] = 'Le mot de passe ne correspond pas';
+                    $errorsPassword[] = 'Ancien mot de passe incorrect';
                 }
             }//fin de if Pro_connected
 
 
             else if ($pro_connected == 'non'){
              if(!password_verify($safe["lastpassword"], $userFound->getPassword())){
-                $errorsPassword[] = 'Le mot de passe ne correspond pas';
+                $errorsPassword[] = 'Ancien mot de passe incorrect';
             }
 
         }
@@ -93,7 +103,7 @@ class UserprofileController extends AbstractController
 
         $errors = array_filter($errors);
         $errorsSiren = array_filter($errorsSiren);
-        $totalerrors = array_merge($errors, $errorsSiren, $errorsPassword);
+        $totalerrors = array_merge($errors, $errorsSiren, $errorsPassword, $checkpassword);
 
         if (count($totalerrors) == 0) {
             $success = true;
@@ -101,11 +111,13 @@ class UserprofileController extends AbstractController
 
             if ($pro_connected == 'oui'){
                 $userProFound->setFirstname($safe['firstname'])
-                ->setName($safe['lastname'])
-                ->setEmail($safe['email'])  
-                ->setSiret($safe['siren'])
-                ->setPseudo($userProFound->getPseudo())
-                ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                             ->setName($safe['lastname'])
+                             ->setEmail($safe['email'])  
+                             ->setSiret($safe['siren'])
+                             ->setPseudo($userProFound->getPseudo());
+                if(!empty($safe['password'])){
+                    $userProFound->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                };
                     //éxecution
                 $em->flush();
 
@@ -126,10 +138,13 @@ class UserprofileController extends AbstractController
              else if ($pro_connected == 'non'){
 
                     $userFound->setFistname($safe['firstname'])
-                    ->setName($safe['lastname'])
-                    ->setEmail($safe['email']) 
-                    ->setPseudo($userFound->getPseudo())
-                    ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                              ->setName($safe['lastname'])
+                              ->setEmail($safe['email']) 
+                              ->setPseudo($userFound->getPseudo());
+                    if(!empty($safe['password'])){
+                        $userFound->setPassword(password_hash($safe['password']   , PASSWORD_DEFAULT));
+                    }
+
                     //éxecution
                     $em->flush();
 
@@ -150,6 +165,11 @@ class UserprofileController extends AbstractController
                 //Manque à faire basculer les info BDD des $userfound et $userprofound dans le twig.
 
 
+            } // Fin de 'if (count($errors) == 0)'
+
+        } // Fin de 'if (!empty($_POST))'
+
+
                 if ($pro_connected == 'non') {
                     return $this->render('userprofile/user-profile.html.twig', [
                         'success'   => $success,
@@ -165,14 +185,9 @@ class UserprofileController extends AbstractController
                         'info_user' => $userProFound,
                     ]);
                 }
-            } // Fin de 'if (count($errors) == 0)'
-
-        } // Fin de 'if (!empty($_POST))'
-
-
-        return $this->render('userprofile/user-profile.html.twig', [
-            'success'       => $success,
-            'liste_erreurs' => $totalerrors,
-        ]);
+        // return $this->render('userprofile/user-profile.html.twig', [
+        //     'success'       => $success,
+        //     'liste_erreurs' => $totalerrors,
+        // ]);
     }     
 }
