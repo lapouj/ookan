@@ -58,12 +58,15 @@ class UserprofileController extends AbstractController
             $errors = [
                 (!v::notEmpty()->length(3,15)->validate($safe['firstname'])) ? 'Votre prénom doit comporter entre 3 et 15 caractères' : null,
                 (!v::notEmpty()->length(3,15)->validate($safe['lastname'])) ? 'Votre nom doit comporter entre 3 et 15 caractères' : null,
-                (!v::notEmpty()->length(5,15)->validate($safe['password'])) ? 'Votre nouveau mot de passe doit comporter entre 5 et 15 caractères' : null,
             ];
             
 
             if (($safe['password'] != $safe['confirm-password']) && (!empty($safe['password']))) {
                 $checkpassword[] = 'Erreur lors de la confirmation du nouveau mot de passe';
+            }
+
+            if ((strlen($safe['password'])<3) || (strlen($safe['password'])>15)) {
+                $checkpassword[] = 'Votre mot de passe doit comporter entre 3 et 15 caractères';
             }
 
 
@@ -111,9 +114,10 @@ class UserprofileController extends AbstractController
                              ->setName($safe['lastname'])
                              ->setEmail($safe['email'])  
                              ->setSiret($safe['siren'])
-                             ->setPseudo($userProFound->getPseudo())
-                             ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT)
-            );
+                             ->setPseudo($userProFound->getPseudo());
+                if(!empty($safe['password'])){
+                    $userProFound->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                };
                     //éxecution
                 $em->flush();
 
@@ -136,9 +140,11 @@ class UserprofileController extends AbstractController
                     $userFound->setFistname($safe['firstname'])
                               ->setName($safe['lastname'])
                               ->setEmail($safe['email']) 
-                              ->setPseudo($userFound->getPseudo())
-                              ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT)
-                    );
+                              ->setPseudo($userFound->getPseudo());
+                    if(!empty($safe['password'])){
+                        $userFound->setPassword(password_hash($safe['password']   , PASSWORD_DEFAULT));
+                    }
+
                     //éxecution
                     $em->flush();
 
