@@ -19,11 +19,6 @@ class PasswordForget
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $token;
 
     /**
@@ -34,18 +29,6 @@ class PasswordForget
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
     public function getToken(): ?string
