@@ -75,13 +75,14 @@
 
 
 	{# javascript #}
-	{% block js %} 
+	{% block javascripts %} 
 
 		<script src="https://maps.google.com/maps/api/js?key=AIzaSyAmkMmW6mnFdvnyhblcCnqYBsXvLsuJdyQ" type="text/javascript"></script>
 		{# AXIOS pour tester #}
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
 
 		<script type="text/javascript">
+
 /**
  * Fonction d'initialisation de la carte
  * @param param_latitude La latitude
@@ -159,6 +160,7 @@ window.onload = function(){
 
 </script>
 
+{% include "partials/javascript.html.twig" %}
 
 {% endblock %} 
 
