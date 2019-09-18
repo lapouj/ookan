@@ -65,7 +65,7 @@ class UserprofileController extends AbstractController
                 $checkpassword[] = 'Erreur lors de la confirmation du nouveau mot de passe';
             }
 
-            if ((strlen($safe['password'])<3) || (strlen($safe['password'])>15)) {
+            if ((((strlen($safe['password'])<3) || (strlen($safe['password'])>15))) && (!empty($safe['password']))) {
                 $checkpassword[] = 'Votre mot de passe doit comporter entre 3 et 15 caractères';
             }
 
