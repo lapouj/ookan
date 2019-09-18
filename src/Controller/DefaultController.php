@@ -166,6 +166,76 @@ public function ookan_team()
     ]);
 }
 
+ public function PasswordForget()
+    {
+        $mail = new PHPMailer;
+
+        $errors = [];
+
+        $success = '';
+
+        if (!empty($_POST)) {
+
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+
+            if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Votre adresse email n\'est pas valide';
+            }
+
+            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['email' => $safe['email']]);
+            $emailProExist = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['email' => $safe['email']]);
+
+            if (count($errors) == 0) {
+
+                $errors = array_filter($errors);
+
+                $mail->SMTPOptions = ['ssl' => 
+                                    ['verify_peer' => false,
+                                    'verify_peer_name' => false,
+                                    'allow_self_signed' => true]
+                                ];
+            // $mail->SMTPDebug = 3; //mode debug si > 2
+            $mail->CharSet = 'UTF-8'; //charset utf-8
+            $mail->isSMTP(); //connexion directe à un serveur SMTP
+            $mail->isHTML(true); //mail au format HTML
+            $mail->Host = 'smtp.gmail.com'; //serveur SMTP
+            $mail->SMTPAuth = true; //serveur sécurisé
+            $mail->Port = 465; //port utilisé par le serveur
+            $mail->SMTPSecure = 'ssl'; //certificat SSL
+            $mail->Username = 'wf3toulouse@gmail.com'; //login 
+            $mail->Password = '244Seysses'; //mot de passe
+            $mail->AddAddress('stephh31000@gmail.com'); //destinataire
+            $mail->SetFrom('wf3toulouse@gmail.com', 'Ookan'); //expediteur
+            $mail->Subject = 'Message de '.$safe['email']; //sujet
+            // le corps du mail au forma HTML
+            $mail->Body = ' <html>
+                                <head>
+                                    <style>
+                                        h1{color: green; }
+                                    </style>
+                                </head>
+                                <body>
+                                    <p>Pour modifier votre mot de passe veuillez cliquer <a>ici </a> '.$safe['email'].'</p>
+                                </body>
+                            </html>';
+
+                // envoi email
+                if ($mail->Send()) {
+                    $success = 'Votre demande est un succès, Ookan vous remercie !';
+                    $disp = 'd-none';
+                }
+
+                $em = $this->getDoctrine()->getManager();
+                
+                $success = true;
+            }
+        }
+return $this->render('userprofile/user-profile.html.twig', [
+            'success'       => $success,
+            'liste_erreurs' => $totalerrors,
+        ]);   
+    }
+
 }
 
 
