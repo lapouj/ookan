@@ -23,7 +23,7 @@
                         <img class="border vignette" src="/img/logo/photo-dispo.jpg">
                     </div>
                     
-                    <div class="col-lg-8 col-md-12">
+                    <div class="col-lg-8 col-md-12 mt-5">
 
                         <div class="col-12 p-0 mb-4">
                             <h5 class="">Description</h5>
@@ -68,14 +68,23 @@
                         </p>
                     </div>
 
+
                     <div class="my-5 col-12">
                         <h3 class="text-center secondary-title">Avis des utilisateurs</h3>
                     </div>
 
                     <div class="offset-lg-2 col-lg-8 col-md-12">
-                        yrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
-                    </div>
 
+                    {% for comments in commentaires %}
+
+                        <div class="comment-div mb-3">
+                            <h6 class="gold-ookan">{{ comments.getAuthor() }}</h6>
+                            <p>{{ comments.getContent() }}</p>
+                        </div>
+                            
+                    {% endfor %}
+                            
+                    </div>
 
 
                         

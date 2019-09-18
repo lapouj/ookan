@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Resto;
+use App\Entity\Resto; // Intéraction
+use App\Entity\Comments; // Intéraction
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class MangerController extends AbstractController
@@ -121,10 +122,13 @@ class MangerController extends AbstractController
     	// Permet de chercher l'article donnée en id via le repository
 		$restoFound = $em->getRepository(Resto::class)->findById($id);
 
+		$comments = $em->getRepository(Comments::class)->findAll();
+
 
     	// la vue
         return $this->render('manger/avis.html.twig', [
-        	'resto' => $restoFound,
+			'resto'		 	=> $restoFound,
+			'commentaires' 	=> $comments,
         ]);
 
     }
