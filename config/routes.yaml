@@ -45,7 +45,7 @@ password_forget:
     controller: App\Controller\DefaultController::PasswordForget
 
 new_password:
-    path: /new_password
+    path: /new-password
     controller: App\Controller\DefaultController::NewPassword
 
 

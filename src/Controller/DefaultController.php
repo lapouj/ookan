@@ -189,21 +189,21 @@ public function ookan_team()
 
                         $errors[] = 'Votre adresse email n\'est pas valide';
                     }
-                }   
-
-                $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['email' => $safe['email']]);
+                }      
             
 
             if (count($errors) == 0) {
+
+                $errors = array_filter($errors);
 
                 $em = $this->getDoctrine()->getManager();
 
                 $token = bin2hex(random_bytes(50));
 
                 $bddToken = new PasswordForget();
-                $bddToken->setId($emailExist);
-
-                $bddToken->setToken($token);
+                $bddToken->setToken($token)
+                        ->setPseudo($safe['email']);
+            
 
                 $em->persist($bddToken);
                 //éxecution
@@ -226,9 +226,9 @@ public function ookan_team()
             $mail->SMTPSecure = 'ssl'; //certificat SSL
             $mail->Username = 'wf3toulouse@gmail.com'; //login 
             $mail->Password = '244Seysses'; //mot de passe
-            $mail->AddAddress('stephh31000@gmail.com'); //destinataire
+            $mail->AddAddress($safe['email']); //destinataire
             $mail->SetFrom('wf3toulouse@gmail.com', 'Ookan'); //expediteur
-            $mail->Subject = 'Message de '.$safe['email']; //sujet
+            $mail->Subject = 'Mot de passe perdu'; //sujet
             // le corps du mail au forma HTML
             $mail->Body = ' <html>
                                 <head>
@@ -237,14 +237,13 @@ public function ookan_team()
                                     </style>
                                 </head>
                                 <body>
-                                    <p>Pour modifier votre mot de passe veuillez cliquer <a href="http://127.0.0.1:8000/new-password.html.twig?token='.$token.'">ici</a> '.$safe['email'].'</p>
+                                    <p>Pour réinitialiser votre mot de passe veuillez cliquer <a href="http://127.0.0.1:8000/new-password?token='.$token.'">ici</a></p>
                                 </body>
                             </html>';
 
                 // envoi email
                 if ($mail->Send()) {
                     $success = 'Un email vous a été envoyer';
-                    $disp = 'd-none';
                 }
             }
         }
@@ -253,6 +252,56 @@ return $this->render('password_forget.html.twig', [
             'mes_erreurs'       => $errors,
         ]);   
     }
+
+    public function NewPassword()
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $errors = [];
+
+            $success = false;
+
+            if (!empty($_POST)) {
+
+                $safe = array_map('trim', array_map('strip_tags', $_POST));
+                
+                if (strlen($safe['password']) < 4) {
+                $errors[] = 'Votre mot de passe doit contenir au moins 5 caractères';
+                }
+                elseif($safe['password'] != $safe['comfirm_password']) {
+                $errors[] = 'Votre mot de passe n\'est pas identique';
+                }
+
+                  if (count($errors) == 0) {
+
+                        $resultat = $this->getDoctrine()->getRepository(PasswordForget::class)->findOneBy(['token' => $_GET['token']]);
+
+                        $userToChange = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $resultat->getPseudo()]);
+                        $userProToChange = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $resultat->getPseudo()]);
+                        
+                        if ($userToChange) {
+                        
+                        $userToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                        //éxecution
+                        $em->flush();
+
+                        }
+                        else if ($userProToChange) {
+                            $userProToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                        //éxecution
+                        $em->flush();
+                        }
+
+
+                    $success = true;
+
+                    }    
+            }
+            return $this->render('new-password.html.twig', [
+                'mes_erreurs'       => $errors,
+                'success'           => $success,
+            ]);
+        }
 
 }
 
