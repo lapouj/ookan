@@ -5,11 +5,11 @@
     {% block body %}
 
     {% if success is not empty %}
-        <div class="alert alert-success">
+        <div class="alert text-center alert-success">
             {{ success|join('<br>')|raw }}
         </div>    
     {% elseif not_success is not empty %}
-        <div class="alert alert-danger">
+        <div class="alert text-center alert-danger">
             {{ not_success|join('<br>')|raw }}
         </div>    
     {% endif %}
