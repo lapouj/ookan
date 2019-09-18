@@ -122,12 +122,62 @@ class MangerController extends AbstractController
     	// Permet de chercher l'article donnée en id via le repository
 		$restoFound = $em->getRepository(Resto::class)->findById($id);
 
-		// $comments = $em->getRepository(Comments::class)->findAll();
-
+		// Je place mes erreurs dans un tableau
+        $errors = [];
+		
+        $success = '';
+		
 		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id]);
+
+        // Si mes inputs sont remplies
+        if (!empty($_POST)) {
+
+            // je nettoie les données reçues
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+            
+            // Je pose mes conditions de validation du formulaire
+            if (!empty($safe['comment'])) {
+                if (strlen($safe['comment']) <= 50) {
+                    $errors[] = 'Votre avis doit comporter au moins 50 caractères';
+                }
+            } else $errors[] = 'Vous n\'avez pas remplis le champ commentaire';
+
+
+            if (count($errors) == 0) {
+
+                $errors = array_filter($errors);
+
+                $em = $this->getDoctrine()->getManager();
+
+				$commentData = new Comments();
+				
+				$session = new Session();
+
+                $commentData->setAuthor($session->get('pseudo'))
+                        ->setContent($safe['comment'])
+                        ->setTarget($id)
+                        ->setDate(new \Datetime);
+
+                //Préparation de la requete.
+                $em->persist($commentData);
+                //éxecution
+                $em->flush();
+                
+				// Redirection
+				
+				$success = 'Votre avis a bien été pris en compte !';
+
+				return $this->redirectToRoute('avis_restos{id}');
+            
+            } // Fin de 'if (count($errors) == 0)'
+
+        } // Fin de 'if (!empty($_POST))'
+
 
     	// la vue
         return $this->render('manger/avis.html.twig', [
+			'errors'		=> $errors,
+			'success'		=> $success,
 			'resto'		 	=> $restoFound,
 			'commentaires' 	=> $comments,
         ]);

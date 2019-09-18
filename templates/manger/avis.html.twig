@@ -90,9 +90,20 @@
 
                         <div class="my-comment mb-5">
                             <form action="" method="POST">
+
+                                {% if success is not empty %}
+                                    <div class="alert text-center alert-success">
+                                        {{ success|join('<br>')|raw }}
+                                    </div>    
+                                {% elseif errors is not empty %}
+                                    <div class="alert text-center alert-danger">
+                                        {{ errors|join('<br>')|raw }}
+                                    </div>    
+                                {% endif %}
+
                                 <div class="form-group">
-                                    <label class="montserrat author-pseudo" for="ControlTextarea">{{ app.session.get('pseudo') }}</label>
-                                    <textarea class="form-control text-center" id="ControlTextarea" rows="3" placeholder="{{ app.session.get('pseudo') }}, dites nous ce que vous pensez de {{ OneResto.getRestoname() }}"></textarea>
+                                    <label class="montserrat author-pseudo" for="comment">{{ app.session.get('pseudo') }}</label>
+                                    <textarea class="form-control text-center" name="comment" id="comment" rows="3" placeholder="{{ app.session.get('pseudo') }}, dites nous ce que vous pensez de {{ OneResto.getRestoname() }}"></textarea>
                                 </div>
                                 <div class="form-group text-center">
                                     <button class="btn btn-gold">Envoyer</button>

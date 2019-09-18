@@ -188,8 +188,6 @@ class InscriptionController extends AbstractController
                 //éxecution
                 $em->flush();
                 
-                // Redirection
-                return $this->redirectToRoute('inscription_reussite');
 				// $success = 'Votre inscription est un succès, bienvenue chez Ookan !';
             
             } // Fin de 'if (count($errors) == 0)'
