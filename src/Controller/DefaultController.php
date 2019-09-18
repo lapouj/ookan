@@ -73,41 +73,6 @@ class DefaultController extends AbstractController
             }
 
             if (count($errors) == 0) {
-                /*
-                $errors = array_filter($errors);
-
-                if ($userdata){
-                    $infos_user = [
-                        'id_user'   => $userdata->getId(),
-                        'pseudo'    => $userdata->getPseudo(),
-                        'connected' => 'true',
-                        'pro'       => 'non'
-                    ];
-                }
-                else if ($userdatapro){
-                      $infos_user = [
-                        'id_user'   => $userdatapro->getId(),
-                        'pseudo'    => $userdatapro->getPseudo(),
-                        'connected' => 'true',
-                        'pro'       => 'oui'
-                    ];
-                }
-
-
-                $session = new Session();
-                $session->set('user', $infos_user);
-
-                return $this->redirectToRoute('user_profile', [
-                'userinfo'     =>  $infos_user,    
-                'user'         =>  $userdata,    
-                'userpro'      =>  $userdatapro,    
-                 ]);*/
-
-
-                // $my_user_connected = $session->get('user');
-                //  $my_user_connected['id_user'];
-                //  $my_user_connected['email'];
-
 
             if(!empty($userdata)){
                     
@@ -247,8 +212,10 @@ class DefaultController extends AbstractController
         return $this->render('password_forget.html.twig', [
                     'mes_validation'    => $success,
                     'mes_erreurs'       => $errors,
+
         ]);   
     }
+
 
     public function NewPassword()
     {
@@ -257,6 +224,7 @@ class DefaultController extends AbstractController
         $errors = [];
 
         $success = false;
+
 
         if (!empty($_POST)) {
 
@@ -283,6 +251,7 @@ class DefaultController extends AbstractController
                 $em->flush();
                 }
 
+
                 else if ($userProToChange) {
                     $userProToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
                 //éxecution
@@ -290,8 +259,10 @@ class DefaultController extends AbstractController
                 }
 
 
+
                 $success = true;
             }    
+
         }
         return $this->render('new-password.html.twig', [
             'mes_erreurs'       => $errors,
