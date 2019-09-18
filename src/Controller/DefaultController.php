@@ -8,7 +8,12 @@ use Doctrine\ORM\EntityManagerInterface; //Connexion à la base données
 
 use App\Entity\User; // Intéraction
 use App\Entity\UserPro; // Intéraction
+use App\Entity\PasswordForget; // Intéraction
 use Symfony\Component\HttpFoundation\Session\Session;
+
+/* import des classes de PHPMailer */
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class DefaultController extends AbstractController
 {
@@ -174,18 +179,35 @@ public function ookan_team()
 
         $success = '';
 
-        if (!empty($_POST)) {
+        if (!empty($_POST['email']) && (!empty($_POST['email']))) {
 
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
-            if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
-                $errors[] = 'Votre adresse email n\'est pas valide';
-            }
+            if (!empty($safe['email'])) {
 
-            $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['email' => $safe['email']]);
-            $emailProExist = $this->getDoctrine()->getRepository(UserPro::class)->findBy(['email' => $safe['email']]);
+                    if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+
+                        $errors[] = 'Votre adresse email n\'est pas valide';
+                    }
+                }   
+
+                $emailExist = $this->getDoctrine()->getRepository(User::class)->findBy(['email' => $safe['email']]);
+            
 
             if (count($errors) == 0) {
+
+                $em = $this->getDoctrine()->getManager();
+
+                $token = bin2hex(random_bytes(50));
+
+                $bddToken = new PasswordForget();
+                $bddToken->setId($emailExist);
+
+                $bddToken->setToken($token);
+
+                $em->persist($bddToken);
+                //éxecution
+                $em->flush();
 
                 $errors = array_filter($errors);
 
@@ -215,24 +237,20 @@ public function ookan_team()
                                     </style>
                                 </head>
                                 <body>
-                                    <p>Pour modifier votre mot de passe veuillez cliquer <a>ici </a> '.$safe['email'].'</p>
+                                    <p>Pour modifier votre mot de passe veuillez cliquer <a href="http://127.0.0.1:8000/new-password.html.twig?token='.$token.'">ici</a> '.$safe['email'].'</p>
                                 </body>
                             </html>';
 
                 // envoi email
                 if ($mail->Send()) {
-                    $success = 'Votre demande est un succès, Ookan vous remercie !';
+                    $success = 'Un email vous a été envoyer';
                     $disp = 'd-none';
                 }
-
-                $em = $this->getDoctrine()->getManager();
-                
-                $success = true;
             }
         }
-return $this->render('userprofile/user-profile.html.twig', [
-            'success'       => $success,
-            'liste_erreurs' => $totalerrors,
+return $this->render('password_forget.html.twig', [
+            'mes_validation'    => $success,
+            'mes_erreurs'       => $errors,
         ]);   
     }
 
