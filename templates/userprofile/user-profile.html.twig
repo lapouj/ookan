@@ -114,17 +114,19 @@
 
                 <h3 class="py-4 montserrat grey-ookan">Activité professionnelle</h3>
 
-                <h4 class="montserrat grey-ookan mb-5">Ajouter votre établissement</h4>
+                <h5 class="montserrat grey-ookan mb-5">Ajouter votre établissement</h5>
 
-                    <a href="{{ path('add_sortie') }}" class="col-4">
+                    <button type="button" class="btn btn-outline-secondary"><a href="{{ path('add_sortie') }}" class="col-4 text-decoration-none text-dark grey-ookan">
                         Sortie
-                    </a>
-                    <a href="{{ path('add_restos') }}" class="col-4">
+                    </a></button>
+
+                    <button type="button" class="btn btn-outline-secondary"><a href="{{ path('add_restos') }}" class="col-4 text-decoration-none text-dark grey-ookan">
                         Restaurant
-                    </a>
-                    <a href=" {{ path('add_activity') }}"class="col-4">
+                    </a></button>
+
+                    <button type="button" class="btn btn-outline-secondary"><a href=" {{ path('add_activity') }}"class="col-4 text-decoration-none text-dark grey-ookan">
                         Activité
-                    </a>
+                    </a></button>
 
                     {% endif %} 
 
