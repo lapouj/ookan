@@ -26,6 +26,7 @@ body {
 .encart {
 	border: 1px solid grey;
 	color: black;
+	background: #e0e0e0;
 }
 
 #cards {
