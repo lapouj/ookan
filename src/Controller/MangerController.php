@@ -109,5 +109,24 @@ class MangerController extends AbstractController
     	]);
     	
 	}
+
+	/**
+     * @Route("/manger{id}", name="avis_resto")
+     */
+    public function avisResto($id)
+    {
+
+    	// Récupération de l'article
+    	$em = $this->getDoctrine()->getManager();
+    	// Permet de chercher l'article donnée en id via le repository
+		$restoFound = $em->getRepository(Resto::class)->findById($id);
+
+
+    	// la vue
+        return $this->render('manger/avis.html.twig', [
+        	'resto' => $restoFound,
+        ]);
+
+    }
 	
 }
