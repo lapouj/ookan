@@ -101,12 +101,13 @@ class DefaultController extends AbstractController
                 'userinfo'     =>  $infos_user,    
                 'user'         =>  $userdata,    
                 'userpro'      =>  $userdatapro,    
-                 ]);*/
+                 ]);
+                 */
 
 
                 // $my_user_connected = $session->get('user');
-                //  $my_user_connected['id_user'];
-                //  $my_user_connected['email'];
+                // $my_user_connected['id_user'];
+                // $my_user_connected['email'];
 
 
                 if(!empty($userdata)){
@@ -247,11 +248,11 @@ public function ookan_team()
                 }
             }
         }
-return $this->render('password_forget.html.twig', [
-            'mes_validation'    => $success,
-            'mes_erreurs'       => $errors,
-        ]);   
-    }
+        return $this->render('password_forget.html.twig', [
+                    'mes_validation'    => $success,
+                    'mes_erreurs'       => $errors,
+                ]);   
+     }
 
     public function NewPassword()
         {
@@ -266,36 +267,39 @@ return $this->render('password_forget.html.twig', [
                 $safe = array_map('trim', array_map('strip_tags', $_POST));
                 
                 if (strlen($safe['password']) < 4) {
-                $errors[] = 'Votre mot de passe doit contenir au moins 5 caractères';
+                    $errors[] = 'Votre mot de passe doit contenir au moins 5 caractères';
                 }
                 elseif($safe['password'] != $safe['comfirm_password']) {
-                $errors[] = 'Votre mot de passe n\'est pas identique';
+                    $errors[] = 'Votre mot de passe n\'est pas identique';
                 }
 
-                  if (count($errors) == 0) {
 
-                        $resultat = $this->getDoctrine()->getRepository(PasswordForget::class)->findOneBy(['token' => $_GET['token']]);
+              if (count($errors) == 0) {
 
-                        $userToChange = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $resultat->getPseudo()]);
-                        $userProToChange = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $resultat->getPseudo()]);
-                        
-                        if ($userToChange) {
-                        
+                    $resultat = $this->getDoctrine()->getRepository(PasswordForget::class)->findOneBy(['token' => $_GET['token']]);
+
+                    $userToChange = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $resultat->getPseudo()]);
+                    $userProToChange = $this->getDoctrine()->getRepository(UserPro::class)->findOneBy(['email' => $resultat->getPseudo()]);
+                    
+                    if($userToChange) {
+                    
                         $userToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
                         //éxecution
                         $em->flush();
 
-                        }
-                        else if ($userProToChange) {
-                            $userProToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
-                        //éxecution
+                    }
+                    else if ($userProToChange) {
+                        $userProToChange->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+
+                        $em->remove($resultat);
+
                         $em->flush();
-                        }
+                    }
 
 
-                    $success = true;
+                $success = true;
 
-                    }    
+                }    
             }
             return $this->render('new-password.html.twig', [
                 'mes_erreurs'       => $errors,
