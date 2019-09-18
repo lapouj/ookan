@@ -56,8 +56,8 @@ class UserprofileController extends AbstractController
 
 
             $errors = [
-                (!v::notEmpty()->length(3,15)->validate($safe['firstname'])) ? 'Votre prénom doit comporter entre 3 et 15 caractères' : null,
-                (!v::notEmpty()->length(3,15)->validate($safe['lastname'])) ? 'Votre nom doit comporter entre 3 et 15 caractères' : null,
+                (!v::notEmpty()->length(2,15)->validate($safe['firstname'])) ? 'Votre prénom doit comporter entre 2 et 15 caractères' : null,
+                (!v::notEmpty()->length(2,15)->validate($safe['lastname'])) ? 'Votre nom doit comporter entre 2 et 15 caractères' : null,
             ];
             
 
