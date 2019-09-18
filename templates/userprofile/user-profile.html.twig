@@ -1,8 +1,8 @@
 {% extends "base.html.twig" %}
 
 
-    
-    {% block body %}
+
+{% block body %}
     <div class="container">
 
         <h1 class="montserrat grey-ookan text-center">Mon C<scan class="gold-ookan">Oo</scan>mpte</h1>
@@ -29,7 +29,7 @@
                 <h3 class="py-4 montserrat grey-ookan">Modifier mes Infos : </h3>
 
                 {% if app.session.get('pro') == 'oui'  %} 
-                
+                    
 
 
                     <p><b> UTILISATEUR PRO </b></p>
@@ -70,33 +70,33 @@
 
                     {% if app.session.get('pro') == 'oui'  %}
 
-                    <div class="form-row my-3">
-                        <div class="col">
-                            <label for="siren" class="montserrat">N° SIREN :</label>
-                            <input type="number" class="form-control" name="siren" id="siren" value="{{ app.session.get('siret') }}" >
+                        <div class="form-row my-3">
+                            <div class="col">
+                                <label for="siren" class="montserrat">N° SIREN :</label>
+                                <input type="number" class="form-control" name="siren" id="siren" value="{{ app.session.get('siret') }}" >
+                            </div>
                         </div>
-                    </div>
 
-                {% endif %}
+                    {% endif %}
 
                     <h4 class="grey-ookan montserrat">Modification Mot de Passe</h4>
                     <div class="form-row my-3">
                         <div class="col">
                             <small class="montserrat grey-ookan">Ancien Mot de Passe</small>
-                            <input type="text" class="form-control" name="lastpassword" id="lastpassword" placeholder="Ancien mot de passe">
+                            <input type="text" class="form-control" name="lastpassword" id="lastpassword" value="{{ info_user.getPassword }}">
                         </div>
                     </div>
                     <div class="form-row my-3">
                         <div class="col">
                             <small class="montserrat grey-ookan">Nouveau Mot de Passe</small>
-                            <input type="text" class="form-control" name="password" id="password" placeholder="Nouveau mot de passe (8 caractères min.)">
+                            <input type="text" class="form-control" name="password" id="password" value="{{ info_user.getPassword }}">
                         </div>
                     </div>
 
                     <div class="form-row my-3">
                         <div class="col">
                             <small class="montserrat grey-ookan">Confirmation nouveau Mot de Passe</small>
-                            <input type="text" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirmer le mot de passe">
+                            <input type="text" class="form-control" name="confirm-password" id="confirm-password" value="{{ info_user.getPassword }}">
                         </div>
                     </div>
 
@@ -109,12 +109,12 @@
             </div>    
 
             {# Partie sur les ajout et vu d'activité #}
-             {% if app.session.get('pro') == 'oui'  %} 
-            <div class="col-lg-6 col-sm-12 my-5">
+            {% if app.session.get('pro') == 'oui'  %} 
+                <div class="col-lg-6 col-sm-12 my-5">
 
-                <h3 class="py-4 montserrat grey-ookan">Activité professionnelle</h3>
+                    <h3 class="py-4 montserrat grey-ookan">Activité professionnelle</h3>
 
-                <h5 class="montserrat grey-ookan mb-5">Ajouter votre établissement</h5>
+                    <h5 class="montserrat grey-ookan mb-5">Ajouter votre établissement</h5>
 
                     <button type="button" class="btn btn-outline-secondary"><a href="{{ path('add_sortie') }}" class="col-4 text-decoration-none text-dark grey-ookan">
                         Sortie
@@ -128,7 +128,7 @@
                         Activité
                     </a></button>
 
-                    {% endif %} 
+                {% endif %} 
 
 
             </div>
@@ -136,4 +136,4 @@
         </div> {# Fin de div row #}
 
     </div> {# Fin de div Container #}
-     {% endblock %}
+{% endblock %}

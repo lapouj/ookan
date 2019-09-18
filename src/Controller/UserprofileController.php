@@ -108,11 +108,12 @@ class UserprofileController extends AbstractController
 
             if ($pro_connected == 'oui'){
                 $userProFound->setFirstname($safe['firstname'])
-                ->setName($safe['lastname'])
-                ->setEmail($safe['email'])  
-                ->setSiret($safe['siren'])
-                ->setPseudo($userProFound->getPseudo())
-                ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                             ->setName($safe['lastname'])
+                             ->setEmail($safe['email'])  
+                             ->setSiret($safe['siren'])
+                             ->setPseudo($userProFound->getPseudo())
+                             ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT)
+            );
                     //éxecution
                 $em->flush();
 
@@ -133,10 +134,11 @@ class UserprofileController extends AbstractController
              else if ($pro_connected == 'non'){
 
                     $userFound->setFistname($safe['firstname'])
-                    ->setName($safe['lastname'])
-                    ->setEmail($safe['email']) 
-                    ->setPseudo($userFound->getPseudo())
-                    ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT));
+                              ->setName($safe['lastname'])
+                              ->setEmail($safe['email']) 
+                              ->setPseudo($userFound->getPseudo())
+                              ->setPassword(password_hash($safe['password'], PASSWORD_DEFAULT)
+                    );
                     //éxecution
                     $em->flush();
 
@@ -157,6 +159,11 @@ class UserprofileController extends AbstractController
                 //Manque à faire basculer les info BDD des $userfound et $userprofound dans le twig.
 
 
+            } // Fin de 'if (count($errors) == 0)'
+
+        } // Fin de 'if (!empty($_POST))'
+
+
                 if ($pro_connected == 'non') {
                     return $this->render('userprofile/user-profile.html.twig', [
                         'success'   => $success,
@@ -172,14 +179,9 @@ class UserprofileController extends AbstractController
                         'info_user' => $userProFound,
                     ]);
                 }
-            } // Fin de 'if (count($errors) == 0)'
-
-        } // Fin de 'if (!empty($_POST))'
-
-
-        return $this->render('userprofile/user-profile.html.twig', [
-            'success'       => $success,
-            'liste_erreurs' => $totalerrors,
-        ]);
+        // return $this->render('userprofile/user-profile.html.twig', [
+        //     'success'       => $success,
+        //     'liste_erreurs' => $totalerrors,
+        // ]);
     }     
 }
