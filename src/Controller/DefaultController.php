@@ -105,6 +105,7 @@ class DefaultController extends AbstractController
 
 
                 if(!empty($userdata)){
+                    
                 $session = new Session();
                 $session->set('user_id',  $userdata->getId());
                 $session->set('pseudo',  $userdata->getPseudo());
