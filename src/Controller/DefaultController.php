@@ -73,42 +73,6 @@ class DefaultController extends AbstractController
             }
 
             if (count($errors) == 0) {
-                /*
-                $errors = array_filter($errors);
-
-                if ($userdata){
-                    $infos_user = [
-                        'id_user'   => $userdata->getId(),
-                        'pseudo'    => $userdata->getPseudo(),
-                        'connected' => 'true',
-                        'pro'       => 'non'
-                    ];
-                }
-                else if ($userdatapro){
-                      $infos_user = [
-                        'id_user'   => $userdatapro->getId(),
-                        'pseudo'    => $userdatapro->getPseudo(),
-                        'connected' => 'true',
-                        'pro'       => 'oui'
-                    ];
-                }
-
-
-                $session = new Session();
-                $session->set('user', $infos_user);
-
-                return $this->redirectToRoute('user_profile', [
-                'userinfo'     =>  $infos_user,    
-                'user'         =>  $userdata,    
-                'userpro'      =>  $userdatapro,    
-                 ]);
-                 */
-
-
-                // $my_user_connected = $session->get('user');
-                // $my_user_connected['id_user'];
-                // $my_user_connected['email'];
-
 
             if(!empty($userdata)){
                     
