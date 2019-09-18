@@ -24,11 +24,15 @@
 
         {% block body %}{% endblock %}
 
+
+
         
         {% include 'partials/footer.html.twig' %}
 
-        {% include "partials/javascript.html.twig" %}
         
-        {% block js %}{% endblock %}
+        
+        {% block javascripts %}
+            {% include "partials/javascript.html.twig" %}
+        {% endblock %}
     </body>
 </html>

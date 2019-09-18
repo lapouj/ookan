@@ -35,6 +35,7 @@ class UserprofileController extends AbstractController
         $errors = [];
         $errorsSiren = [];
         $errorsPassword = [];
+        $checkpassword = [];
         $totalerrors = [];
 
         $success = false;
@@ -57,8 +58,14 @@ class UserprofileController extends AbstractController
             $errors = [
                 (!v::notEmpty()->length(3,15)->validate($safe['firstname'])) ? 'Votre prénom doit comporter entre 3 et 15 caractères' : null,
                 (!v::notEmpty()->length(3,15)->validate($safe['lastname'])) ? 'Votre nom doit comporter entre 3 et 15 caractères' : null,
+                (!v::notEmpty()->length(5,15)->validate($safe['password'])) ? 'Votre nouveau mot de passe doit comporter entre 5 et 15 caractères' : null,
             ];
             
+
+            if (($safe['password'] != $safe['confirm-password']) && (!empty($safe['password']))) {
+                $checkpassword[] = 'Erreur lors de la confirmation du nouveau mot de passe';
+            }
+
 
             if ($pro_connected == 'oui'){
                 $errorsSiren = [
@@ -67,14 +74,14 @@ class UserprofileController extends AbstractController
 
                 //Check du mdp dans BDD user_pro
                 if(!password_verify($safe["lastpassword"], $userProFound->getPassword())){
-                    $errorsPassword[] = 'Le mot de passe ne correspond pas';
+                    $errorsPassword[] = 'Ancien mot de passe incorrect';
                 }
             }//fin de if Pro_connected
 
 
             else if ($pro_connected == 'non'){
              if(!password_verify($safe["lastpassword"], $userFound->getPassword())){
-                $errorsPassword[] = 'Le mot de passe ne correspond pas';
+                $errorsPassword[] = 'Ancien mot de passe incorrect';
             }
 
         }
@@ -93,7 +100,7 @@ class UserprofileController extends AbstractController
 
         $errors = array_filter($errors);
         $errorsSiren = array_filter($errorsSiren);
-        $totalerrors = array_merge($errors, $errorsSiren, $errorsPassword);
+        $totalerrors = array_merge($errors, $errorsSiren, $errorsPassword, $checkpassword);
 
         if (count($totalerrors) == 0) {
             $success = true;
