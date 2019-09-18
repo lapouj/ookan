@@ -82,20 +82,20 @@
                     <h4 class="grey-ookan montserrat">Modification Mot de Passe</h4>
                     <div class="form-row my-3">
                         <div class="col">
-                            <small>Ancien Mot de Passe</small>
+                            <small class="montserrat grey-ookan">Ancien Mot de Passe</small>
                             <input type="text" class="form-control" name="lastpassword" id="lastpassword" placeholder="Ancien mot de passe">
                         </div>
                     </div>
                     <div class="form-row my-3">
                         <div class="col">
-                            <small>Nouveau Mot de Passe</small>
+                            <small class="montserrat grey-ookan">Nouveau Mot de Passe</small>
                             <input type="text" class="form-control" name="password" id="password" placeholder="Nouveau mot de passe (8 caractères min.)">
                         </div>
                     </div>
 
                     <div class="form-row my-3">
                         <div class="col">
-                            <small>Confirmation nouveau Mot de Passe</small>
+                            <small class="montserrat grey-ookan">Confirmation nouveau Mot de Passe</small>
                             <input type="text" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirmer le mot de passe">
                         </div>
                     </div>
@@ -110,11 +110,11 @@
 
             {# Partie sur les ajout et vu d'activité #}
              {% if app.session.get('pro') == 'oui'  %} 
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-12 my-5">
 
-                <h3 class="py-4 montserrat">Activité professionnelle</h3>
+                <h3 class="py-4 montserrat grey-ookan">Activité professionnelle</h3>
 
-                <h4 class="montserrat">Ajouter un établissement</h4>
+                <h4 class="montserrat grey-ookan mb-5">Ajouter votre établissement</h4>
 
                     <a href="{{ path('add_sortie') }}" class="col-4">
                         Sortie
@@ -123,7 +123,7 @@
                         Restaurant
                     </a>
                     <a href=" {{ path('add_activity') }}"class="col-4">
-                        activitée
+                        Activité
                     </a>
 
                     {% endif %} 
