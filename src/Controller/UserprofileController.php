@@ -31,14 +31,21 @@ class UserprofileController extends AbstractController
         $session = new Session();
         $pro_connected = $session->get('pro');
 
-        // Je place mes erreurs dans un tableau
+        // Création des tableaux d'erreurs
         $errors = [];
         $errorsSiren = [];
         $errorsPassword = [];
         $checkpassword = [];
+        $errorsImage = [];
         $totalerrors = [];
 
         $success = false;
+        $successImage = false;
+
+        //Préparation pour l'image :
+        $maxSizeFile = 3 * 1000 * 1000; //3mo max
+        $uploadDir = 'img/uploaded/profiles';
+        $allowMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
 
         // $userFound contient les informations de mon utilisateur qui sont en base de données
@@ -48,8 +55,35 @@ class UserprofileController extends AbstractController
         $userProFound = $em->getRepository(UserPro::class)->find( $session->get('user_id'));
 
 
+        //Si j'ai choisi un fichier
+         if (!empty($_POST)&&(!empty($_FILES))) {
+             //Upload de l'image :
+            if (!empty($_FILES['avatar'])) {
+                if ($_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
+                    $image = Image::make($_FILES['avatar']['tmp_name']);
+                    if ($image->filesize() > $maxSizeFile) {
+                        $errorsImage[] = 'Votre image ne doit pas excedér 3 Mo';
+                    } elseif (!v::in($allowMimes)->validate($image->mime())) {
+                        $errorsImage[] = 'Votre fichier n\'est pas une image valide';
+                    }
+                } elseif ($_FILES['avatar']['error'] == UPLOAD_ERR_NO_FILE) {
+                    $errorsImage[] = 'Aucun fichier n\'a été uploadé';
+                } else {
+                    $errorsImage[] = 'Une erreur est survenue lors de l\'envoi de l\'image';
+                }
+            }
+
+            if (count($errorsImage) == 0){
+                $successImage = true;
+            }
+
+        }
+
+
+
+
         // Si mes inputs sont remplies
-        if (!empty($_POST)) {
+        if (!empty($_POST)&&(empty($_FILES))) {
 
 
             $safe = array_map('trim', array_map('strip_tags', $_POST));
@@ -83,30 +117,32 @@ class UserprofileController extends AbstractController
 
 
             else if ($pro_connected == 'non'){
-             if(!password_verify($safe["lastpassword"], $userFound->getPassword())){
-                $errorsPassword[] = 'Ancien mot de passe incorrect';
+                 if(!password_verify($safe["lastpassword"], $userFound->getPassword())){
+                    $errorsPassword[] = 'Ancien mot de passe incorrect';
+                }
+
             }
 
-        }
 
 
 
-
-        if (!empty($safe['email'])) {
-            if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
-                $errors[] = 'Votre adresse email n\'est pas valide';
+            if (!empty($safe['email'])) {
+                if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
+                    $errors[] = 'Votre adresse email n\'est pas valide';
+                }
             }
-        }
-        else {
-            $errors[] = 'Le champ Adresse Email est obligatoire';
-        } 
+            else {
+                $errors[] = 'Le champ Adresse Email est obligatoire';
+            } 
 
-        $errors = array_filter($errors);
-        $errorsSiren = array_filter($errorsSiren);
-        $totalerrors = array_merge($errors, $errorsSiren, $errorsPassword, $checkpassword);
 
-        if (count($totalerrors) == 0) {
-            $success = true;
+            // Récap des erreurs
+            $errors = array_filter($errors);
+            $errorsSiren = array_filter($errorsSiren);
+            $totalerrors = array_merge($errors, $errorsSiren, $errorsPassword, $checkpassword);
+
+            if (count($totalerrors) == 0) {
+                $success = true;
 
 
             if ($pro_connected == 'oui'){
@@ -135,7 +171,7 @@ class UserprofileController extends AbstractController
                 }//fin pro_connected
 
 
-             else if ($pro_connected == 'non'){
+                else if ($pro_connected == 'non'){
 
                     $userFound->setFistname($safe['firstname'])
                               ->setName($safe['lastname'])
@@ -157,13 +193,7 @@ class UserprofileController extends AbstractController
                     $session->set('pro', 'oui');
                     $session->set('connected', 'true');
 
-
-
                 }//fin user normal connected
-
-
-                //Manque à faire basculer les info BDD des $userfound et $userprofound dans le twig.
-
 
             } // Fin de 'if (count($errors) == 0)'
 
@@ -172,17 +202,21 @@ class UserprofileController extends AbstractController
 
                 if ($pro_connected == 'non') {
                     return $this->render('userprofile/user-profile.html.twig', [
-                        'success'   => $success,
+                        'success'       => $success,
+                        'successImage'  => $successImage,
                         'liste_erreurs' => $totalerrors,
-                        'info_user' => $userFound,
+                        'info_user'     => $userFound,
+                        'erreurs_image' => $errorsImage,
                     ]);
 
                 }
                 else if ($pro_connected == 'oui'){
                     return $this->render('userprofile/user-profile.html.twig', [
-                        'success'   => $success,
+                        'success'       => $success,
+                        'successImage'  => $successImage,
                         'liste_erreurs' => $totalerrors,
-                        'info_user' => $userProFound,
+                        'info_user'     => $userProFound,
+                        'erreurs_image' => $errorsImage,
                     ]);
                 }
         // return $this->render('userprofile/user-profile.html.twig', [
