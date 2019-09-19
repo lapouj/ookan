@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Avis sur les restaurants{% endblock %}
-    {# contenu page #}
-    {% block body %}
-     
-
+{# contenu page #}
+{% block body %}
+<!-- {% if app.session.get('pro') == 'oui'  %}
+                <div class="text-center py-5">
+                    <a href="{{ path('add_restos')}}"class="btn btn-gold">Ajouter votre établissement</a>
+                </div>
+            {% endif %} -->
+    
         {% for OneResto in resto %}
 
             <div class="container">
@@ -14,122 +18,138 @@
                     <h2 class="col-12 text-center primary-title mt-5 mb-4">{{ OneResto.getRestoname() }}</h2>
 
                     {% if OneResto.getNote() > 0 %}<p class="col-12 text-center mb-4"><span class="span-rate">{{ OneResto.getNote() }}/5 <i class="fas fa-star rated-star"></i></span></p>{% endif %}
+                    
+                    <div class="col-12 mb-5 d-flex justify-content-center">
+                        <img class="border vignette" src="/img/logo/photo-dispo.jpg">
+                    </div>
+                    
+                    <div class="col-lg-8 col-md-12 mt-5">
 
-                        <div class="col-12 mb-5 d-flex justify-content-center">
-                            <img class="border vignette" src="/img/logo/photo-dispo.jpg">
+                        <div class="col-12 p-0 mb-4">
+                            <h5 class="">Description</h5>
+                            <p>{{ OneResto.getDescription() }}</p>
                         </div>
+                        
+                        <div class="col-lg-6 col-md-12 d-flex p-0 mb-4 mr-3">
 
-                        <div class="col-lg-8 col-md-12 mt-5">
-
-                            <div class="col-12 p-0 mb-4">
-                                <h5 class="">Description</h5>
-                                <p>{{ OneResto.getDescription() }}</p>
+                            <div class="col-12 p-0">
+                                <h5 class="">Site web</h5>
+                                <p><a href="{{ OneResto.getWebsite() }}">{{ OneResto.getWebsite() }}</a></p>
                             </div>
 
-                            <div class="col-lg-6 col-md-12 d-flex p-0 mb-4 mr-3">
-
-                                <div class="col-12 p-0">
-                                    <h5 class="">Site web</h5>
-                                    <p><a href="{{ OneResto.getWebsite() }}">{{ OneResto.getWebsite() }}</a></p>
-                                </div>
-
-                                <div class="col-12 p-0">
-                                    <h5 class="">N° Téléphone</h5>
-                                    <p>{{ OneResto.getPhone() }}</p>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-6 col-md-12 d-flex p-0 mb-4 mr-3">
-
-                                <div class="col-12 p-0">
-                                    <h5 class="">Type de cuisine</h5>
-                                    <p>{{ OneResto.getType() }}</p>
-                                </div>
-
-                                <div class="col-12 p-0">
-                                    <h5 class="">Adresse</h5>
-                                    <p>{{ OneResto.getStreetnum() ~ ' ' ~ OneResto.getStreetname() ~ ' ' ~ OneResto.getCp() ~ ' ' ~ OneResto.getVille() }}</p>
-                                </div>
-
+                            <div class="col-12 p-0">
+                                <h5 class="">N° Téléphone</h5>
+                                <p>{{ OneResto.getPhone() }}</p>
                             </div>
 
                         </div>
 
-                        <div class="col-lg-4 col-md-12 mb-4">  
-                            <p>
-                                <div class="border m-3 p-2" id="map{{OneResto.getId()}}" style="min-height:300px;border-radius:10px;width:100%">
-                                    <!-- id="map5" par exemple -->
-                                </div>
-                            </p>
-                        </div>
+                        <div class="col-lg-6 col-md-12 d-flex p-0 mb-4 mr-3">
 
-
-                        <div class="my-5 col-12">
-                            <h3 class="text-center secondary-title">Avis des utilisateurs</h3>
-                        </div>
-
-                        <div class="offset-lg-2 col-lg-8 col-md-12">
-
-                            {% for comments in commentaires %}
-
-                                <div class="comment-div mb-3 p-2">
-                                    <h6 class="montserrat author-pseudo">{{ comments.getAuthor() }}</h6>
-                                    <p class="roboto">{{ comments.getContent() }}</p>
-                                </div>
-
-                            {% endfor %}
-
-                            <div class="mt-5 mb-3 col-12">
-                                <h3 class="text-center secondary-title">Poster un avis</h3>
+                            <div class="col-12 p-0">
+                                <h5 class="">Type de cuisine</h5>
+                                <p>{{ OneResto.getType() }}</p>
                             </div>
 
-                            <div class="my-comment mb-5">
-                                <form action="" method="POST">
-
-                                    {% if success is not empty %}
-                                        <div class="alert text-center alert-success">
-                                            {{ success|join('<br>')|raw }}
-                                        </div>    
-                                    {% elseif errors is not empty %}
-                                        <div class="alert text-center alert-danger">
-                                            {{ errors|join('<br>')|raw }}
-                                        </div>    
-                                    {% endif %}
-
-                                    {% if app.session.get('pro') == 'oui'  %}
-                                        <div class="form-group">
-                                            <label class="montserrat author-pseudo" for="comment">{{ app.session.get('pseudo') }}</label>
-                                            <textarea class="form-control text-center" name="comment" id="comment" rows="3" placeholder="{{ app.session.get('pseudo') }}, dites nous ce que vous pensez de {{ OneResto.getRestoname() }}"></textarea>
-                                        </div>
-                                        <div class="form-group text-center">
-                                            <button class="btn btn-gold">Envoyer</button>
-                                        </div>
-                                    {% endif %}
-                                </form>
+                            <div class="col-12 p-0">
+                                <h5 class="">Adresse</h5>
+                                <p>{{ OneResto.getStreetnum() ~ ' ' ~ OneResto.getStreetname() ~ ' ' ~ OneResto.getCp() ~ ' ' ~ OneResto.getVille() }}</p>
                             </div>
+
+                        </div>
+
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-12 mb-4">  
+                        <p>
+                            <div class="border m-3 p-2" id="map{{OneResto.getId()}}" style="min-height:300px;border-radius:10px;width:100%">
+                                <!-- id="map5" par exemple -->
+                            </div>
+                        </p>
+                    </div>
+
+
+                    <div class="my-5 col-12">
+                        <h3 class="text-center secondary-title">Avis des utilisateurs</h3>
+                    </div>
+
+                    <div class="offset-lg-2 col-lg-8 col-md-12">
+
+                    {% for comments in commentaires %}
+
+                        <div class="comment-div mb-3 p-2">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="montserrat author-pseudo">{{ comments.getAuthor() }}</h6>
+                                <p><i>{{ comments.getDate()|date('d-m-Y H:i:s') }}</i></p>
+                            </div>
+                            <p class="roboto">{{ comments.getContent() }}</p>
+                        </div>
                             
+                    {% endfor %}
+
+                        <div class="mt-5 mb-3 col-12">
+                            <h3 class="text-center secondary-title">Poster un avis</h3>
                         </div>
+
+                        {% if app.session.get('connected') == 'true' %}
+                        
+                        <div class="my-comment mb-5">
+                            <form action="" method="POST">
+
+                                {% if success is not empty %}
+                                    <div class="alert text-center alert-success">
+                                        {{ success|join('<br>')|raw }}
+                                    </div>    
+                                {% elseif errors is not empty %}
+                                    <div class="alert text-center alert-danger">
+                                        {{ errors|join('<br>')|raw }}
+                                    </div>    
+                                {% endif %}
+
+                                <div class="form-group">
+                                    <label class="montserrat author-pseudo" for="comment">{{ app.session.get('pseudo') }}</label>
+                                    <textarea class="form-control text-center" name="comment" id="comment" rows="3" placeholder="{{ app.session.get('pseudo') }}, dites nous ce que vous pensez de {{ OneResto.getRestoname() }}"></textarea>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-gold">Envoyer</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        {% else %}
+
+                        <div class="my-comment-not-coonected mb-5">
+                            <p class="text-center mt-4">Vous devez être connecté pour poster un avis</p>
+
+                            <div class="d-flex justify-content-center mx-5">
+                                <a class="montserrat grey-ookan font-weight-bold nav-link btn" href="{{ path('inscription_choix') }}">Inscripti<scan class="gold-ookan">Oo</scan>n</a>
+                                <a class="montserrat grey-ookan font-weight-bold nav-link btn" href="{{ path('connect') }}">Connexi<scan class="gold-ookan">Oo</scan>n</a>
+                            </div>
+                        </div>
+
+                        {% endif %}
+                            
+                    </div>
 
 
                         
+                    
+                </div> <!-- Fin de div.row -->
 
-                    </div> <!-- Fin de div.row -->
+            </div> <!-- Fin de div.container -->
 
-                </div> <!-- Fin de div.container -->
+		{% endfor %}
+		
+    {% endblock %} 
+    
+    	{# javascript #}
+	{% block javascripts %} 
 
-            {% endfor %}
+        <script src="https://maps.google.com/maps/api/js?key=AIzaSyAmkMmW6mnFdvnyhblcCnqYBsXvLsuJdyQ" type="text/javascript"></script>
+        {# AXIOS pour tester #}
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
 
-        {% endblock %} 
-
-        {# javascript #}
-        {% block javascripts %} 
-
-            <script src="https://maps.google.com/maps/api/js?key=AIzaSyAmkMmW6mnFdvnyhblcCnqYBsXvLsuJdyQ" type="text/javascript"></script>
-            {# AXIOS pour tester #}
-            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
-
-            <script type="text/javascript">
+        <script type="text/javascript">
 
             /**
             * Fonction d'initialisation de la carte
@@ -168,7 +188,7 @@
 
             });
 
-        }
+            }
 
         </script>
 
@@ -178,7 +198,7 @@
             window.onload = function(){
 
 
-                {% for OneResto in resto %}
+            {% for OneResto in resto %}
 
             // Récupération de la latitude & longitude
             var location = '{{ OneResto.getStreetnum() ~ OneResto.getStreetname() ~ OneResto.getCp() ~ OneResto.getVille() }}';
@@ -189,7 +209,7 @@
                 }
             })
             .then(function(response){
-
+                
 
                 // "response" me donne le résultat
                 var location = response.data.results[0].geometry.location;
@@ -199,14 +219,14 @@
 
             })
             .catch(function(error){
-
+                
             });
 
             {%  endfor %}
 
         };
 
-        </script>
+    </script>
 
 
-    {% endblock %} 
+{% endblock %} 
