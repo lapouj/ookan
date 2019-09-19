@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Sortie;
+use App\Entity\Comments; // Intéraction
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class SortirController extends AbstractController
@@ -109,6 +110,77 @@ class SortirController extends AbstractController
     		'controller_name' => 'MangerController',
 
     	]);
+    }
+
+    /**
+     * @Route("/sortir{id}", name="avis_sortie")
+     */
+    public function avisSortie($id)
+    {
+
+    	// Récupération de l'article
+    	$em = $this->getDoctrine()->getManager();
+    	// Permet de chercher l'article donnée en id via le repository
+		$sortieFound = $em->getRepository(Sortie::class)->findById($id);
+
+		// Je place mes erreurs dans un tableau
+        $errors = [];
+		
+        $success = '';
+		
+		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id]);
+
+        // Si mes inputs sont remplies
+        if (!empty($_POST)) {
+
+            // je nettoie les données reçues
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+            
+            // Je pose mes conditions de validation du formulaire
+            if (!empty($safe['comment'])) {
+                if (strlen($safe['comment']) <= 50) {
+                    $errors[] = 'Votre avis doit comporter au moins 50 caractères';
+                }
+            } else $errors[] = 'Vous n\'avez pas remplis le champ commentaire';
+
+
+            if (count($errors) == 0) {
+
+                $errors = array_filter($errors);
+
+                $em = $this->getDoctrine()->getManager();
+
+				$commentData = new Comments();
+				
+				$session = new Session();
+
+                $commentData->setAuthor($session->get('pseudo'))
+                        ->setContent($safe['comment'])
+                        ->setTarget($id)
+                        ->setDate(new \Datetime());
+
+                //Préparation de la requete.
+                $em->persist($commentData);
+                //éxecution
+                $em->flush();
+                
+				// Redirection
+				
+				$success = 'Votre avis a bien été pris en compte !';
+            
+            } // Fin de 'if (count($errors) == 0)'
+
+        } // Fin de 'if (!empty($_POST))'
+
+
+    	// la vue
+        return $this->render('sortir/avis.html.twig', [
+			'errors'		=> $errors,
+			'success'		=> $success,
+			'sortie'		=> $sortieFound,
+			'commentaires' 	=> $comments,
+        ]);
+
     }
 }
 

@@ -74,6 +74,12 @@ show_sorties:
     path: /consulter-sorties
     controller: App\Controller\SortirController::show
 
+avis_sorties: 
+    path: /avis-sortie{id} # url d'accès a ma page. Le paramètre {id} est un paramètre get.
+    controller: App\Controller\SortirController::avisSortie
+    requirements: 
+      id: '\d+' # veut dire que le paramètre id n'acceptera que des chiffres
+
 # Les activités -----------------------------------------
 add_activity:
     path: /ajouter-activité
