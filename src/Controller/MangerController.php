@@ -212,6 +212,9 @@ class MangerController extends AbstractController
             if (!empty($safe['comment'])) {
                 if (strlen($safe['comment']) <= 50) {
                     $errors[] = 'Votre avis doit comporter au moins 50 caractères';
+                    if (strlen($safe['comment']) >= 1000) {
+                        $errors[] = 'Votre avis doit comporter moins de 1000 caractères';
+                    }
                 }
             } else $errors[] = 'Vous n\'avez pas remplis le champ commentaire';
             
