@@ -108,16 +108,6 @@ class UserprofileController extends AbstractController
                     } elseif (!v::in($allowMimes)->validate($image->mime())) {
                         $errorsImage[] = 'Votre fichier n\'est pas une image valide';
                     }
-                } elseif ($_FILES['avatar']['error'] == UPLOAD_ERR_NO_FILE) {
-                    $errorsImage[] = 'Aucun fichier n\'a été uploadé';
-                } else {
-                    $errorsImage[] = 'Une erreur est survenue lors de l\'envoi de l\'image';
-                }
-
-
-
-                $successImage = true;
-
 
 
                 ///////////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +137,18 @@ class UserprofileController extends AbstractController
                     $imageDefined = true;
                     $em->flush();
                 }
+
+
+
+                } elseif ($_FILES['avatar']['error'] == UPLOAD_ERR_NO_FILE) {
+                    $errorsImage[] = 'Aucun fichier n\'a été uploadé';
+                } else {
+                    $errorsImage[] = 'Une erreur est survenue lors de l\'envoi de l\'image';
+                }
+
+
+                $successImage = true;
+
 
             }
 
