@@ -37,6 +37,10 @@ class ContactController extends AbstractController
 				$errors[] = 'Votre nom doit contenir au moins 4 caractères';
 			}
 
+			if (strlen($safe['message']) <= 20) {
+				$errors[] = 'Votre message doit contenir au moins 20 caractères';
+			}
+
 			if(!filter_var($safe['email'], FILTER_VALIDATE_EMAIL)) {
 				$errors[] = 'Votre adresse email n\'est pas valide';
 			}
