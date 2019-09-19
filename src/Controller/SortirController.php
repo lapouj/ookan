@@ -31,9 +31,6 @@ class SortirController extends AbstractController
     		
     		$safe = array_map('trim', array_map('strip_tags', $_POST));
 
-
-
-
             if (strlen($safe['nom']) <= 4) {
                 $errors[] = 'Votre nom doit contenir au moins 4 caractères';
             }
@@ -86,8 +83,8 @@ class SortirController extends AbstractController
     	}    
 }
     	return $this->render('sortir/ajouterSorti.html.twig', [
-    		'mes_erreurs'     =>  $errors,
-             'success' => $success,
+    		'mes_erreurs'  =>  $errors,
+            'success'      => $success,
     	]);
     }
 
