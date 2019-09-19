@@ -28,7 +28,7 @@ class SortirController extends AbstractController
     {
         $uploadedImage = '';
         $maxSizeFile = 3 * 1000 * 1000; //3mo max
-        $uploadDir = 'img/uploaded/restos/';
+        $uploadDir = 'img/uploaded/sorties/';
         $allowMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
     	$errors = [];

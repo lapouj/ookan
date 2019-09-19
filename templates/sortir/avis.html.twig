@@ -16,7 +16,13 @@
                     {% if OneSortie.getNote() > 0 %}<p class="col-12 text-center mb-4"><span class="span-rate">{{ OneSortie.getNote() }}/5 <i class="fas fa-star rated-star"></i></span></p>{% endif %}
                     
                     <div class="col-12 mb-5 d-flex justify-content-center">
-                        <img class="border vignette" src="/img/{% if OneSortie.getPhoto() == true %}uploaded/sorties/{{ OneSortie.getPhoto() }}{% else %}logo/photo-dispo.jpg{% endif %}">
+
+                    {% if OneSortie.getPhoto() == true %}
+                        <img class="border vignette" src="img/uploaded/sorties/{{ OneSortie.getPhoto() }}">
+                    {% else %} 
+                        <img class="border vignette" src="img/logo/photo-dispo.jpg">
+                    {% endif %}
+
                     </div>
                     
                     <div class="col-lg-8 col-md-12 mt-5">

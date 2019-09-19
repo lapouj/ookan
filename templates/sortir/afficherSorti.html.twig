@@ -6,7 +6,6 @@
 
 	<h2 class="text-center primary-title">Les meilleures s<span class="gold-ookan">o</span>rties T<span class="gold-ookan">o</span>ul<span class="gold-ookan">o</span>usaines</h2>
 
-	<p class="text-center montserrat grey-ookan">Classement basé sur les notes et avis des utilisateurs Ookan</p> 
 
 	<div class="col-10 m-auto text-white mb-3 mt-3 montserrat" style="border-radius:10px">
 
@@ -21,7 +20,7 @@
 				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
 					<div class="d-flex justify-content-center m-auto align-items-center">
 						{% if OneSortie.getPhoto == true %}
-							<img class="border vignette" src="/img/uploaded/restos/{{OneSortie.getPhoto()}}">
+							<img class="border vignette" src="/img/uploaded/sorties/{{OneSortie.getPhoto()}}">
 						{% endif %}	
 
 						{% if OneSortie.getPhoto == false %}
