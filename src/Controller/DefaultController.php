@@ -200,7 +200,7 @@ class DefaultController extends AbstractController
 
                 // envoi email
                 if ($mail->Send()) {
-                    $success = 'Un email vous a été envoyer';
+                    $success = 'Un email vous a été envoyé';
                 }
             }
         }

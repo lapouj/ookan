@@ -7,6 +7,21 @@
 
         <h1 class="montserrat grey-ookan text-center">Mon C<scan class="gold-ookan">Oo</scan>mpte</h1>
 
+         {% if erreurs_image is not empty %}
+
+            <div class="row justify-content-center">
+                <div class="alert alert-danger text-center col-4 col-lg-12">
+                    {{ erreurs_image|join('<br>')|raw }} 
+                </div>
+            </div>
+
+        {% elseif successImage == true %}
+
+            <div class="alert alert-success text-center">Photo changée avec succès</div>
+
+        {% endif %}
+
+
         {% if liste_erreurs is not empty %}
 
             <div class="row justify-content-center">
@@ -36,16 +51,39 @@
 
                 {% endif %}
 
-                <form method="POST" enctype="multipart/form-data">
 
+                <form id="form1" name="userPhotoForm" method="POST" enctype="multipart/form-data">
                     <h4 class="grey-ookan montserrat">Photo de profil</h4>
+                    <small>Cliquez pour modifier la photo</small>
                     <div class="form-row my-3">
                         <div class="col">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize;?>">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxSizeFile;?>">
+                        <input type="file" class="inputAvatar" name="avatar" id="avatar" accept="image/*">
+                        
+                        {% if imageDefined == false %}
+
+                        <label for="avatar"><img class="photoAvatar" src="/img/profil/avatar.png" height="150px" alt="Votre photo de profil" title="Photo du profil"><i class="main fas fa-camera"></i></label>
+
+                        {% elseif imageDefined == true %}
+
+                        <label for="avatar"><img class="photoAvatar" src="/img/uploaded/profiles/{{ photo }}" height="150px" alt="Votre photo de profil" title="Photo du profil"><i class="main fas fa-camera"></i></label>
+
+                        {% endif %}
+                        </div>
+                    </div>
+                    <input type="submit" name="avatarvalidation" value="Modifier photo">
+                </form>
+
+                <form id="form2" name="userDataForm" method="POST" enctype="multipart/form-data">
+
+                    {# <h4 class="grey-ookan montserrat">Photo de profil</h4>
+                    <div class="form-row my-3">
+                        <div class="col">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxSizeFile;?>">
                             <input type="file" class="inputAvatar" name="avatar" id="avatar" accept="image/*">
                             <label for="avatar"><img class="photoAvatar" src="/img/profil/avatar.png" height="150px" alt="Votre photo de profil" title="Photo du profil"><i class="main fas fa-camera"></i></label>
                         </div>
-                    </div>
+                    </div> #}
 
                     <h4 class="grey-ookan montserrat">Informations générales</h4>
                     <div class="form-row my-3">
