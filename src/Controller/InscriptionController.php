@@ -45,7 +45,7 @@ class InscriptionController extends AbstractController
                 $errors[] = 'Votre prénom doit contenir au moins 2 caractères';
             }
 
-            if (strlen($safe['pseudo']) <= 6) {
+            if (strlen($safe['pseudo']) <= 5) {
                 $errors[] = 'Votre pseudo doit contenir au moins 6 caractères';
             }
 
