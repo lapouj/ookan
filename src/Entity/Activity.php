@@ -56,6 +56,11 @@ class Activity
      */
     private $note;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
    
 
     public function getId(): ?int
@@ -155,6 +160,18 @@ class Activity
     public function setNote(?int $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

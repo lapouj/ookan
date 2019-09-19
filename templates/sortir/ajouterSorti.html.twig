@@ -31,6 +31,12 @@
 			</div>
 
 			<div class="form-group">
+				<small>Veuillez sélectionner la photo de votre établissement*
+				<input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxSizeFile;?>">
+                <input type="file" name="photo" id="photo" accept="image/*">
+			</div>
+
+			<div class="form-group">
 				<textarea id="description" name="description" rows="10" cols="50" placeholder="Description (Minimum 50 caractères) *" class="form-control" required></textarea>
 			</div>
 
