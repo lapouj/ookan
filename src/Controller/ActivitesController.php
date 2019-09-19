@@ -123,11 +123,10 @@ class ActivitesController extends AbstractController
 		
         $success = '';
 		
-		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id, 'target_table' => 'activity']);
-
+        
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
-
+            
             // je nettoie les données reçues
             $safe = array_map('trim', array_map('strip_tags', $_POST));
             
@@ -137,24 +136,24 @@ class ActivitesController extends AbstractController
                     $errors[] = 'Votre avis doit comporter au moins 50 caractères';
                 }
             } else $errors[] = 'Vous n\'avez pas remplis le champ commentaire';
-
-
+            
+            
             if (count($errors) == 0) {
-
+                
                 $errors = array_filter($errors);
-
+                
                 $em = $this->getDoctrine()->getManager();
-
+                
 				$commentData = new Comments();
 				
 				$session = new Session();
-
+                
                 $commentData->setAuthor($session->get('pseudo'))
-                        ->setContent($safe['comment'])
-                        ->setTarget($id)
-                        ->setTargetTable('activity')
-                        ->setDate(new \Datetime());
-
+                ->setContent($safe['comment'])
+                ->setTarget($id)
+                ->setTargetTable('activity')
+                ->setDate(new \Datetime());
+                
                 //Préparation de la requete.
                 $em->persist($commentData);
                 //éxecution
@@ -165,18 +164,20 @@ class ActivitesController extends AbstractController
 				$success = 'Votre avis a bien été pris en compte !';
             
             } // Fin de 'if (count($errors) == 0)'
-
+            
         } // Fin de 'if (!empty($_POST))'
-
-
+        
+        $comments = $em->getRepository(Comments::class)->findBy(['target' => $id, 'target_table' => 'activity']);
+        
     	// la vue
         return $this->render('activites/avis.html.twig', [
-			'errors'		=> $errors,
+            'errors'		=> $errors,
 			'success'		=> $success,
 			'activities'	=> $activityFound,
 			'commentaires' 	=> $comments,
-        ]);
-
-    }
+            ]);
+            
+        }
         
-}
+    }
+    
