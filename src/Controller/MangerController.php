@@ -197,7 +197,7 @@ class MangerController extends AbstractController
 		
         $success = '';
 		
-		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id]);
+		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id, 'target_table' => 'resto']);
 
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
@@ -226,6 +226,7 @@ class MangerController extends AbstractController
                 $commentData->setAuthor($session->get('pseudo'))
                         ->setContent($safe['comment'])
                         ->setTarget($id)
+                        ->setTargetTable('resto')
                         ->setDate(new \Datetime());
 
                 //Préparation de la requete.
