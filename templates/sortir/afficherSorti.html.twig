@@ -24,15 +24,35 @@
 					</div>
 					<div class="col-lg-7">
 						<div class="row">
-							<div class="col-6">
-								<h2>{{ OneSortie.getSortiename() }}</h2>
+							<div class="col-lg-12">
+								<div class="d-flex justify-content-between">
+									<h2>{{ OneSortie.getSortiename() }}{% if OneSortie.getNote() > 0 %}<span class="span-rate"> - {{ OneSortie.getNote() }}/5 <i class="fas fa-star rated-star"></i></span>{% endif %}</h2>
+											
+									<div>
+										<!-- Système de notation -->
+										<div class="rating">Noter l'établissement :
+											<a href="{{ path('show_sorties') }}?note=5" title="Donner 5 étoiles"><i class="far fa-star"></i></a><!--
+											--><a href="{{ path('show_sorties') }}?note=4" title="Donner 4 étoiles"><i class="far fa-star"></i></a><!--
+											--><a href="{{ path('show_sorties') }}?note=3" title="Donner 3 étoiles"><i class="far fa-star"></i></a><!--
+											--><a href="{{ path('show_sorties') }}?note=2" title="Donner 2 étoiles"><i class="far fa-star"></i></a><!--
+											--><a href="{{ path('show_sorties') }}?note=1" title="Donner 1 étoile"><i class="far fa-star"></i></a>
+										</div>
+
+										<div>
+											<a href="{{ path('avis_sortie', {id : OneSortie.getId}) }}">Voir les avis</a>
+										</div>
+									</div>
+		
+								</div>
 								<hr>
+							</div>
+							<div class="col-lg-6">
 								<small>Style du lieu :</small>
 								<p>{{ OneSortie.getType() }}</p>
 								<small>Un mot sur l'endroit' :</small>
 								<p>{{ OneSortie.getDescription() }}</p>
 							</div>
-							<div class="col-6">
+							<div class="col-lg-6">
 								<small>Adresse :</small>
 								<p>{{ OneSortie.getStreetnum() ~ ' ' ~ OneSortie.getStreetname() ~ ' ' ~ OneSortie.getCp() ~ ' ' ~ OneSortie.getVille() }}</p>
 							</div>
