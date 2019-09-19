@@ -20,7 +20,13 @@
 			{% for OneSortie in sorties %}
 				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
 					<div class="d-flex justify-content-center m-auto align-items-center">
-						<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+						{% if OneSortie.getPhoto == true %}
+							<img class="border vignette" src="/img/uploaded/restos/{{OneSortie.getPhoto()}}">
+						{% endif %}	
+
+						{% if OneSortie.getPhoto == false %}
+							<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+						{% endif %}
 					</div>
 					<div class="col-lg-7">
 						<div class="row">
