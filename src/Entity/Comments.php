@@ -36,6 +36,11 @@ class Comments
      */
     private $date;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $target_table;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Comments
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getTargetTable(): ?string
+    {
+        return $this->target_table;
+    }
+
+    public function setTargetTable(string $target_table): self
+    {
+        $this->target_table = $target_table;
 
         return $this;
     }

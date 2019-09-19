@@ -50,7 +50,7 @@
 								<small>Style du lieu :</small>
 								<p>{{ OneSortie.getType() }}</p>
 								<small>Un mot sur l'endroit' :</small>
-								<p>{{ OneSortie.getDescription() }}</p>
+								<p class="text-break">{{ OneSortie.getDescription() }}</p>
 							</div>
 							<div class="col-lg-6">
 								<small>Adresse :</small>
@@ -59,7 +59,7 @@
 							
 						</div>
 					</div>
-					<div class="col-3">
+					<div class="col-lg-3">
 						<p>
 							<div class="border m-3 p-2" id="map{{OneSortie.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
 								<!-- id="map5" par exemple -->

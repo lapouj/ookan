@@ -89,6 +89,12 @@ show_activies:
     path: /consulter-activités
     controller: App\Controller\ActivitesController::show
 
+avis_activities: 
+    path: /avis-activites{id} # url d'accès a ma page. Le paramètre {id} est un paramètre get.
+    controller: App\Controller\ActivitesController::avisActivite
+    requirements: 
+      id: '\d+' # veut dire que le paramètre id n'acceptera que des chiffres
+
 
 
 # A propos de Ookan -------------------------------------------

@@ -23,13 +23,32 @@
 					</div>
 					<div class="col-7">
 						<div class="row">
-							<div class="col-6">
-								<h2>{{ OneActivity.getName() }}</h2>
+							<div class="col-lg-12">
+								<div class="d-flex justify-content-between">
+									<h2>{{ OneActivity.getname() }}{% if OneActivity.getNote() > 0 %}<span class="span-rate"> - {{ OneActivity.getNote() }}/5 <i class="fas fa-star rated-star"></i></span>{% endif %}</h2>
+									
+									<div>
+										<!-- Système de notation -->
+										<div class="rating">Noter l'établissement :
+												<a href="{{ path('show_activies') }}?note=5" title="Donner 5 étoiles"><i class="far fa-star"></i></a><!--
+												--><a href="{{ path('show_activies') }}?note=4" title="Donner 4 étoiles"><i class="far fa-star"></i></a><!--
+												--><a href="{{ path('show_activies') }}?note=3" title="Donner 3 étoiles"><i class="far fa-star"></i></a><!--
+												--><a href="{{ path('show_activies') }}?note=2" title="Donner 2 étoiles"><i class="far fa-star"></i></a><!--
+												--><a href="{{ path('show_activies') }}?note=1" title="Donner 1 étoile"><i class="far fa-star"></i></a>
+										</div>
+										<div>
+											<a href="{{ path('avis_activities', {id : OneActivity.getId}) }}">Voir les avis</a>
+										</div>
+									</div>
+
+								</div>
 								<hr>
-								<small>Un mot sur l'activité' :</small>
-								<p>{{ OneActivity.getDescription() }}</p>
 							</div>
-							<div class="col-6">
+							<div class="col-lg-6">
+								<small>Un mot sur l'activité' :</small>
+								<p class="text-break">{{ OneActivity.getDescription() }}</p>
+							</div>
+							<div class="col-lg-6">
 								<small>Adresse :</small>
 								<p>{{ OneActivity.getStreetnum() ~ ' ' ~ OneActivity.getStreetname() ~ ' ' ~ OneActivity.getCp() ~ ' ' ~ OneActivity.getVille() }}</p>
 								<small>Contact :</small>
@@ -37,7 +56,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-3">
+					<div class="col-lg-3">
 						<p>
 							<div class="border m-3 p-2" id="map{{OneActivity.getId()}}" style="height:15rem;border-radius:10px;width:15rem">
 								<!-- id="map5" par exemple -->
