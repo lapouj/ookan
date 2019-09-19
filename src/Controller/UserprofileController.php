@@ -50,26 +50,43 @@ class UserprofileController extends AbstractController
         $allowMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
 
-        // $userFound contient les informations de mon utilisateur qui sont en base de données
+   
         $em = $this->getDoctrine()->getManager();
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        //Cette partie sert à afficher la photo d'avatar vide 
+        //lorsque rien  n'est trouvé dans la base de données.
+        
 
         $userFound = $em->getRepository(User::class)->find( $session->get('user_id'));
         $userProFound = $em->getRepository(UserPro::class)->find( $session->get('user_id'));
 
         if ($userProFound){
-                    $uploadedImage=$userProFound->getPhoto();
-                    $imageDefined = true;
-                }
+            if ($uploadedImage=$userProFound->getPhoto()) {
+              $imageDefined = true;
+            }
+        }
         elseif ($userFound){
-                    $uploadedImage=$userFound->getPhoto();
-                    $imageDefined = true;
-                }
+            if ($uploadedImage=$userFound->getPhoto()){
+                $imageDefined = true;
+            }
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////
 
-            $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
 
+
+
+        $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////
         //Si j'ai choisi un fichier
-        if (!empty($_POST)&&(!empty($_FILES['avatar']))) {
 
+        if (!empty($_POST)&&(!empty($_FILES['avatar']))) {
 
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
@@ -97,12 +114,24 @@ class UserprofileController extends AbstractController
                     $errorsImage[] = 'Une erreur est survenue lors de l\'envoi de l\'image';
                 }
 
+
+
                 $successImage = true;
+
+
+
+                ///////////////////////////////////////////////////////////////////////////////////////
+                // Si tout est bon, on récupère l'extension ($ext) et on renomme l'image
+
 
                 $ext = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
                 $imgName = tr::transliterate(time()) . '.' . $ext;
 
                 $image->save($uploadDir . $imgName);
+
+                ///////////////////////////////////////////////////////////////////////////////////////
+
+
 
                if ($pro_connected == 'oui'){
                     
@@ -125,7 +154,7 @@ class UserprofileController extends AbstractController
 
 
 
-
+        ///////////////////////////////////////////////////////////////////////////////////////
         // Si mes inputs sont remplies et que je n'ai pas choisi de fichier
         if (!empty($_POST)&&(empty($_FILES))) {
 
