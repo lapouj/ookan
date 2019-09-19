@@ -16,7 +16,7 @@
                     {% if OneResto.getNote() > 0 %}<p class="col-12 text-center mb-4"><span class="span-rate">{{ OneResto.getNote() }}/5 <i class="fas fa-star rated-star"></i></span></p>{% endif %}
                     
                     <div class="col-12 mb-5 d-flex justify-content-center">
-                        <img class="border vignette" src="/img/logo/photo-dispo.jpg">
+                        <img class="border vignette" src="/img/{% if OneResto.getPhoto() %}/uploaded/restos/{{ OneResto.getPhoto() }}{% else %}logo/photo-dispo.jpg{% endif %}">
                     </div>
                     
                     <div class="col-lg-8 col-md-12 mt-5">
