@@ -19,7 +19,13 @@
 			{% for OneActivity in activities %}
 				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
 					<div class="d-flex justify-content-center m-auto align-items-center">
-						<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+						{% if OneActivity.getPhoto == true %}
+							<img class="border vignette" src="/img/uploaded/activities/{{OneActivity.getPhoto()}}">
+						{% endif %}	
+
+						{% if OneActivity.getPhoto == false %}
+							<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+						{% endif %}
 					</div>
 					<div class="col-7">
 						<div class="row">
