@@ -68,7 +68,7 @@ class ContactController extends AbstractController
 			$mail->SMTPSecure = 'ssl'; //certificat SSL
 			$mail->Username = 'wf3toulouse@gmail.com'; //login 
 			$mail->Password = '244Seysses'; //mot de passe
-			$mail->AddAddress('stephh31000@gmail.com'); //destinataire
+			$mail->AddAddress('ookan31000@gmail.com'); //destinataire
 			$mail->SetFrom('wf3toulouse@gmail.com', 'Ookan'); //expediteur
 			$mail->Subject = 'Message de '.$safe['email']; //sujet
 			// le corps du mail au forma HTML
