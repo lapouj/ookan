@@ -127,7 +127,7 @@ class UserprofileController extends AbstractController
                 $ext = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
                 $imgName = tr::transliterate(time()) . '.' . $ext;
 
-                $image->save($uploadDir . $imgName);
+                $image->save($uploadDir.$imgName);
 
                 ///////////////////////////////////////////////////////////////////////////////////////
 
