@@ -91,7 +91,7 @@ class MangerController extends AbstractController
                     }
 
                     if (count($errorsImage) == 0){
-                        $image = Image::make($_FILES['photo']['tmp_name'])->resize(300, 300);
+                        $image = Image::make($_FILES['photo']['tmp_name'])->resize(240, 160);
                         if ($image->filesize() > $maxSizeFile) {
                             $errorsImage[] = 'Votre image ne doit pas excedér 3 Mo';
                         } elseif (!v::in($allowMimes)->validate($image->mime())) {
