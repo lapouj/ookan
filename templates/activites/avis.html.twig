@@ -64,7 +64,7 @@
                                 <h6 class="montserrat author-pseudo">{{ comments.getAuthor() }}</h6>
                                 <p><i>{{ comments.getDate()|date('d-m-Y H:i:s') }}</i></p>
                             </div>
-                            <p class="roboto">{{ comments.getContent() }}</p>
+                            <p class="roboto text-break">{{ comments.getContent() }}</p>
                         </div>
                             
                     {% endfor %}

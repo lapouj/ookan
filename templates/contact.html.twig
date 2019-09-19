@@ -4,24 +4,25 @@
 
     {% block body %}
 
-    {% if success is not empty %}
-        <div class="alert text-center alert-success">
-            {{ success|join('<br>')|raw }}
-        </div>    
-    {% elseif not_success is not empty %}
-        <div class="alert text-center alert-danger">
-            {{ not_success|join('<br>')|raw }}
-        </div>    
-    {% endif %}
-
-
+    
+    
     
     <div class="container my-5 montserrat">
         <h3 class="pb-2 text-center secondary-title">C<span class="gold-ookan">o</span>ntactez-n<span class="gold-ookan">o</span>us</h3>
         
         <div class="row justify-content-center">
-
+            
             <form method="post" class="bg-light border p-4 col-lg-4 col-md-6 col-10 {% if disp_none is not empty %} {{ disp_none }} {% endif %}">
+
+                {% if success is not empty %}
+                    <div class="alert text-center alert-success">
+                        {{ success|join('<br>')|raw }}
+                    </div>    
+                {% elseif not_success is not empty %}
+                    <div class="alert text-center alert-danger">
+                        {{ not_success|join('<br>')|raw }}
+                    </div>    
+                {% endif %}
 
                 <div class="form-group">
                     <label for="name">Nom</label>

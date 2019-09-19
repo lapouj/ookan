@@ -195,11 +195,10 @@ class SortirController extends AbstractController
 		
         $success = '';
 		
-		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id, 'target_table' => 'sortie']);
-
+        
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
-
+            
             // je nettoie les données reçues
             $safe = array_map('trim', array_map('strip_tags', $_POST));
             
@@ -207,26 +206,29 @@ class SortirController extends AbstractController
             if (!empty($safe['comment'])) {
                 if (strlen($safe['comment']) <= 50) {
                     $errors[] = 'Votre avis doit comporter au moins 50 caractères';
+                } 
+                if (strlen($safe['comment']) >= 1000) {
+                    $errors[] = 'Votre avis doit comporter moins de 1000 caractères';
                 }
             } else $errors[] = 'Vous n\'avez pas remplis le champ commentaire';
-
-
+            
+            
             if (count($errors) == 0) {
-
+                
                 $errors = array_filter($errors);
-
+                
                 $em = $this->getDoctrine()->getManager();
-
+                
 				$commentData = new Comments();
 				
 				$session = new Session();
-
+                
                 $commentData->setAuthor($session->get('pseudo'))
-                        ->setContent($safe['comment'])
-                        ->setTarget($id)
-                        ->setTargetTable('sortie')
-                        ->setDate(new \Datetime());
-
+                ->setContent($safe['comment'])
+                ->setTarget($id)
+                ->setTargetTable('sortie')
+                ->setDate(new \Datetime());
+                
                 //Préparation de la requete.
                 $em->persist($commentData);
                 //éxecution
@@ -235,26 +237,27 @@ class SortirController extends AbstractController
 				// Redirection
 				
 				$success = 'Votre avis a bien été pris en compte !';
-            
+                
             } // Fin de 'if (count($errors) == 0)'
-
+            
         } // Fin de 'if (!empty($_POST))'
-
-
+        
+        $comments = $em->getRepository(Comments::class)->findBy(['target' => $id, 'target_table' => 'sortie']);
+        
     	// la vue
         return $this->render('sortir/avis.html.twig', [
-			'errors'		=> $errors,
+            'errors'		=> $errors,
 			'success'		=> $success,
 			'sortie'		=> $sortieFound,
 			'commentaires' 	=> $comments,
-        ]);
-
+            ]);
+            
+        }
     }
-}
-
-
-
-
+    
+    
+    
+    
 
 
 
