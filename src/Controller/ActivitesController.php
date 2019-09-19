@@ -37,6 +37,8 @@ class ActivitesController extends AbstractController
 
         $successImage = false;
         $success = false;
+        
+        $image = '';
 
 
         if(!empty($_POST)){

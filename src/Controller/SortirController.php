@@ -31,6 +31,7 @@ class SortirController extends AbstractController
         $uploadDir = 'img/uploaded/sorties/';
         $allowMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
+        $image = '';
     	$errors = [];
         $errorsImage = [];
         $totalerrors = [];

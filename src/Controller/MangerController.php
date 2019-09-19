@@ -31,6 +31,8 @@ class MangerController extends AbstractController
         $uploadDir = 'img/uploaded/restos/';
         $allowMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
+
+        $image = '';
     	$errors = [];
         $errorsImage = [];
         $totalerrors = [];
