@@ -156,7 +156,7 @@ class MangerController extends AbstractController
                 $commentData->setAuthor($session->get('pseudo'))
                         ->setContent($safe['comment'])
                         ->setTarget($id)
-                        ->setDate(new \Datetime);
+                        ->setDate(new \Datetime());
 
                 //Préparation de la requete.
                 $em->persist($commentData);

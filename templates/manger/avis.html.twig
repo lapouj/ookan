@@ -78,7 +78,10 @@
                     {% for comments in commentaires %}
 
                         <div class="comment-div mb-3 p-2">
-                            <h6 class="montserrat author-pseudo">{{ comments.getAuthor() }}</h6>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="montserrat author-pseudo">{{ comments.getAuthor() }}</h6>
+                                <p><i>{{ comments.getDate()|date('d-m-Y H:i:s') }}</i></p>
+                            </div>
                             <p class="roboto">{{ comments.getContent() }}</p>
                         </div>
                             
@@ -88,6 +91,8 @@
                             <h3 class="text-center secondary-title">Poster un avis</h3>
                         </div>
 
+                        {% if app.session.get('connected') == 'true' %}
+                        
                         <div class="my-comment mb-5">
                             <form action="" method="POST">
 
@@ -110,6 +115,19 @@
                                 </div>
                             </form>
                         </div>
+
+                        {% else %}
+
+                        <div class="my-comment-not-coonected mb-5">
+                            <p class="text-center mt-4">Vous devez être connecté pour poster un avis</p>
+
+                            <div class="d-flex justify-content-center mx-5">
+                                <a class="montserrat grey-ookan font-weight-bold nav-link btn" href="{{ path('inscription_choix') }}">Inscripti<scan class="gold-ookan">Oo</scan>n</a>
+                                <a class="montserrat grey-ookan font-weight-bold nav-link btn" href="{{ path('connect') }}">Connexi<scan class="gold-ookan">Oo</scan>n</a>
+                            </div>
+                        </div>
+
+                        {% endif %}
                             
                     </div>
 
