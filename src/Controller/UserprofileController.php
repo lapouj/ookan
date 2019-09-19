@@ -41,10 +41,12 @@ class UserprofileController extends AbstractController
 
         $success = false;
         $successImage = false;
+        $imageDefined = false;
 
         //Préparation pour l'image :
+        $uploadedImage = '';
         $maxSizeFile = 3 * 1000 * 1000; //3mo max
-        $uploadDir = 'img/uploaded/profiles';
+        $uploadDir = 'img/uploaded/profiles/';
         $allowMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
 
@@ -54,13 +56,36 @@ class UserprofileController extends AbstractController
         $userFound = $em->getRepository(User::class)->find( $session->get('user_id'));
         $userProFound = $em->getRepository(UserPro::class)->find( $session->get('user_id'));
 
+        if ($userProFound){
+                    $uploadedImage=$userProFound->getPhoto();
+                    $imageDefined = true;
+                }
+        elseif ($userFound){
+                    $uploadedImage=$userFound->getPhoto();
+                    $imageDefined = true;
+                }
+
+            $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
 
         //Si j'ai choisi un fichier
-         if (!empty($_POST)&&(!empty($_FILES))) {
+        if (!empty($_POST)&&(!empty($_FILES['avatar']))) {
+
+
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+
              //Upload de l'image :
-            if (!empty($_FILES['avatar'])) {
-                if ($_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
-                    $image = Image::make($_FILES['avatar']['tmp_name']);
+
+            if ($_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
+
+            $mimeType = finfo_file($fileInfo, $_FILES['avatar']['tmp_name']);
+            finfo_close($fileInfo);
+
+                if(substr($mimeType, 0, 5) != 'image') {
+                    $errorsImage[] = 'Type de fichier invalide. Vous devez sélectionner un fichier de type image';
+                }
+
+                if (count($errorsImage) == 0){
+                    $image = Image::make($_FILES['avatar']['tmp_name'])->resize(300, 300);
                     if ($image->filesize() > $maxSizeFile) {
                         $errorsImage[] = 'Votre image ne doit pas excedér 3 Mo';
                     } elseif (!v::in($allowMimes)->validate($image->mime())) {
@@ -71,10 +96,29 @@ class UserprofileController extends AbstractController
                 } else {
                     $errorsImage[] = 'Une erreur est survenue lors de l\'envoi de l\'image';
                 }
-            }
 
-            if (count($errorsImage) == 0){
                 $successImage = true;
+
+                $ext = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+                $imgName = tr::transliterate(time()) . '.' . $ext;
+
+                $image->save($uploadDir . $imgName);
+
+               if ($pro_connected == 'oui'){
+                    
+                    $userProFound->setPhoto($imgName);
+                    $uploadedImage=$userProFound->getPhoto();
+                    $imageDefined = true;
+                    $em->flush();
+                }
+                elseif ($pro_connected == 'non'){
+                    
+                    $userFound->setPhoto($imgName);
+                    $uploadedImage=$userFound->getPhoto();
+                    $imageDefined = true;
+                    $em->flush();
+                }
+
             }
 
         }
@@ -82,7 +126,7 @@ class UserprofileController extends AbstractController
 
 
 
-        // Si mes inputs sont remplies
+        // Si mes inputs sont remplies et que je n'ai pas choisi de fichier
         if (!empty($_POST)&&(empty($_FILES))) {
 
 
@@ -207,6 +251,8 @@ class UserprofileController extends AbstractController
                         'liste_erreurs' => $totalerrors,
                         'info_user'     => $userFound,
                         'erreurs_image' => $errorsImage,
+                        'imageDefined'  => $imageDefined,
+                        'photo'         => $uploadedImage,
                     ]);
 
                 }
@@ -217,6 +263,8 @@ class UserprofileController extends AbstractController
                         'liste_erreurs' => $totalerrors,
                         'info_user'     => $userProFound,
                         'erreurs_image' => $errorsImage,
+                        'imageDefined'  => $imageDefined,
+                        'photo'         => $uploadedImage,
                     ]);
                 }
         // return $this->render('userprofile/user-profile.html.twig', [
