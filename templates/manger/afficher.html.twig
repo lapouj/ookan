@@ -20,7 +20,15 @@
 			{% for OneResto in resto %}
 				<div id="" class="bg-light row justify-content-center encart my-3 p-3" style="border-radius:10px">
 					<div class="col-lg-2 d-flex justify-content-center m-auto align-items-center">
-						<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+
+						{% if OneResto.getPhoto == true %}
+							<img class="border vignette" src="/img/uploaded/restos/{{OneResto.getPhoto()}}">
+						{% endif %}	
+
+						{% if OneResto.getPhoto == false %}
+							<img class="border vignette" src="/img/logo/photo-dispo.jpg">
+						{% endif %}
+
 					</div>
 					<div class="col-lg-7">
 						<div class="row">
@@ -28,6 +36,8 @@
 								<div class="d-flex justify-content-between">
 									<h2>{{ OneResto.getRestoname() }}{% if OneResto.getNote() > 0 %}<span class="span-rate"> - {{ OneResto.getNote() }}/5 <i class="fas fa-star rated-star"></i></span>{% endif %}</h2>
 									
+
+
 									<div>
 										<!-- Système de notation -->
 										<div class="rating">Noter l'établissement :

@@ -35,6 +35,7 @@ class MangerController extends AbstractController
         $errorsImage = [];
         $totalerrors = [];
 
+        $successImage = false;
     	$success = false;
 
     	if(!empty($_POST)){
@@ -90,7 +91,7 @@ class MangerController extends AbstractController
                     }
 
                     if (count($errorsImage) == 0){
-                        $image = Image::make($_FILES['photo']['tmp_name'])->resize(300, 300);
+                        $image = Image::make($_FILES['photo']['tmp_name'])->resize(240, 160);
                         if ($image->filesize() > $maxSizeFile) {
                             $errorsImage[] = 'Votre image ne doit pas excedér 3 Mo';
                         } elseif (!v::in($allowMimes)->validate($image->mime())) {
@@ -118,7 +119,6 @@ class MangerController extends AbstractController
                         }
 
 
-                    $successImage = true;
 
 
                 }
@@ -138,21 +138,22 @@ class MangerController extends AbstractController
                 }
 
     			$restoData = new Resto(); 
-    			$restoData   ->setRestoName($safe['nom'])
-    			->setDescription($safe['description'])
-    			->setType($safe['type'])
-    			->setStreetname($safe['street_name'])
-    			->setStreetnum($safe['street_num'])
-    			->setCp($safe['cp'])
-                ->setPhone($safe['phone'])
-                ->setWebsite($web_site ?? '')
-                ->setPhoto($imgName)
-    			->setVille($safe['ville']);
+    			$restoData      ->setRestoName($safe['nom'])
+                    			->setDescription($safe['description'])
+                    			->setType($safe['type'])
+                    			->setStreetname($safe['street_name'])
+                    			->setStreetnum($safe['street_num'])
+                    			->setCp($safe['cp'])
+                                ->setPhone($safe['phone'])
+                                ->setWebsite($web_site ?? '')
+                                ->setPhoto($imgName)
+                    			->setVille($safe['ville']);
     			// On prépare la requete.
     			$em->persist($restoData);
     			// On l'exécute
     			$em->flush();
 
+                $successImage = true;
                 $success = true;
 
     		}
@@ -161,6 +162,7 @@ class MangerController extends AbstractController
     	return $this->render('manger/ajouter.html.twig', [
     		'mes_erreurs'     =>  $totalerrors,
             'success' => $success,
+            'imageSet' => $successImage,
     	]);
     }
 
@@ -172,6 +174,8 @@ class MangerController extends AbstractController
 	
     // Permet de chercher les articles données via le repository
 	$restoFound = $em->getRepository(resto::class)->findAll();
+
+
 
         // la vue
     	return $this->render('manger/afficher.html.twig', [
@@ -197,7 +201,7 @@ class MangerController extends AbstractController
 		
         $success = '';
 		
-		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id]);
+		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id, 'target_table' => 'resto']);
 
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
@@ -226,6 +230,7 @@ class MangerController extends AbstractController
                 $commentData->setAuthor($session->get('pseudo'))
                         ->setContent($safe['comment'])
                         ->setTarget($id)
+                        ->setTargetTable('resto')
                         ->setDate(new \Datetime());
 
                 //Préparation de la requete.

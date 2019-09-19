@@ -125,7 +125,7 @@ class SortirController extends AbstractController
 		
         $success = '';
 		
-		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id]);
+		$comments = $em->getRepository(Comments::class)->findBy(['target' => $id, 'target_table' => 'sortie']);
 
         // Si mes inputs sont remplies
         if (!empty($_POST)) {
@@ -154,6 +154,7 @@ class SortirController extends AbstractController
                 $commentData->setAuthor($session->get('pseudo'))
                         ->setContent($safe['comment'])
                         ->setTarget($id)
+                        ->setTargetTable('sortie')
                         ->setDate(new \Datetime());
 
                 //Préparation de la requete.

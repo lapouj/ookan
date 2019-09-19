@@ -40,7 +40,7 @@
 
                         </div> -->
 
-                        <div class="col-lg-6 col-md-12 d-flex p-0 mb-4 mr-3">
+                        <div class="col-lg-6 col-md-12 p-0 mb-4 mr-3">
 
                             <div class="col-12 p-0">
                                 <h5 class="">Type de cuisine</h5>
@@ -73,14 +73,14 @@
 
                     {% for comments in commentaires %}
 
-                        <div class="comment-div mb-3 p-2">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="montserrat author-pseudo">{{ comments.getAuthor() }}</h6>
-                                <p><i>{{ comments.getDate()|date('d-m-Y H:i:s') }}</i></p>
+                            <div class="comment-div mb-3 p-2">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="montserrat author-pseudo">{{ comments.getAuthor() }}</h6>
+                                    <p><i>{{ comments.getDate()|date('d-m-Y H:i:s') }}</i></p>
+                                </div>
+                                <p class="roboto">{{ comments.getContent() }}</p>
                             </div>
-                            <p class="roboto">{{ comments.getContent() }}</p>
-                        </div>
-                            
+
                     {% endfor %}
 
                         <div class="mt-5 mb-3 col-12">
