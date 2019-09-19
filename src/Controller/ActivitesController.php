@@ -28,7 +28,7 @@ class ActivitesController extends AbstractController
 
         $uploadedImage = '';
         $maxSizeFile = 3 * 1000 * 1000; //3mo max
-        $uploadDir = 'img/uploaded/restos/';
+        $uploadDir = 'img/uploaded/activities/';
         $allowMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
         $errors = [];
@@ -71,24 +71,83 @@ class ActivitesController extends AbstractController
                     $errors[] = 'Merci d\'indiquer une ville';
                 }
 
+            $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
 
-                if (count($errors) == 0) {
+
+
+            if (!empty($_POST)&&(!empty($_FILES['photo']))) {
+
+                $safe = array_map('trim', array_map('strip_tags', $_POST));
+
+                 //Upload de l'image :
+
+                if ($_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+
+                $mimeType = finfo_file($fileInfo, $_FILES['photo']['tmp_name']);
+                finfo_close($fileInfo);
+
+                    if(substr($mimeType, 0, 5) != 'image') {
+                        $errorsImage[] = 'Type de fichier invalide. Vous devez sélectionner un fichier de type image';
+                    }
+
+                    if (count($errorsImage) == 0){
+                        $image = Image::make($_FILES['photo']['tmp_name'])->resize(240, 160);
+                        if ($image->filesize() > $maxSizeFile) {
+                            $errorsImage[] = 'Votre image ne doit pas excedér 3 Mo';
+                        } elseif (!v::in($allowMimes)->validate($image->mime())) {
+                            $errorsImage[] = 'Votre fichier n\'est pas une image valide';
+                        }
+
+
+                        ///////////////////////////////////////////////////////////////////////////////////////
+                        // Si tout est bon, on récupère l'extension ($ext) et on renomme l'image
+
+
+                        $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+                        $imgName = tr::transliterate(time()) . '.' . $ext;
+
+                        $image->save($uploadDir.$imgName);
+
+                        ///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+                        } elseif ($_FILES['photo']['error'] == UPLOAD_ERR_NO_FILE) {
+                            $errorsImage[] = 'Aucun fichier n\'a été uploadé';
+                        } else {
+                            $errorsImage[] = 'Une erreur est survenue lors de l\'envoi de l\'image';
+                        }
+
+
+
+
+                }
+
+            }
+
+            $totalerrors = array_merge($errors, $errorsImage);
+
+
+
+                if (count($totalerrors) == 0) {
                 // Utilisation de la base de données
                     $em = $this->getDoctrine()->getManager();
 
                     $activityData = new Activity(); 
                     $activityData   ->setName($safe['nom'])
-                    ->setDescription($safe['description'])
-                    ->setContact($safe['contact'])
-                    ->setStreetname($safe['street_name'])
-                    ->setStreetnum($safe['street_num'])
-                    ->setCp($safe['cp'])
-                    ->setVille($safe['ville']);
+                                    ->setDescription($safe['description'])
+                                    ->setContact($safe['contact'])
+                                    ->setStreetname($safe['street_name'])
+                                    ->setStreetnum($safe['street_num'])
+                                    ->setCp($safe['cp'])
+                                    ->setPhoto($imgName)
+                                    ->setVille($safe['ville']);
                     // On prépare la requete.
                     $em->persist($activityData);
                     // On l'exécute
                     $em->flush();
 
+                    $successImage = true;
                     $success = true;
 
                 }
@@ -97,8 +156,9 @@ class ActivitesController extends AbstractController
             
             return $this->render('activites/add_activity.html.twig', [
                 'controller_name' => 'ActivitesController',
-                'mes_erreurs' => $errors,
+                'mes_erreurs' => $totalerrors,
                 'success' => $success,
+                'imageSet' => $successImage,
             ]);
         }
 
