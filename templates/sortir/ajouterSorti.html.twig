@@ -4,26 +4,23 @@
 
 {% block body %}
 
+	<div>
+		<h3 class="text-center secondary-title">Aj<span class="gold-ookan">o</span>uter v<span class="gold-ookan">o</span>tre établissement</h3>
+	</div>
+
 	{% if mes_erreurs is not empty %}
 		<div class="row justify-content-center">
-			<div class="alert alert-danger text-center col-lg-4">
+			<div class="offset-lg-4 col-lg-4 col-md-12 alert alert-danger text-center col-lg-4 mt-4">
 				{{ mes_erreurs|join('<br>')|raw }} 
 			</div>
 		</div>
 	{% elseif success == true %}
-		<div class="alert alert-success text-center">Votre lieu a bien été ajoutée</div>
+		<div class="offset-lg-4 col-lg-4 col-md-12 alert alert-success text-center mt-4">Votre lieu a bien été ajoutée</div>
 	{% endif %}
-
-	<div>
-
-		<h3 class="text-center secondary-title">Aj<span class="gold-ookan">o</span>uter v<span class="gold-ookan">o</span>tre établissement</h3>
-
-	</div>
 
 	<div class="row justify-content-center py-4">
 
 		<form id="add_form" method="post" class="border bg-light p-4" enctype="multipart/form-data">
-
 			<small>Les champs marqués d'une * sont obligatoires</small>
 
 			<div class="form-group">
@@ -77,6 +74,5 @@
 		</form>
 
 	</div>
-
 
 {% endblock %}

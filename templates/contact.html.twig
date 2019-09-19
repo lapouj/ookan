@@ -8,11 +8,11 @@
         <h3 class="pb-2 text-center secondary-title">C<span class="gold-ookan">o</span>ntactez-n<span class="gold-ookan">o</span>us</h3>
         
         {% if success is not empty %}
-            <div class="offset-lg-3 col-lg-6 alert text-center alert-success">
+            <div class="offset-lg-3 col-lg-6 col-md-12 alert text-center alert-success">
                 {{ success|join('<br>')|raw }}
             </div>    
         {% elseif not_success is not empty %}
-            <div class="offset-lg-3 col-lg-6 alert text-center alert-danger">
+            <div class="offset-lg-3 col-lg-6 col-md-12 alert text-center alert-danger">
                 {{ not_success|join('<br>')|raw }}
             </div>    
         {% endif %}
